@@ -1,0 +1,7 @@
+﻿# Scripts com credenciais - nao subir
+*.py
+.openclaw/
+openclaw.json
+
+# Sistema
+.DS_Store
