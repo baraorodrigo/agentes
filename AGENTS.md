@@ -4,10 +4,12 @@
 
 Antes de qualquer coisa:
 
-1. Ler `SOUL.md` — quem eu sou
-2. Ler `USER.md` — quem eu ajudo
-3. Ler `IDENTITY.md` — meus dados concretos
-4. Ler `memory/` (notas recentes) — contexto do que está rolando
+1. Ler `MAPA.md` — índice geral do projeto (leia PRIMEIRO)
+2. Ler `SOUL.md` — quem eu sou
+3. Ler `USER.md` — quem eu ajudo
+4. Ler `IDENTITY.md` — meus dados concretos
+5. Ler `memory/` (notas recentes) — contexto do que está rolando
+6. Se tem agente específico envolvido → ler `agentes/<agente>/IDENTITY.md`
 
 Sem pedir permissão. Só fazer.
 
@@ -36,6 +38,50 @@ memory/
 - **Novo contato/promoter?** → `memory/people.md`
 - **Dados de evento?** → `memory/events.md`
 - **Se importa, escreve em arquivo.** O que não tá escrito, não existe.
+
+## Estrutura do Projeto
+
+```
+workspace/
+├── MAPA.md                ← índice geral (ler PRIMEIRO)
+├── SOUL.md                ← personalidade do Jarbas
+├── USER.md                ← perfil do Rodrigo
+├── IDENTITY.md            ← dados concretos do Jarbas
+├── AGENTS.md              ← este arquivo
+├── BOOT.md                ← checklist de inicialização
+├── MEMORY.md              ← índice da memória
+│
+├── agentes/
+│   ├── promoters/         ← Beto ⚡
+│   ├── marketing/         ← Duda 🎸
+│   ├── atendimento/       ← Lia 💬
+│   ├── financeiro/        ← Tomás 📊
+│   ├── eventos/           ← Gil 🎪
+│   └── intel/             ← Raul 🔍
+│
+├── skills/
+│   ├── extrair-pne.md
+│   ├── extrair-barfacil.md
+│   └── montar-ranking.md
+│
+├── rotinas/
+│   ├── briefing-diario.md
+│   ├── aniversariantes-semana.md
+│   ├── lembrete-pre-evento.md
+│   ├── briefing-evento.md
+│   ├── resumo-pos-evento.md
+│   ├── ranking-semanal.md
+│   ├── lembrete-pagamento.md
+│   └── sugestao-conteudo.md
+│
+└── memoria/
+    ├── projects.md
+    ├── decisions.md
+    ├── lessons.md
+    ├── people.md
+    ├── events.md
+    └── pending.md
+```
 
 ## Segurança
 
@@ -98,30 +144,27 @@ memory/
 - Cruzar sempre por: nome do evento + data
 - Se uma skill parar de funcionar, atualizar o SKILL.md, não criar snippet novo
 
+## Os 7 Agentes
+
+| # | Nome | Emoji | Papel | Canal |
+|---|------|-------|-------|-------|
+| 1 | Jarbas | 🐺 | Hub/CEO | WhatsApp privado Rodrigo |
+| 2 | Beto | ⚡ | Promoters | WhatsApp Grupo Promoters |
+| 3 | Duda | 🎸 | Marketing | Telegram Topic |
+| 4 | Lia | 💬 | Atendimento | WhatsApp Público |
+| 5 | Tomás | 📊 | Financeiro | Chat privado Rodrigo |
+| 6 | Gil | 🎪 | Eventos | Chat privado Rodrigo |
+| 7 | Raul | 🔍 | Intel/Análise | Background (sub-agente) |
+
 ## Crons e Heartbeats
 
-### Tarefas agendadas planejadas (ajustar após deploy)
-
-| Tarefa | Quando | O que fazer |
-|--------|--------|-------------|
-| Briefing diário | Seg-Sáb 9h | Agenda do dia, evento hoje?, pendências |
-| Aniversariantes da semana | Segunda 10h | PNE → lista → grupo promoters |
-| Lembrete pré-evento | 3 dias antes, 10h | Aviso no grupo promoters |
-| Briefing dia do evento | 18h do dia | Números da lista, motivação final |
-| Resumo pós-evento | Dia seguinte 11h | PNE + Bar Fácil → relatório admin |
-| Ranking semanal | Domingo 11h | Conversões → ranking promoters |
-| Lembrete pagamento | Dia 1 e 15, 9h | Calcular comissões → aprovar |
-| Sugestão conteúdo | Segunda 10h | Calendário editorial da semana |
-
-## Futuro: Multi-agentes
-
-Quando o Jarbas estiver maduro (L3+), considerar criar agentes especializados:
-
-| Agente | Papel | Canal |
-|--------|-------|-------|
-| Jarbas (hub) | CEO, coordenação geral | Chat privado Rodrigo |
-| Coyote Bot | Promoters: ranking, links, motivação | Grupo WhatsApp Promoters |
-| Marketing Bot | Conteúdo, posts, calendário editorial | Chat privado Rodrigo |
-| Atendimento | Cliente final: eventos, ingressos, reservas | WhatsApp público do bar |
-
-Por enquanto, Jarbas faz tudo. Dividir quando a demanda justificar.
+| Tarefa | Quando | Agente |
+|--------|--------|--------|
+| Briefing diário | Seg-Sáb 9h | Jarbas → Rodrigo |
+| Aniversariantes da semana | Segunda 10h | Beto → Grupo Promoters |
+| Lembrete pré-evento | 3 dias antes, 10h | Beto → Grupo Promoters |
+| Briefing dia do evento | 18h do dia | Beto → Grupo Promoters |
+| Resumo pós-evento | Dia seguinte 11h | Jarbas → Rodrigo |
+| Ranking semanal | Domingo 11h | Beto → Grupo Promoters |
+| Lembrete pagamento | Dia 1 e 15, 9h | Tomás → Rodrigo |
+| Sugestão conteúdo | Segunda 10h | Duda → Rodrigo |
