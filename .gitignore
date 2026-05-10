@@ -3,5 +3,25 @@
 .openclaw/
 openclaw.json
 
+# Env / secrets
+.env
+.env.*
+*.bak
+*.bak.*
+
+# Settings locais do Claude Code
+.claude/
+
+# Logs / runtime de agente (gerados, não-código)
+agentes/*/activity.jsonl
+HEARTBEAT.md
+logs/
+
+# Build artifacts
+node_modules/
+.next/
+*.tsbuildinfo
+
 # Sistema
 .DS_Store
+Thumbs.db
