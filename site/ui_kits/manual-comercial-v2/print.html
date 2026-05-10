@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Manual Comercial + Atendimento EL COYOTE · INTERNO · versão impressão A4</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+  /* ============================================================
+     PRINT-FIRST CSS — A4, 16mm de margem, 1 seção por página
+     ============================================================ */
+  :root {
+    --ink: #0E0E0E; --deep: #274156; --ember: #f58549; --sun: #f2c14e;
+    --terra: #9e5641; --sage: #88a07d; --mist: #a9b0b3; --cream: #F4EFE6; --sand: #E6DCCB;
+    --ok: #4f6d50; --bad: #b14747; --warn: #b1822c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #d9d3c7; font-family: 'Inter', sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 40px 16px; }
+  .page {
+    width: 210mm; min-height: 297mm;
+    background: var(--cream);
+    padding: 16mm 18mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child { page-break-after: auto; }
+  .page.dark { background: var(--ink); color: var(--cream); }
+  .page.deep { background: var(--deep); color: var(--cream); }
+  .page.sand { background: var(--sand); }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .stack { display: block; padding: 0; gap: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .printbar { display: none !important; }
+  }
+
+  /* Tipografia */
+  .display { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.92; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase; }
+  .hand { font-family: 'Caveat', cursive; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .runner-top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 6mm; border-bottom: 0.3mm solid currentColor;
+    opacity: 0.6; font-size: 8pt; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .runner-bottom {
+    position: absolute; bottom: 10mm; left: 18mm; right: 18mm;
+    display: flex; justify-content: space-between;
+    opacity: 0.55; font-size: 8pt; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+
+  /* Helpers */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+  .hairline { height: 0.3mm; background: currentColor; opacity: 0.18; }
+
+  .frame { border: 0.3mm solid rgba(14,14,14,0.18); border-radius: 2mm; padding: 4mm; }
+  .frame.dark { border-color: rgba(244,239,230,0.18); }
+  .frame.ok { border-color: rgba(79,109,80,0.55); }
+  .frame.warn { border-color: rgba(177,130,44,0.55); }
+  .frame.bad { border-color: rgba(177,71,71,0.55); }
+  .frame.bg-sand { background: var(--sand); }
+  .frame.bg-deep { background: var(--deep); color: var(--cream); border-color: transparent; }
+  .frame.bg-ember { background: rgba(245,133,73,0.10); border-color: rgba(245,133,73,0.45); }
+  .frame.bg-ink { background: rgba(14,14,14,0.06); }
+
+  .h1 { font-size: 56pt; line-height: 0.95; margin-bottom: 6mm; }
+  .h2 { font-size: 30pt; line-height: 0.95; margin-bottom: 5mm; }
+  .h3 { font-size: 14pt; font-weight: 600; margin-bottom: 2mm; }
+  .body { font-size: 10pt; line-height: 1.5; }
+  .small { font-size: 8.5pt; line-height: 1.45; opacity: 0.78; }
+  .micro { font-size: 7.5pt; line-height: 1.4; opacity: 0.65; }
+
+  /* Stamps */
+  .stamp {
+    display: inline-block; padding: 0.6mm 2mm; border-radius: 1mm;
+    font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .stamp.confirmar { background: var(--sun); color: var(--ink); }
+  .stamp.regra { background: var(--ink); color: var(--cream); }
+  .stamp.escalar { background: var(--bad); color: var(--cream); }
+
+  /* Tables */
+  table.spec { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  table.spec th, table.spec td { text-align: left; padding: 1.8mm 2.5mm; border-bottom: 0.2mm solid rgba(0,0,0,0.1); }
+  table.spec th { font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.6; }
+  table.spec.dark th, table.spec.dark td { border-bottom-color: rgba(244,239,230,0.15); }
+  table.spec.dark th { opacity: 0.55; }
+  table.spec td.label { font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; width: 38%; }
+
+  /* WhatsApp mockup (simplificado pra impressão) */
+  .mock-wa {
+    background: #ECE5DD; border-radius: 2mm; padding: 3mm;
+    display: flex; flex-direction: column; gap: 1.5mm;
+  }
+  .mock-wa.dark-bg { background: #d8d2c5; }
+  .mock-wa .head { font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; opacity: .55; padding: 0 1mm 1mm; border-bottom: 0.15mm solid rgba(0,0,0,.08); margin-bottom: 1mm; letter-spacing: 0.12em; text-transform: uppercase; }
+  .mock-wa .bub { padding: 1.6mm 2.4mm; border-radius: 1.5mm; font-size: 8.2pt; line-height: 1.35; max-width: 88%; color: var(--ink); }
+  .mock-wa .me { background: #DCF8C6; align-self: flex-end; }
+  .mock-wa .them { background: #fff; align-self: flex-start; }
+
+  /* Pacote cards (página 04) */
+  .pacote {
+    border: 0.3mm solid rgba(244,239,230,0.18); border-radius: 2mm; padding: 4mm;
+    display: flex; flex-direction: column; gap: 2mm;
+  }
+  .pacote .top-eyebrow { color: var(--sun); }
+  .pacote .name { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 18pt; line-height: 0.95; }
+  .pacote .price { font-family: 'Anton', sans-serif; color: var(--ember); font-size: 36pt; line-height: 0.95; }
+  .pacote .tag { font-family: 'Caveat', cursive; color: var(--sun); font-size: 16pt; line-height: 1; }
+  .pacote .desc { font-size: 8.5pt; opacity: 0.85; line-height: 1.4; }
+
+  /* Floating print bar */
+  .printbar {
+    position: fixed; top: 16px; right: 16px; z-index: 99;
+    background: var(--ink); color: var(--cream); border: none;
+    padding: 10px 16px; border-radius: 999px; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  }
+  .printbar:hover { background: var(--ember); }
+
+  ul.clean { list-style: none; }
+  ul.clean li { padding: 1.2mm 0; }
+</style>
+</head>
+<body>
+
+<button class="printbar" onclick="window.print()">⎙ imprimir / salvar pdf</button>
+
+<div class="stack">
+
+<!-- ===================== COVER ===================== -->
+<section class="page dark">
+  <div class="runner-top" style="border-bottom-color: rgba(244,239,230,.3);"><span>EL COYOTE · manual comercial v2</span><span>INTERNO</span></div>
+
+  <div style="margin-top: 70mm;">
+    <p class="eyebrow" style="color: var(--ember);">manual comercial + atendimento</p>
+    <p class="display" style="font-size: 96pt; line-height: 0.88; margin-top: 8mm;">
+      COMO<br/>A CASA<br/>VENDE.
+    </p>
+    <p class="hand" style="font-size: 30pt; color: var(--sun); margin-top: 8mm;">beto vende. lia atende.</p>
+  </div>
+
+  <div style="position: absolute; top: 18mm; right: 18mm; display: flex; gap: 2mm;">
+    <span class="stamp regra">documento interno</span>
+    <span class="stamp confirmar">contém pontos a confirmar</span>
+  </div>
+
+  <div style="position: absolute; bottom: 18mm; left: 18mm; right: 18mm;">
+    <div class="hairline" style="background: rgba(244,239,230,.3); margin-bottom: 4mm;"></div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <p class="eyebrow" style="opacity: .7;">não publica · não posta · não vaza</p>
+        <p class="small" style="opacity: .55; margin-top: 2mm;">manual operacional · v2 · 2026-05-09 · complementa brandbook v2</p>
+      </div>
+      <p class="mono" style="font-size: 8pt; opacity: .55;">imbituba · sc</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUMÁRIO ===================== -->
+<section class="page">
+  <div class="runner-top"><span>EL COYOTE · manual comercial v2</span><span>SUMÁRIO</span></div>
+  <h1 class="display h1" style="margin-top: 14mm;">SUMÁRIO.</h1>
+
+  <table class="spec" style="margin-top: 6mm;">
+    <tbody>
+      <tr><td class="mono" style="opacity:.55; width: 14mm;">01</td><td>Visão geral — duas portas (Beto vendas · Lia atende), quando passa pra outra</td><td class="mono" style="text-align:right; opacity:.55;">03</td></tr>
+      <tr><td class="mono" style="opacity:.55;">02</td><td>Reservas (sex/sáb) — lista free, lote, mesa, scripts Lia</td><td class="mono" style="text-align:right; opacity:.55;">04</td></tr>
+      <tr><td class="mono" style="opacity:.55;">03</td><td>Aniversariantes — pacote padrão, alavancas, script</td><td class="mono" style="text-align:right; opacity:.55;">05</td></tr>
+      <tr><td class="mono" style="opacity:.55;">04</td><td>Eventos privados — 3 trilhas (ter-qui, sex-sáb, dom) e calculadora</td><td class="mono" style="text-align:right; opacity:.55;">06</td></tr>
+      <tr><td class="mono" style="opacity:.55;">05</td><td>O que inclui × o que é à parte — régua que evita briga</td><td class="mono" style="text-align:right; opacity:.55;">07</td></tr>
+      <tr><td class="mono" style="opacity:.55;">06</td><td>Pacote de bebidas — open bar × comanda × híbrido</td><td class="mono" style="text-align:right; opacity:.55;">08</td></tr>
+      <tr><td class="mono" style="opacity:.55;">07</td><td>Política comercial — sinal, alteração, contrato, filosofia interna</td><td class="mono" style="text-align:right; opacity:.55;">09</td></tr>
+      <tr><td class="mono" style="opacity:.55;">08</td><td>Régua de atendimento — tempo de resposta, tom, auto-resposta</td><td class="mono" style="text-align:right; opacity:.55;">10</td></tr>
+      <tr><td class="mono" style="opacity:.55;">09</td><td>Scripts — Beto qualifica, negocia, pós-venda · Lia chuva</td><td class="mono" style="text-align:right; opacity:.55;">11</td></tr>
+      <tr><td class="mono" style="opacity:.55;">10</td><td>Limites internos — o que a casa nunca faz · sempre confirmar Rodrigo</td><td class="mono" style="text-align:right; opacity:.55;">12</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 12mm; padding: 5mm; background: rgba(14,14,14,0.06); border-radius: 2mm;">
+    <p class="eyebrow" style="color: var(--ember); margin-bottom: 2mm;">princípio-mãe</p>
+    <p class="display" style="font-size: 26pt; line-height: 0.95;">DEVOLVER A CASA VAZIA<br/>É O PIOR NEGÓCIO QUE EXISTE.</p>
+    <p class="small" style="margin-top: 3mm;">Fechar com margem mínima é melhor que não fechar. Mas <b>com regras</b> — sem improviso, sem promessa fora do pacote, sem desconto sem aprovação. Esse manual é o trilho que permite negociar rápido sem virar bagunça.</p>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>02</span></div>
+</section>
+
+<!-- ===================== 01 VISÃO GERAL ===================== -->
+<section class="page">
+  <div class="runner-top"><span>01 · VISÃO GERAL</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">01 — visão geral</p>
+  <h2 class="display h1" style="margin-top: 4mm;">DUAS PORTAS,<br/>UMA CASA.</h2>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div class="frame">
+      <p class="eyebrow" style="opacity:.6;">whatsapp · reservas</p>
+      <p class="display" style="font-size: 26pt; margin-top: 1mm;">LIA</p>
+      <p class="mono" style="font-size: 9pt; opacity:.7; margin-top: 1mm;">(48) 99666-3645</p>
+      <p class="body" style="margin-top: 3mm;">Cobre tudo que é <b>noite pública</b>: reserva de mesa, lote promocional, lista free, aniversariante, dúvida de cardápio, horário, dress-code, chuva, cancelamento.</p>
+      <p class="hand" style="font-size: 18pt; color: var(--ember); margin-top: 3mm;">"oi! reserva pra qual data?"</p>
+    </div>
+    <div class="frame">
+      <p class="eyebrow" style="opacity:.6;">whatsapp · eventos</p>
+      <p class="display" style="font-size: 26pt; margin-top: 1mm;">BETO</p>
+      <p class="mono" style="font-size: 9pt; opacity:.7; margin-top: 1mm;">(48) 99174-4141</p>
+      <p class="body" style="margin-top: 3mm;">Cobre tudo que é <b>casa fechada</b>: casamento, aniversário grande, corporativo, formatura, festa de empresa, destination wedding RS, hospedagem dos convidados.</p>
+      <p class="hand" style="font-size: 18pt; color: var(--ember); margin-top: 3mm;">"a casa fica sua. me conta a data e quantos convidados."</p>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">quando uma porta passa pra outra</p>
+  <div class="frame" style="margin-top: 3mm;">
+    <ul class="clean body">
+      <li><b>Lia → Beto:</b> qualquer pergunta sobre fechar a casa (mais de 30 pessoas, evento privado, casamento, formatura). Lia repassa o número do Beto + nome + data tentativa.</li>
+      <li><b>Beto → Lia:</b> cliente quer só ir num sex/sáb público depois (não fechar) — Beto presenteia atenção e passa pra Lia montar reserva.</li>
+      <li><b>Beto → Rodrigo:</b> desconto acima da trilha do dia, pacote customizado fora do padrão, parceria nova com pousada, contrato CNPJ corporativo, imprensa.</li>
+      <li><b>Lia → Rodrigo:</b> reclamação grave, pedido de reembolso, aparição de imprensa, problema com fornecedor.</li>
+    </ul>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>03</span></div>
+</section>
+
+<!-- ===================== 02 RESERVAS ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>02 · RESERVAS</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">02 — reservas (sex/sáb)</p>
+  <h2 class="display h1" style="margin-top: 4mm;">A PORTA<br/>ABRE 22H.</h2>
+
+  <div class="grid-3" style="margin-top: 8mm;">
+    <div class="frame" style="background: rgba(255,255,255,.6);">
+      <p class="eyebrow" style="color: var(--ok);">lista free</p>
+      <p class="display" style="font-size: 24pt; margin-top: 1mm;">ATÉ 23H</p>
+      <p class="small" style="margin-top: 2mm;">Quem entrou na lista da casa entra de graça até 23h. Após 23h: paga ingresso normal. Mecânica pra encher a casa cedo.</p>
+      <p class="micro mono" style="margin-top: 2mm;">nome + sobrenome + telefone até 21h do dia</p>
+    </div>
+    <div class="frame" style="background: rgba(255,255,255,.6);">
+      <p class="eyebrow" style="color: var(--ember);">lote promocional</p>
+      <p class="display" style="font-size: 24pt; margin-top: 1mm;">R$ 30</p>
+      <p class="small" style="margin-top: 2mm;">1º lote. Vende online (link Lia) e na portaria. Sobe quando o lote esgota.</p>
+      <p class="micro mono" style="margin-top: 2mm;">próximos lotes: a definir conforme demanda</p>
+    </div>
+    <div class="frame" style="background: rgba(255,255,255,.6);">
+      <p class="eyebrow" style="opacity:.6;">mesa</p>
+      <p class="display" style="font-size: 24pt; margin-top: 1mm;">22H–22H45</p>
+      <p class="small" style="margin-top: 2mm;">Mesa garantida até 22h45. Após esse horário libera pra fila. Lia confirma 1h antes via WhatsApp.</p>
+      <p class="micro" style="margin-top: 2mm;">capacidade mín. por mesa: <span class="stamp confirmar">a confirmar</span></p>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">script lia · reserva mesa (modelo)</p>
+  <div class="grid-2" style="margin-top: 3mm;">
+    <div class="mock-wa dark-bg">
+      <div class="head">cliente · 14:32</div>
+      <div class="bub them">oi, queria reservar uma mesa pra sábado à noite</div>
+      <div class="bub me">oi! pra quantas pessoas e que horas vocês chegam?</div>
+      <div class="bub them">somos 6, chegamos uns 22h30</div>
+      <div class="bub me">fechado. mesa garantida até 22h45 — depois libera. seu nome completo + um telefone, por favor?</div>
+      <div class="bub them">Maria Souza, 51 99...</div>
+      <div class="bub me">reservado, Maria. ingresso/lote sai R$30 por pessoa na portaria. te confirmo 1h antes. ✦</div>
+    </div>
+    <div class="mock-wa dark-bg">
+      <div class="head">cliente · 19:10</div>
+      <div class="bub them">tem como entrar de graça hoje?</div>
+      <div class="bub me">tem! lista free vai até 23h. me passa nome + sobrenome + telefone que adiciono pra você.</div>
+      <div class="bub them">João Pereira, 47 9...</div>
+      <div class="bub me">tá na lista. depois das 23h o ingresso vira R$30. te espero. ✦</div>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>04</span></div>
+</section>
+
+<!-- ===================== 03 ANIVERSARIANTES ===================== -->
+<section class="page">
+  <div class="runner-top"><span>03 · ANIVERSARIANTES</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">03 — aniversariantes</p>
+  <h2 class="display h1" style="margin-top: 4mm;">O ANIVERSÁRIO<br/>TEM TRILHA.</h2>
+
+  <p class="body" style="margin-top: 6mm; max-width: 165mm;">
+    Aniversariante traz galera, garante consumo, vira foto, vira boca-a-boca. É das melhores conversões da casa.
+    A oferta padrão tem 3 alavancas: <b>lista de convidados</b>, <b>consumação</b> e um <b>mimo</b>.
+  </p>
+
+  <div class="frame" style="margin-top: 6mm;">
+    <p class="eyebrow" style="opacity:.6;">pacote padrão (sex/sáb) <span class="stamp confirmar" style="margin-left: 2mm;">valores a confirmar</span></p>
+    <table class="spec" style="margin-top: 3mm;">
+      <tbody>
+        <tr><td class="label">lista de convidados</td><td>até X pessoas free na lista até 23h</td></tr>
+        <tr><td class="label">consumação</td><td>R$Y por convidado, garantida no caixa</td></tr>
+        <tr><td class="label">mimo da casa</td><td>1 drink Coyote ou bolinho de tainha pro aniversariante</td></tr>
+        <tr><td class="label">nome no painel</td><td>aniversariante aparece nominal no painel da entrada</td></tr>
+      </tbody>
+    </table>
+    <p class="micro" style="margin-top: 3mm;">Lia pede ao Rodrigo confirmar X (nº de convidados free) e Y (consumação por pessoa) antes de divulgar.</p>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">script lia · aniversariante</p>
+  <div class="mock-wa" style="margin-top: 3mm; max-width: 110mm;">
+    <div class="bub them">faço aniversário dia 28, queria comemorar aí. tem alguma coisa pra mim?</div>
+    <div class="bub me">tem! conta: dia 28 cai sex ou sáb? quantos convidados aproximadamente?</div>
+    <div class="bub them">sexta, uns 15</div>
+    <div class="bub me">show. seus 15 entram free na lista até 23h. consumação sai R$Y por convidado, garantida no caixa. casa coloca seu nome no painel + um drink Coyote por minha conta. fecha?</div>
+    <div class="bub them">fecha</div>
+    <div class="bub me">manda nome completo + lista dos convidados (nome+telefone) até quinta às 21h. te espero. ✦</div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>05</span></div>
+</section>
+
+<!-- ===================== 04 PACOTES EVENTOS PRIVADOS ===================== -->
+<section class="page dark">
+  <div class="runner-top" style="border-bottom-color: rgba(244,239,230,.3);"><span>04 · EVENTOS PRIVADOS</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">04 — eventos privados · pacotes</p>
+  <h2 class="display h1" style="margin-top: 4mm;">3 TRILHAS.<br/>DIA DA SEMANA<br/>DECIDE.</h2>
+
+  <div class="grid-3" style="margin-top: 8mm;">
+    <div class="pacote">
+      <p class="eyebrow top-eyebrow">trilha 1</p>
+      <p class="name">TER A QUI</p>
+      <p class="price">R$ 3.000</p>
+      <p class="tag">50% off do cheio.</p>
+      <p class="desc">Casa mais aberta a custo de oportunidade. Boa pra corporativo, lançamento, formatura compacta, casamento meio de semana.</p>
+    </div>
+    <div class="pacote">
+      <p class="eyebrow top-eyebrow">trilha 2</p>
+      <p class="name">SEX OU SÁB</p>
+      <p class="price">R$ 6.000</p>
+      <p class="tag">preço cheio.</p>
+      <p class="desc">Premium. Casamento principal, festa grande, evento âncora. Conflito direto com a noite pública — abrir mão exige cobrir.</p>
+    </div>
+    <div class="pacote">
+      <p class="eyebrow top-eyebrow">trilha 3</p>
+      <p class="name">DOMINGO</p>
+      <p class="price">R$ 4.500</p>
+      <p class="tag">25% off.</p>
+      <p class="desc">Casa não opera pública aos domingos. Boa pra cerimônia + festa intimista, brunch de casamento, batizado.</p>
+    </div>
+  </div>
+
+  <div class="frame dark" style="margin-top: 8mm;">
+    <p class="eyebrow" style="color: var(--sun);">calculadora rápida — exemplo 50 convidados</p>
+    <table class="spec dark" style="margin-top: 3mm;">
+      <thead>
+        <tr><th>trilha</th><th>locação</th><th>+ open R$69×50</th><th>+ banda *</th><th style="text-align: right;">= total exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ter–qui</td><td>3.000</td><td>3.450</td><td>2.500</td><td style="text-align: right;"><b>8.950</b></td></tr>
+        <tr><td>sex–sáb</td><td>6.000</td><td>3.450</td><td>2.500</td><td style="text-align: right;"><b>11.950</b></td></tr>
+        <tr><td>domingo</td><td>4.500</td><td>3.450</td><td>2.500</td><td style="text-align: right;"><b>10.450</b></td></tr>
+      </tbody>
+    </table>
+    <p class="micro mono" style="margin-top: 3mm;">* banda = estimativa cachê médio · não incluso no pacote · varia por noiva/cliente</p>
+  </div>
+
+  <div class="runner-bottom" style="opacity:.5;"><span>EL COYOTE · 2026 · INTERNO</span><span>06</span></div>
+</section>
+
+<!-- ===================== 05 O QUE INCLUI ===================== -->
+<section class="page">
+  <div class="runner-top"><span>05 · O QUE INCLUI</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">05 — o que entra e o que é à parte</p>
+  <h2 class="display h1" style="margin-top: 4mm;">A RÉGUA<br/>QUE EVITA BRIGA.</h2>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div class="frame ok">
+      <p class="eyebrow" style="color: var(--ok);">incluso na locação</p>
+      <ul class="clean body" style="margin-top: 3mm;">
+        <li><b>✓ Deck.</b> espaço completo da casa, vista do porto.</li>
+        <li><b>✓ Som.</b> PA, mesa, microfone, técnico de operação.</li>
+        <li><b>✓ Luz.</b> ambiente, cênica básica, ponto de palco.</li>
+        <li><b>✓ DJ.</b> set ambiente, transição, repertório casa.</li>
+        <li><b>✓ Equipe operacional.</b> bar, garçons, cozinha base, segurança.</li>
+        <li><b>✓ Banheiros.</b> limpeza durante o evento.</li>
+        <li><b>✓ Estrutura básica</b> de mesas e cadeiras da casa.</li>
+      </ul>
+    </div>
+    <div class="frame warn">
+      <p class="eyebrow" style="color: var(--warn);">à parte (cobrado separado)</p>
+      <ul class="clean body" style="margin-top: 3mm;">
+        <li><b>+ Banda ao vivo.</b> Beto cota com bandas parceiras ou indica.</li>
+        <li><b>+ Alimentação.</b> ver opções: cardápio degustação, jantar empratado, ilhas, finger food.</li>
+        <li><b>+ Decoração temática.</b> cerimonialista, flores, papelaria, mesa principal.</li>
+        <li><b>+ Hospedagem dos convidados.</b> Pousada Barra Mar Oficial é parceira atual; outras pousadas em colab aberta.</li>
+        <li><b>+ Cerimônia (casamento).</b> celebrante, espaço cenográfico, som de cerimônia separado.</li>
+        <li><b>+ Bolo, bem-casado, lembranças.</b> fornecedores indicados.</li>
+        <li><b>+ Foto e vídeo.</b> indicação de parceiros.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="frame bg-deep" style="margin-top: 6mm;">
+    <p class="eyebrow" style="color: var(--sun);">regra de ouro</p>
+    <p class="body" style="margin-top: 2mm;">
+      Se o cliente pedir algo fora da locação, Beto responde sempre primeiro com:
+      <b style="color: var(--sun);">"isso a gente cota separado, você prefere que eu indique fornecedor parceiro ou você já tem o seu?"</b>
+      Nunca prometer "tá incluso" sem checar.
+    </p>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>07</span></div>
+</section>
+
+<!-- ===================== 06 BEBIDAS ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>06 · BEBIDAS</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">06 — pacote de bebidas</p>
+  <h2 class="display h1" style="margin-top: 4mm;">DUAS FORMAS,<br/>UMA ESCOLHA.</h2>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div class="frame" style="background: rgba(255,255,255,.65);">
+      <p class="eyebrow" style="color: var(--ember);">modalidade A · open bar</p>
+      <p class="display" style="font-size: 18pt; margin-top: 2mm;">A PARTIR R$ 69 / pessoa</p>
+      <p class="small" style="margin-top: 2mm;">
+        Cobrança fixa por convidado, bebida liberada por X horas (definir no fechamento). Cliente sabe o custo na contratação — zero surpresa.
+      </p>
+      <table class="spec" style="margin-top: 4mm;">
+        <tbody>
+          <tr><td class="label">essencial</td><td>R$ 69 — cerveja + refri + água</td></tr>
+          <tr><td class="label">casa <span class="stamp confirmar" style="margin-left: 1mm;">a confirmar</span></td><td>R$ 99 — + drinks da casa (Coyote, Beira-mar, Pôr do Sol)</td></tr>
+          <tr><td class="label">premium <span class="stamp confirmar" style="margin-left: 1mm;">a confirmar</span></td><td>R$ 149 — + destilados premium + espumante</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="frame" style="background: rgba(255,255,255,.65);">
+      <p class="eyebrow" style="opacity:.6;">modalidade B · comanda</p>
+      <p class="display" style="font-size: 18pt; margin-top: 2mm;">CONSUMO INDIVIDUAL</p>
+      <p class="small" style="margin-top: 2mm;">
+        Cada convidado abre comanda e paga ao final. Locador não tem risco de open, mas perde controle do total.
+        Boa pra evento corporativo onde a empresa não banca bebida, ou casamento com perfil que bebe pouco.
+      </p>
+      <ul class="clean body" style="margin-top: 4mm;">
+        <li>— preços do cardápio normal da casa</li>
+        <li>— casa abre comanda no nome de cada convidado na entrada</li>
+        <li>— anfitrião pode optar por <b>open parcial</b>: assume X reais por pessoa, depois vira comanda (híbrido)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="frame bg-deep" style="margin-top: 6mm;">
+    <p class="eyebrow" style="color: var(--sun);">como Beto recomenda</p>
+    <ul class="clean body" style="margin-top: 2mm;">
+      <li>— <b>Casamento jovem (25–35), público RS:</b> Open Casa R$99. RS bebe.</li>
+      <li>— <b>Casamento intimista, comida sentada:</b> Open Premium R$149. Vinho/espumante puxa o pacote.</li>
+      <li>— <b>Aniversário 40+:</b> Open Essencial R$69 ou comanda — público bebe menos volume.</li>
+      <li>— <b>Corporativo:</b> Comanda quase sempre. Empresa não cobre álcool no Brasil em 80% dos casos.</li>
+      <li>— <b>Formatura:</b> Híbrido. Open inicial 2h + comanda depois.</li>
+    </ul>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>08</span></div>
+</section>
+
+<!-- ===================== 07 POLÍTICA ===================== -->
+<section class="page">
+  <div class="runner-top"><span>07 · POLÍTICA</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">07 — política comercial</p>
+  <h2 class="display h1" style="margin-top: 4mm;">SINAL, CONTRATO,<br/>ALTERAÇÃO.</h2>
+
+  <div class="grid-3" style="margin-top: 8mm;">
+    <div class="frame bad">
+      <p class="eyebrow" style="color: var(--bad);">sinal</p>
+      <p class="display" style="font-size: 18pt; margin-top: 2mm;">NÃO REEMBOLSÁVEL</p>
+      <p class="small" style="margin-top: 2mm;">
+        Cancelou, perde — independente do prazo (regra direta do Rodrigo).
+      </p>
+      <p class="small" style="margin-top: 2mm;">
+        % do sinal sobre valor total: <span class="stamp confirmar">a confirmar — sugestão default 30%</span>
+      </p>
+    </div>
+    <div class="frame">
+      <p class="eyebrow" style="opacity:.6;">alteração de data</p>
+      <p class="display" style="font-size: 18pt; margin-top: 2mm;">1× SEM CUSTO</p>
+      <p class="small" style="margin-top: 2mm;">
+        1 alteração permitida sem custo, mediante disponibilidade da nova data.
+      </p>
+      <p class="small" style="margin-top: 2mm;">
+        2ª alteração: cobrar taxa de remarcação (<span class="stamp confirmar">valor a confirmar</span>).
+      </p>
+    </div>
+    <div class="frame">
+      <p class="eyebrow" style="opacity:.6;">contrato</p>
+      <p class="display" style="font-size: 18pt; margin-top: 2mm;">SEMPRE ESCRITO</p>
+      <p class="small" style="margin-top: 2mm;">
+        Nada fechado só por WhatsApp. Beto manda contrato após sinal pago. Modelo padrão a definir com Rodrigo.
+      </p>
+    </div>
+  </div>
+
+  <div class="frame bg-ember" style="margin-top: 8mm;">
+    <p class="eyebrow" style="color: var(--ember);">filosofia interna · não publicar</p>
+    <p class="h3" style="margin-top: 2mm;">"Fazemos qualquer negócio pra não quebrar."</p>
+    <p class="micro" style="margin-top: 1mm;">— Rodrigo, 2026-05-09.</p>
+    <p class="small" style="margin-top: 4mm;">Beto e Lia têm autonomia pra fechar mesmo com margem apertada — desde que dentro destes trilhos:</p>
+    <ul class="clean small" style="margin-top: 2mm; line-height: 1.7;">
+      <li>✦ Aplicar trilha do dia direto (ter-qui, sex-sáb, dom) <b>sem precisar perguntar</b>.</li>
+      <li>✦ Desconto adicional <b>até 25%</b> sobre a trilha → autonomia Beto/Lia.</li>
+      <li>✦ Desconto <b>acima de 25%</b> sobre a trilha → <span class="stamp escalar">escalation Rodrigo</span>.</li>
+      <li>✦ Pacote customizado, mudança de pacote-base, contrato CNPJ, parceria nova → <span class="stamp escalar">escalation Rodrigo</span>.</li>
+      <li>✦ Vitrine pública: <b>nunca</b> publicizar "negociável", "promocional", "sob medida". Valor âncora cheio sempre.</li>
+    </ul>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>09</span></div>
+</section>
+
+<!-- ===================== 08 RÉGUA ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>08 · RÉGUA DE ATENDIMENTO</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">08 — régua de atendimento</p>
+  <h2 class="display h1" style="margin-top: 4mm;">TEMPO, TOM,<br/>ESCALATION.</h2>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div class="frame" style="background: rgba(255,255,255,.65);">
+      <p class="eyebrow" style="opacity:.6;">tempo de resposta · meta</p>
+      <table class="spec" style="margin-top: 3mm;">
+        <tbody>
+          <tr><td class="label">lia · comercial (10h–22h ter–dom)</td><td>até 30 min</td></tr>
+          <tr><td class="label">lia · fora do comercial</td><td>até 2h</td></tr>
+          <tr><td class="label">beto · comercial</td><td>até 1h</td></tr>
+          <tr><td class="label">beto · fora do comercial</td><td>até 4h</td></tr>
+          <tr><td class="label">madrugada (00h–10h)</td><td>auto-resposta + retoma 10h</td></tr>
+        </tbody>
+      </table>
+      <p class="micro mono" style="margin-top: 3mm;"><span class="stamp confirmar">a confirmar com rodrigo</span> — defaults sugeridos.</p>
+    </div>
+    <div class="frame" style="background: rgba(255,255,255,.65);">
+      <p class="eyebrow" style="opacity:.6;">tom (referência brandbook v2)</p>
+      <ul class="clean body" style="margin-top: 3mm;">
+        <li>— informal 78% · coração 72% · sugere 65%</li>
+        <li>— minúsculas no início de frase em DM</li>
+        <li>— ponto final sim, exclamação muito raro</li>
+        <li>— frases curtas (6–10 palavras)</li>
+        <li>— vocabulário proibido: balada, vip, premium, top, brother, galera, rolê, imperdível</li>
+        <li>— frases canônicas têm uso definido — não inventar variação</li>
+      </ul>
+      <p class="micro mono" style="margin-top: 3mm;">→ brandbook v2 · seção 07 · voz</p>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">auto-resposta madrugada (modelo lia/beto)</p>
+  <div class="mock-wa dark-bg" style="margin-top: 3mm; max-width: 130mm;">
+    <div class="head">cliente · 03:14</div>
+    <div class="bub them">oi, queria informação sobre casamento aí</div>
+    <div class="bub them"><i>[lida automaticamente]</i></div>
+    <div class="bub me">oi! a casa dorme até 10h. te respondo daqui a pouco com tudo que precisa saber. enquanto isso, dá uma olhada: elcoyotepub.com/eventos ✦</div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>10</span></div>
+</section>
+
+<!-- ===================== 09 SCRIPTS ===================== -->
+<section class="page">
+  <div class="runner-top"><span>09 · SCRIPTS</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 10mm;">09 — scripts</p>
+  <h2 class="display h2" style="margin-top: 3mm;">A CONVERSA QUE FECHA.</h2>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 6mm;">beto · primeiro contato → qualificação</p>
+  <div class="grid-2" style="margin-top: 2mm;">
+    <div class="mock-wa">
+      <div class="head">noiva · porto alegre · 16:08</div>
+      <div class="bub them">oi! vi o site de vocês, queria saber sobre casamento aí</div>
+      <div class="bub me">oi! que bom que chegou. a casa fica sua — me conta o básico:</div>
+      <div class="bub me">— data tentativa (ou mês)<br/>— quantos convidados aproximadamente<br/>— cerimônia + festa, ou só festa</div>
+      <div class="bub them">15 de março, uns 80 convidados, cerimônia + festa</div>
+      <div class="bub me">show. 15/3 cai sábado — trilha cheia. te mando pacote-base por aqui em uns 10 minutos. seu nome?</div>
+    </div>
+    <div class="mock-wa">
+      <div class="head">noiva · 16:18</div>
+      <div class="bub me">Maria, segura o sinal:</div>
+      <div class="bub me">SÁBADO 15/3<br/>locação: R$ 6.000<br/>+ open casa R$99×80 = R$ 7.920<br/>+ banda (cota separado)<br/>+ alimentação (cota separado)<br/>+ deco (cota separado)<br/><br/><b>locação + open: R$ 13.920</b><br/><br/>incluso: deck, som, luz, dj, equipe.</div>
+      <div class="bub me">manda o que tá amarrando seu coração e o que ainda tá no ar — a gente desenha junto. ✦</div>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 6mm;">beto · negociação dentro da autonomia (-25%)</p>
+  <div class="grid-2" style="margin-top: 2mm;">
+    <div class="mock-wa">
+      <div class="bub them">tá um pouco acima do que a gente pode</div>
+      <div class="bub me">entendi. me conta: o teto pra locação tá em quanto?</div>
+      <div class="bub them">teríamos uns 4500 só pra casa</div>
+      <div class="bub me">consigo fazer R$ 4.500 mantendo deck/som/luz/dj. só tô abrindo mão de uns 25% — então preciso de sinal de 30% pra travar agora. fecha?</div>
+      <div class="bub them">fecha</div>
+    </div>
+    <div class="frame bg-ink">
+      <p class="eyebrow" style="opacity:.6;">por trás da conta</p>
+      <ul class="clean mono" style="font-size: 8pt; margin-top: 3mm; line-height: 1.6;">
+        <li>trilha sex-sáb cheia: 6.000</li>
+        <li>desconto aplicado: -25% = 4.500</li>
+        <li>está dentro da autonomia beto</li>
+        <li>não precisa escalar rodrigo</li>
+        <li>se cliente pedisse 4.000 → escalation</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 6mm;">beto · pós-venda (d+1) · lia · cancelamento por chuva</p>
+  <div class="grid-2" style="margin-top: 2mm;">
+    <div class="mock-wa">
+      <div class="head">d+1 · 11:00</div>
+      <div class="bub me">Maria, bom dia. ontem foi noite. obrigado por confiar na casa.</div>
+      <div class="bub me">se quiser que a gente repasse fotos, peça do fotógrafo direto que eu intermedio.</div>
+      <div class="bub me">se algum convidado teu quiser fazer evento aqui, manda meu contato. casa é sua agora. ✦</div>
+    </div>
+    <div class="mock-wa">
+      <div class="head">cliente que comprou ingresso · 19:42</div>
+      <div class="bub them">e a chuva? tem evento hoje?</div>
+      <div class="bub me">a chuva venceu hoje. o show fica pra próxima sexta — seu ingresso vale, sem reapresentação.</div>
+      <div class="bub me">se preferir reembolso, me confirma por aqui que devolvo até amanhã.</div>
+      <div class="bub them">prefiro ir na próxima</div>
+      <div class="bub me">tá garantido. sexta 22h. ✦</div>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026 · INTERNO</span><span>11</span></div>
+</section>
+
+<!-- ===================== 10 LIMITES ===================== -->
+<section class="page dark">
+  <div class="runner-top" style="border-bottom-color: rgba(244,239,230,.3);"><span>10 · LIMITES INTERNOS</span><span>MANUAL COMERCIAL V2</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">10 — limites internos</p>
+  <h2 class="display h1" style="margin-top: 4mm;">O QUE A CASA<br/>NUNCA FAZ.</h2>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div class="frame dark">
+      <p class="eyebrow" style="color: var(--bad);">não fazemos · regra dura</p>
+      <ul class="clean body" style="margin-top: 3mm;">
+        <li>✗ aluguel sem sinal pago</li>
+        <li>✗ open bar premium grátis ou de cortesia em larga escala</li>
+        <li>✗ promessa de banda específica sem checar agenda da banda</li>
+        <li>✗ fechar contrato CNPJ sem revisão Rodrigo</li>
+        <li>✗ co-branding com pousada nova sem aprovação</li>
+        <li>✗ desconto &gt;25% sobre trilha sem escalation</li>
+        <li>✗ mexer no pacote-base ("tira o dj e desconta") sem escalation</li>
+        <li>✗ comprometer data sem disponibilidade confirmada no calendário</li>
+      </ul>
+    </div>
+    <div class="frame dark">
+      <p class="eyebrow" style="color: var(--warn);">sempre confirmar com rodrigo</p>
+      <ul class="clean body" style="margin-top: 3mm;">
+        <li>⚠ casamento com cláusula contratual fora do padrão</li>
+        <li>⚠ parceria nova com pousada / hotel / fornecedor</li>
+        <li>⚠ aparição imprensa, mídia, vídeo institucional</li>
+        <li>⚠ permuta (troca de serviço por divulgação)</li>
+        <li>⚠ evento beneficente, política, religioso</li>
+        <li>⚠ fechamento de mais de 1 evento na mesma data</li>
+        <li>⚠ alteração de cardápio padrão (cliente "mas eu queria...")</li>
+        <li>⚠ ingresso cortesia em volume (&gt;5 pessoas)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top: 14mm;">
+    <p class="display" style="font-size: 36pt; line-height: 0.95;">DENTRO DESSES TRILHOS,<br/>BETO E LIA FECHAM.</p>
+    <p class="small" style="margin-top: 4mm; max-width: 140mm; opacity: 0.75;">Fora deles, a 5ª pessoa da conversa é o Rodrigo. Sem improviso, sem promessa que não cabe no contrato.</p>
+  </div>
+
+  <div class="runner-bottom" style="opacity:.5;"><span>EL COYOTE · 2026 · INTERNO</span><span>12</span></div>
+</section>
+
+<!-- ===================== BACKCOVER ===================== -->
+<section class="page dark">
+  <div style="margin-top: 70mm; text-align: center;">
+    <p class="hand" style="font-size: 28pt; color: var(--sun);">a casa fica sua.</p>
+    <p class="display" style="font-size: 84pt; line-height: 0.9; margin-top: 6mm;">A NOITE<br/>VIRA<br/>HISTÓRIA.</p>
+    <p class="hand" style="font-size: 22pt; color: var(--ember); margin-top: 8mm;">beto vende. lia atende.</p>
+  </div>
+
+  <div style="position: absolute; bottom: 18mm; left: 18mm; right: 18mm;">
+    <div class="hairline" style="background: rgba(244,239,230,.3); margin-bottom: 4mm;"></div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <p class="eyebrow" style="opacity: .7;">EL COYOTE · ROCK N BAR</p>
+        <p class="small" style="opacity: .6; margin-top: 2mm;">Beto · vendas · (48) 99174-4141</p>
+        <p class="small" style="opacity: .6;">Lia · atendimento · (48) 99666-3645</p>
+      </div>
+      <div style="text-align: right;">
+        <p class="mono" style="font-size: 8pt; opacity: .6;">manual interno · v2</p>
+        <p class="mono" style="font-size: 8pt; opacity: .6;">2026-05-09</p>
+        <p class="mono" style="font-size: 8pt; opacity: .6;">não publica · não posta</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Brandbook + Manual Editorial · EL COYOTE</title>
+<meta name="description" content="Doc canônico de marca, voz e aplicação. Versão 2 — supersedes Brandbook 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:    '#0E0E0E',
+          deep:   '#274156',
+          ember:  '#f58549',
+          sun:    '#f2c14e',
+          terra:  '#9e5641',
+          sage:   '#88a07d',
+          mist:   '#a9b0b3',
+          cream:  '#F4EFE6',
+          sand:   '#E6DCCB',
+        },
+        fontFamily: {
+          display: ['Anton', 'sans-serif'],
+          body:    ['Inter', 'sans-serif'],
+          hand:    ['Caveat', 'cursive'],
+          mono:    ['JetBrains Mono', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #F4EFE6; color: #0E0E0E; font-family: 'Inter', sans-serif; }
+  .display { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.92; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .hand { font-family: 'Caveat', cursive; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .hairline { height: 1px; background: rgba(14,14,14,0.12); }
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: .07;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)' /></svg>");
+  }
+  .photo-grade { filter: contrast(1.06) saturate(0.92) brightness(0.96); }
+  .swatch { aspect-ratio: 4/5; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(14,14,14,0.08); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid rgba(14,14,14,0.18); border-radius: 999px; font-size: 11px; }
+  .chip.no { border-color: #b14747; color: #b14747; text-decoration: line-through; }
+  .chip.yes { border-color: #4f6d50; color: #4f6d50; }
+  .ok { color: #4f6d50; }
+  .bad { color: #b14747; }
+  .card-paper { background: #fff; border: 1px solid rgba(14,14,14,0.10); border-radius: 12px; padding: 24px; }
+  .quote {
+    font-family: 'Anton', sans-serif; text-transform: uppercase; line-height: 1; letter-spacing: -0.01em;
+  }
+  .nav-pill {
+    position: fixed; left: 24px; top: 50%; transform: translateY(-50%); z-index: 60;
+    background: rgba(14,14,14,0.92); color: #F4EFE6; border-radius: 14px; padding: 14px 8px;
+    backdrop-filter: blur(8px);
+  }
+  .nav-pill a { display: block; padding: 6px 10px; font-size: 11px; letter-spacing: 0.1em; opacity: .55; }
+  .nav-pill a:hover, .nav-pill a.active { opacity: 1; color: #f2c14e; }
+  @media (max-width: 1024px) { .nav-pill { display: none; } }
+  .fade-up { opacity: 0; transform: translateY(16px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
+  .fade-up.in { opacity: 1; transform: none; }
+  .voice-bar { height: 6px; background: rgba(14,14,14,0.08); border-radius: 999px; overflow: hidden; }
+  .voice-bar > span { display: block; height: 100%; background: #f58549; border-radius: 999px; }
+  .pillar-num { font-family: 'Anton', sans-serif; font-size: 96px; line-height: .8; color: #f58549; }
+  .mock-poster {
+    aspect-ratio: 3/4; background: #0E0E0E; color: #F4EFE6; padding: 20px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border-radius: 6px; position: relative; overflow: hidden;
+  }
+  .mock-poster::after {
+    content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(245,133,73,0.18), transparent 60%); pointer-events: none;
+  }
+  .mock-story {
+    aspect-ratio: 9/16; background-size: cover; background-position: center;
+    border-radius: 18px; padding: 18px; color: #F4EFE6; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .mock-story::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,0) 50%); }
+  .mock-story > * { position: relative; z-index: 1; }
+  .mock-tee {
+    aspect-ratio: 1; background: #0E0E0E; border-radius: 6px;
+    display: grid; place-items: center; color: #F4EFE6;
+  }
+  .mock-sticker {
+    aspect-ratio: 1; border-radius: 999px; display: grid; place-items: center;
+    background: radial-gradient(circle at 30% 30%, #f58549, #9e5641);
+    color: #F4EFE6; text-align: center; padding: 14px;
+  }
+  .mock-wa {
+    background: #ECE5DD; border-radius: 14px; padding: 14px; max-width: 360px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .mock-wa .bub { padding: 8px 12px; border-radius: 8px; font-size: 13px; max-width: 80%; line-height: 1.4; }
+  .mock-wa .me { background: #DCF8C6; align-self: flex-end; }
+  .mock-wa .them { background: #fff; align-self: flex-start; }
+  .mock-feed {
+    background: #fff; border: 1px solid rgba(14,14,14,0.12); border-radius: 8px; overflow: hidden;
+  }
+  .mock-feed .head { padding: 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .mock-feed .img { aspect-ratio: 1; background-size: cover; background-position: center; }
+  .mock-feed .cap { padding: 12px; font-size: 13px; line-height: 1.5; }
+  details { border-bottom: 1px solid rgba(14,14,14,0.10); padding: 14px 0; }
+  details summary { cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body class="font-body antialiased">
+
+<!-- Sidebar nav -->
+<nav class="nav-pill">
+  <a href="#essencia" class="active">01 essência</a>
+  <a href="#logo">02 logo</a>
+  <a href="#paleta">03 paleta</a>
+  <a href="#tipo">04 tipografia</a>
+  <a href="#foto">05 fotografia</a>
+  <a href="#icone">06 iconografia</a>
+  <a href="#aplica">07 aplicações</a>
+  <a href="#voz">08 voz</a>
+  <a href="#vocab">09 vocabulário</a>
+  <a href="#frases">10 frases</a>
+  <a href="#estru">11 estruturas</a>
+  <a href="#canais">12 canais</a>
+  <a href="#lado">13 ✅ vs ❌</a>
+  <a href="#gloss">14 glossário</a>
+</nav>
+
+<!-- Header -->
+<header class="px-8 lg:px-24 pt-12 pb-16 border-b border-ink/10 relative">
+  <div class="grain"></div>
+  <div class="flex items-center justify-between mb-12">
+    <a href="../../index.html" class="eyebrow underline-offset-4 hover:underline">← voltar ao site</a>
+    <span class="eyebrow opacity-60">brandbook v2 · 2026</span>
+  </div>
+  <p class="eyebrow text-ember mb-6">doc canônico de marca + voz</p>
+  <h1 class="display text-7xl md:text-9xl mb-6">brandbook<br/>+ manual<br/>editorial.</h1>
+  <p class="text-xl md:text-2xl max-w-3xl text-ink/75 leading-relaxed">
+    Como o EL COYOTE se mostra, soa e se faz lembrar.
+    Tudo que vier dessa casa — pôster, post, copo, mensagem — passa por aqui antes de existir.
+  </p>
+  <div class="mt-10 flex flex-wrap gap-2 mono text-xs">
+    <span class="chip">v2 · supersedes brandbook 2026</span>
+    <span class="chip">8 cores · 4 famílias · 9 frases</span>
+    <span class="chip">PT-BR</span>
+    <span class="chip">imbituba · sc</span>
+  </div>
+</header>
+
+<!-- 01 ESSÊNCIA -->
+<section id="essencia" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">01 — essência</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a noite vira história.</h2>
+
+  <div class="grid md:grid-cols-2 gap-12 mb-16">
+    <div>
+      <p class="eyebrow opacity-60 mb-4">manifesto curto</p>
+      <p class="text-lg leading-relaxed text-ink/80">
+        EL COYOTE é uma casa à beira-mar onde a noite começa às 22h e termina com o sol nascendo.
+        Não é balada, não é restaurante, não é resort. É o lugar onde gente real vai pra viver inteiro —
+        comer com a mão, dançar até o amanhecer, casar com vista pro porto, voltar no fim de semana
+        seguinte porque sente falta do calor.
+      </p>
+      <p class="hand text-3xl text-ember mt-6">se é pra viver, que seja inteiro.</p>
+    </div>
+    <div>
+      <p class="eyebrow opacity-60 mb-4">5 pilares</p>
+      <ul class="space-y-4">
+        <li class="flex gap-4 items-baseline"><span class="pillar-num text-2xl">01</span><div><b>Livre.</b><br/><span class="text-ink/60">vem do jeito que vem. a casa não julga.</span></div></li>
+        <li class="flex gap-4 items-baseline"><span class="pillar-num text-2xl">02</span><div><b>Quente.</b><br/><span class="text-ink/60">acolhe. abraça. nunca distante.</span></div></li>
+        <li class="flex gap-4 items-baseline"><span class="pillar-num text-2xl">03</span><div><b>Intenso.</b><br/><span class="text-ink/60">som alto, comida farta, noite longa.</span></div></li>
+        <li class="flex gap-4 items-baseline"><span class="pillar-num text-2xl">04</span><div><b>Poético.</b><br/><span class="text-ink/60">a noite tem verso, não tem clichê.</span></div></li>
+        <li class="flex gap-4 items-baseline"><span class="pillar-num text-2xl">05</span><div><b>Litorâneo.</b><br/><span class="text-ink/60">vista pro mar é parte da identidade.</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card-paper">
+      <p class="eyebrow text-ok mb-4">somos</p>
+      <ul class="space-y-2 text-ink/85">
+        <li>— casa de quem mora ali e de quem viaja pra estar</li>
+        <li>— rock, pagode, raiz, beira-mar</li>
+        <li>— deck com vista do porto</li>
+        <li>— comida com mão de cozinha de avó</li>
+        <li>— casamento de pé no chão com sol nascendo</li>
+        <li>— noite de sexta que devolve domingo</li>
+      </ul>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-bad mb-4">não somos</p>
+      <ul class="space-y-2 text-ink/85">
+        <li>— balada, casa noturna, club</li>
+        <li>— restaurante de cardápio mil-folhas</li>
+        <li>— evento "premium / vip / exclusivo"</li>
+        <li>— resort de cerimonialista de planilha</li>
+        <li>— lugar pra postar e ir embora cedo</li>
+        <li>— marca corporativa de tom neutro</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 02 LOGO -->
+<section id="logo" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">02 — logo</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">o nome é a marca.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    <div class="aspect-[4/3] bg-ink rounded-md grid place-items-center p-12">
+      <img src="../../logo%20branco.png" alt="logo branco sobre preto" class="max-w-[60%]" />
+    </div>
+    <div class="aspect-[4/3] bg-cream rounded-md grid place-items-center p-12 border border-ink/10">
+      <span class="display text-7xl">EL COYOTE</span>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="card-paper">
+      <p class="eyebrow text-ok mb-3">use</p>
+      <ul class="text-sm space-y-2 text-ink/80">
+        <li>— logo branco em fundos escuros (foto noturna, ink, deep)</li>
+        <li>— logo preto em fundos claros (cream, sand, foto clara)</li>
+        <li>— área de respiro = altura da letra "C" em volta</li>
+        <li>— tamanho mínimo digital: 80px de altura</li>
+        <li>— tamanho mínimo impresso: 18mm</li>
+      </ul>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-bad mb-3">não use</p>
+      <ul class="text-sm space-y-2 text-ink/80">
+        <li>— em foto sem máscara escura por baixo (perde leitura)</li>
+        <li>— colorido (laranja, azul, etc — só branco ou preto)</li>
+        <li>— rotacionado, esticado, com sombra ou outline</li>
+        <li>— junto de outros logos sem respiro suficiente</li>
+        <li>— sobre textura/grain pesado (atrapalha leitura)</li>
+      </ul>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">assinaturas</p>
+      <ul class="text-sm space-y-2 text-ink/80">
+        <li>— principal: <b>EL COYOTE</b></li>
+        <li>— estendida: <b>EL COYOTE · ROCK N BAR</b></li>
+        <li>— localização: <b>EL COYOTE · IMBITUBA SC</b></li>
+        <li>— eventos: <b>EL COYOTE · EVENTOS</b> (cinza claro mist)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PALETA -->
+<section id="paleta" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">03 — paleta</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">8 cores. cada uma com função.</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+    <div><div class="swatch bg-ink mb-3"></div><p class="mono text-xs">ink<br/>#0E0E0E</p><p class="text-xs text-ink/60 mt-1">noite, base, autoridade</p></div>
+    <div><div class="swatch bg-deep mb-3"></div><p class="mono text-xs">deep<br/>#274156</p><p class="text-xs text-ink/60 mt-1">mar fundo, calma, contraponto</p></div>
+    <div><div class="swatch bg-ember mb-3"></div><p class="mono text-xs">ember<br/>#f58549</p><p class="text-xs text-ink/60 mt-1">brasa, cta, energia</p></div>
+    <div><div class="swatch bg-sun mb-3"></div><p class="mono text-xs">sun<br/>#f2c14e</p><p class="text-xs text-ink/60 mt-1">sol, destaque, ouro</p></div>
+    <div><div class="swatch bg-terra mb-3"></div><p class="mono text-xs">terra<br/>#9e5641</p><p class="text-xs text-ink/60 mt-1">tijolo, casa, raiz</p></div>
+    <div><div class="swatch bg-sage mb-3"></div><p class="mono text-xs">sage<br/>#88a07d</p><p class="text-xs text-ink/60 mt-1">vegetal, equilíbrio, frescor</p></div>
+    <div><div class="swatch bg-cream mb-3"></div><p class="mono text-xs">cream<br/>#F4EFE6</p><p class="text-xs text-ink/60 mt-1">papel, base clara, respiro</p></div>
+    <div><div class="swatch bg-sand mb-3"></div><p class="mono text-xs">sand<br/>#E6DCCB</p><p class="text-xs text-ink/60 mt-1">areia, contraste suave</p></div>
+  </div>
+
+  <p class="eyebrow opacity-60 mb-4">combinações canônicas</p>
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="aspect-[4/3] rounded-md overflow-hidden grid grid-cols-2">
+      <div class="bg-ink"></div><div class="bg-ember"></div>
+      <div class="bg-cream col-span-2 grid place-items-center"><span class="mono text-xs">noite</span></div>
+    </div>
+    <div class="aspect-[4/3] rounded-md overflow-hidden grid grid-cols-2">
+      <div class="bg-deep"></div><div class="bg-sun"></div>
+      <div class="bg-cream col-span-2 grid place-items-center"><span class="mono text-xs">amanhecer</span></div>
+    </div>
+    <div class="aspect-[4/3] rounded-md overflow-hidden grid grid-cols-2">
+      <div class="bg-deep"></div><div class="bg-sage"></div>
+      <div class="bg-cream col-span-2 grid place-items-center"><span class="mono text-xs">litoral</span></div>
+    </div>
+    <div class="aspect-[4/3] rounded-md overflow-hidden grid grid-cols-2">
+      <div class="bg-terra"></div><div class="bg-sand"></div>
+      <div class="bg-ink col-span-2 grid place-items-center text-cream"><span class="mono text-xs">manifesto</span></div>
+    </div>
+  </div>
+
+  <p class="text-sm text-ink/60 mt-8 max-w-3xl">
+    <b>Regra:</b> nunca usar mais de 3 cores num mesmo material. Ember é o único acento permitido em CTA digital.
+    Sun é decorativo (eyebrows, ornamentos, hover). Terra e sage só em peças impressas e fotografia, não em UI.
+  </p>
+</section>
+
+<!-- 04 TIPOGRAFIA -->
+<section id="tipo" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">04 — tipografia</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">4 famílias. cada uma sabe o que faz.</h2>
+
+  <div class="space-y-12">
+    <div class="border-b border-ink/10 pb-12">
+      <p class="eyebrow opacity-60 mb-2">Anton · display</p>
+      <p class="display text-7xl md:text-9xl">A NOITE TE ESPERA.</p>
+      <p class="text-sm text-ink/60 mt-4 max-w-2xl">Único uso: ≥28px, sempre MAIÚSCULA. É a voz gritada da casa. Nunca em corpo de texto, nunca em parágrafo, nunca minúscula.</p>
+    </div>
+    <div class="border-b border-ink/10 pb-12">
+      <p class="eyebrow opacity-60 mb-2">Inter · corpo + UI</p>
+      <p class="text-3xl font-light mb-2">light 300 — leads, frases longas em hero</p>
+      <p class="text-2xl font-normal mb-2">regular 400 — corpo de texto padrão</p>
+      <p class="text-xl font-medium mb-2">medium 500 — eyebrow alternativa, sublinhas</p>
+      <p class="text-xl font-semibold mb-2">semibold 600 — destaques, autores, nomes</p>
+      <p class="text-xl font-bold">bold 700 — só em casos extremos</p>
+    </div>
+    <div class="border-b border-ink/10 pb-12">
+      <p class="eyebrow opacity-60 mb-2">Caveat · ornamento</p>
+      <p class="hand text-6xl text-ember">venha inteiro.</p>
+      <p class="text-sm text-ink/60 mt-4 max-w-2xl">Manuscrita, cor ember. <b>Máximo 1 por seção.</b> Usa pra reforçar uma frase canônica, nunca pra título principal.</p>
+    </div>
+    <div>
+      <p class="eyebrow opacity-60 mb-2">JetBrains Mono · técnico</p>
+      <p class="mono text-sm">eyebrow / metadados / código / data / horário / preço técnico</p>
+      <p class="text-sm text-ink/60 mt-4 max-w-2xl">Tudo que é informação operacional (data, horário, JID, código de cupom, hash). Nunca em prosa.</p>
+    </div>
+  </div>
+
+  <p class="eyebrow opacity-60 mt-16 mb-4">hierarquia padrão</p>
+  <div class="card-paper">
+    <table class="w-full text-sm">
+      <thead class="text-left mono text-xs opacity-60">
+        <tr><th class="pb-3">nível</th><th>fonte</th><th>tamanho</th><th>uso</th></tr>
+      </thead>
+      <tbody class="divide-y divide-ink/10">
+        <tr><td class="py-3">display XL</td><td>Anton</td><td>96–144px</td><td>hero, manifesto</td></tr>
+        <tr><td class="py-3">display L</td><td>Anton</td><td>56–80px</td><td>seção</td></tr>
+        <tr><td class="py-3">h2</td><td>Inter 600</td><td>28–32px</td><td>subtítulo</td></tr>
+        <tr><td class="py-3">lead</td><td>Inter 300</td><td>20–22px</td><td>parágrafo de abertura</td></tr>
+        <tr><td class="py-3">body</td><td>Inter 400</td><td>16–17px</td><td>texto corrido</td></tr>
+        <tr><td class="py-3">caption</td><td>Inter 400</td><td>13px</td><td>legenda, ficha técnica</td></tr>
+        <tr><td class="py-3">eyebrow</td><td>JetBrains Mono</td><td>11px</td><td>etiqueta de seção</td></tr>
+        <tr><td class="py-3">ornamento</td><td>Caveat</td><td>32–48px</td><td>1× por seção, ember</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 05 FOTOGRAFIA -->
+<section id="foto" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">05 — fotografia</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a foto certa cheira a sal.</h2>
+
+  <div class="grid md:grid-cols-3 gap-4 mb-12">
+    <div class="aspect-[3/4] bg-cover bg-center photo-grade rounded-md" style="background-image:url(../../222.png)"></div>
+    <div class="aspect-[3/4] bg-cover bg-center photo-grade rounded-md" style="background-image:url(../../IMG_0311-telao.jpg)"></div>
+    <div class="aspect-[3/4] bg-cover bg-center photo-grade rounded-md" style="background-image:url(../../IMG_0134.jpg)"></div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card-paper">
+      <p class="eyebrow text-ok mb-3">princípios</p>
+      <ul class="text-sm space-y-2 text-ink/85">
+        <li>— hora dourada e azul são as horas certas</li>
+        <li>— gente sempre prioritária — nunca só objeto</li>
+        <li>— gestos, mãos, pés, costas — não só rosto</li>
+        <li>— grão visível ok, ruído digital nunca</li>
+        <li>— leve correção: <span class="mono">contrast 1.06 · sat 0.92 · bri 0.96</span></li>
+        <li>— enquadramento generoso, espaço pro respiro</li>
+      </ul>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-bad mb-3">jamais</p>
+      <ul class="text-sm space-y-2 text-ink/85">
+        <li>— flash duro de celular</li>
+        <li>— filtro instagram saturado, hdr, vinheta forte</li>
+        <li>— legenda com fonte gótica em cima da foto</li>
+        <li>— foto de bandeja com prato sozinho ("foodporn")</li>
+        <li>— grupo posando rígido com taça pro alto</li>
+        <li>— foto rotacionada errada (girar antes de subir)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ICONOGRAFIA -->
+<section id="icone" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">06 — iconografia</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">lucide. traço fino. nunca decorativo.</h2>
+
+  <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-8">
+    <div class="card-paper grid place-items-center aspect-square"><svg width="32" height="32" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+    <div class="card-paper grid place-items-center aspect-square"><svg width="32" height="32" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+    <div class="card-paper grid place-items-center aspect-square"><svg width="32" height="32" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="card-paper grid place-items-center aspect-square"><svg width="32" height="32" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 12a9 9 0 119 9"/><path d="M3 12l3-3m-3 3l3 3"/></svg></div>
+    <div class="card-paper grid place-items-center aspect-square"><svg width="32" height="32" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div>
+    <div class="card-paper grid place-items-center aspect-square"><svg width="32" height="32" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 4h4v4M14 10l6-6M8 20H4v-4M10 14l-6 6M16 20h4v-4M14 14l6 6M8 4H4v4M10 10L4 4"/></svg></div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="card-paper">
+      <p class="eyebrow text-ok mb-3">regra</p>
+      <ul class="text-sm space-y-2 text-ink/85">
+        <li>— biblioteca: Lucide (sem mistura com Material/FontAwesome)</li>
+        <li>— traço: 1.5px (nunca preenchido)</li>
+        <li>— tamanho: 16, 20, 24, 32 (não inventar)</li>
+        <li>— cor: herda do contexto (currentColor)</li>
+        <li>— funcional, não decorativo — ícone sem função sai</li>
+      </ul>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">contextos</p>
+      <ul class="text-sm space-y-2 text-ink/85">
+        <li>— navegação (mapa, telefone, instagram)</li>
+        <li>— eyebrow técnica (relógio antes de hora, marker antes de endereço)</li>
+        <li>— botões secundários (whatsapp, share)</li>
+        <li>— nunca em hero, manifesto ou título</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 APLICAÇÕES -->
+<section id="aplica" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">07 — aplicações</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a marca em peças reais.</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <!-- Pôster -->
+    <div>
+      <div class="mock-poster">
+        <p class="eyebrow text-sun">sex · 21 nov · 22h</p>
+        <div>
+          <p class="display text-4xl">BANDA<br/>COYOTE</p>
+          <p class="hand text-2xl text-ember mt-2">a noite te espera.</p>
+        </div>
+        <p class="mono text-xs opacity-70">elcoyotepub.com</p>
+      </div>
+      <p class="mono text-xs opacity-60 mt-2">pôster A2 · evento de sexta</p>
+    </div>
+
+    <!-- Story Insta -->
+    <div>
+      <div class="mock-story" style="background-image:url(../../IMG_0311-telao.jpg)">
+        <p class="eyebrow">eventos privados</p>
+        <div>
+          <p class="display text-3xl">UM SIM<br/>COM VISTA<br/>PRO MAR.</p>
+          <p class="mono text-xs mt-3 opacity-80">arrasta pra cima ↑</p>
+        </div>
+      </div>
+      <p class="mono text-xs opacity-60 mt-2">story instagram · eventos</p>
+    </div>
+
+    <!-- Camiseta -->
+    <div>
+      <div class="mock-tee">
+        <div class="text-center">
+          <p class="display text-3xl">EL COYOTE</p>
+          <p class="hand text-xl text-sun">venha inteiro.</p>
+        </div>
+      </div>
+      <p class="mono text-xs opacity-60 mt-2">camiseta preta · uniforme</p>
+    </div>
+
+    <!-- Adesivo -->
+    <div>
+      <div class="mock-sticker">
+        <div>
+          <p class="display text-2xl">EL<br/>COYOTE</p>
+          <p class="mono text-[9px] mt-1 opacity-80">imbituba · sc · desde 2017</p>
+        </div>
+      </div>
+      <p class="mono text-xs opacity-60 mt-2">adesivo redondo · 8cm</p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 mt-12">
+    <!-- Feed Insta -->
+    <div class="mock-feed">
+      <div class="head"><div class="w-7 h-7 rounded-full bg-ink"></div><b>elcoyotepub</b><span class="mono text-xs opacity-60 ml-auto">···</span></div>
+      <div class="img" style="background-image:url(../../222.png)"></div>
+      <div class="cap">
+        <p><b>elcoyotepub</b> a noite te espera. sexta · 22h às 5h.</p>
+        <p class="opacity-60 text-xs mt-2 mono">12h · ver 47 comentários</p>
+      </div>
+    </div>
+    <!-- Whatsapp -->
+    <div class="mock-wa">
+      <div class="bub them"><b>EL COYOTE · Reservas</b><br/>oi! reserva pra qual data?</div>
+      <div class="bub me">sábado dia 22, mesa pra 6</div>
+      <div class="bub them">fechado. mesa garantida das 22h às 1h. couvert artístico R$ XX por pessoa. te mando localização?</div>
+      <div class="bub me">manda</div>
+    </div>
+    <!-- Outdoor -->
+    <div class="card-paper bg-ink text-cream aspect-video flex flex-col justify-between">
+      <p class="eyebrow text-sun">a 4h de porto alegre</p>
+      <p class="display text-4xl">UM SIM<br/>COM VISTA<br/>PRO MAR.</p>
+      <p class="mono text-xs opacity-70">elcoyotepub.com/eventos</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 VOZ -->
+<section id="voz" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">08 — voz</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">como a casa fala.</h2>
+
+  <div class="grid md:grid-cols-3 gap-8 mb-16">
+    <div>
+      <div class="flex justify-between mb-2"><span class="mono text-xs">informal</span><span class="mono text-xs">78%</span></div>
+      <div class="voice-bar"><span style="width:78%"></span></div>
+      <p class="text-sm text-ink/60 mt-2">"a noite te espera." > "esperamos sua presença esta noite."</p>
+    </div>
+    <div>
+      <div class="flex justify-between mb-2"><span class="mono text-xs">coração</span><span class="mono text-xs">72%</span></div>
+      <div class="voice-bar"><span style="width:72%"></span></div>
+      <p class="text-sm text-ink/60 mt-2">sente antes de explicar. emoção primeiro, info depois.</p>
+    </div>
+    <div>
+      <div class="flex justify-between mb-2"><span class="mono text-xs">sugere</span><span class="mono text-xs">65%</span></div>
+      <div class="voice-bar"><span style="width:65%"></span></div>
+      <p class="text-sm text-ink/60 mt-2">convida sem empurrar. nunca "imperdível", "corre", "última chance".</p>
+    </div>
+  </div>
+
+  <p class="eyebrow opacity-60 mb-6">5 registros de tom — mesma voz, contextos diferentes</p>
+  <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">convite</p>
+      <p class="display text-2xl mb-2">SEXTA. 22H.</p>
+      <p class="text-sm text-ink/70">direto, sensorial, curto. story de evento, post de agenda, marquee.</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">manifesto</p>
+      <p class="hand text-2xl text-ember mb-2">se é pra viver, que seja inteiro.</p>
+      <p class="text-sm text-ink/70">poético, grande, raro. hero, sobre, abertura de evento especial.</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">serviço</p>
+      <p class="text-base mb-2">"abrimos sex e sáb, das 22h às 5h. quer reservar?"</p>
+      <p class="text-sm text-ink/70">claro, gentil, útil. FAQ, resposta rápida, info operacional.</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">vendas</p>
+      <p class="text-base mb-2">"a casa fica sua. me conta a data e o número de convidados — eu desenho o pacote."</p>
+      <p class="text-sm text-ink/70">caloroso, confiante, sem pressa. eventos privados, qualificação.</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">crise</p>
+      <p class="text-base mb-2">"a chuva venceu hoje. o show fica pra próxima sexta. quem comprou ingresso está garantido."</p>
+      <p class="text-sm text-ink/70">humano, transparente, presente. cancelamento, problema, atraso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 VOCABULÁRIO -->
+<section id="vocab" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">09 — vocabulário</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">palavra é móvel da casa.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div>
+      <p class="eyebrow text-bad mb-4">proibido</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip no">balada</span>
+        <span class="chip no">vip</span>
+        <span class="chip no">premium</span>
+        <span class="chip no">experiência</span>
+        <span class="chip no">inesquecível</span>
+        <span class="chip no">exclusivo</span>
+        <span class="chip no">high-end</span>
+        <span class="chip no">incrível</span>
+        <span class="chip no">imperdível</span>
+        <span class="chip no">top</span>
+        <span class="chip no">rolê</span>
+        <span class="chip no">brother</span>
+        <span class="chip no">galera</span>
+        <span class="chip no">curtir</span>
+        <span class="chip no">pista quente</span>
+        <span class="chip no">night</span>
+      </div>
+      <p class="text-sm text-ink/60 mt-4 max-w-md">
+        Cada uma dessas palavras é um clichê de casa de eventos genérica. EL COYOTE não compete nesse campo.
+      </p>
+    </div>
+    <div>
+      <p class="eyebrow text-ok mb-4">preferido</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip yes">noite</span>
+        <span class="chip yes">casa</span>
+        <span class="chip yes">vista</span>
+        <span class="chip yes">mar</span>
+        <span class="chip yes">sol</span>
+        <span class="chip yes">amanhecer</span>
+        <span class="chip yes">deck</span>
+        <span class="chip yes">banda</span>
+        <span class="chip yes">voz</span>
+        <span class="chip yes">abraço</span>
+        <span class="chip yes">inteiro</span>
+        <span class="chip yes">vivo</span>
+        <span class="chip yes">história</span>
+        <span class="chip yes">sim</span>
+        <span class="chip yes">porto</span>
+        <span class="chip yes">litoral</span>
+        <span class="chip yes">cozinha</span>
+        <span class="chip yes">som</span>
+      </div>
+      <p class="text-sm text-ink/60 mt-4 max-w-md">
+        Palavras concretas, sensoriais, com peso emocional. Cada uma cabe em frase de 6 a 10 palavras.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 FRASES -->
+<section id="frases" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-ink text-cream">
+  <p class="eyebrow text-ember mb-3">10 — frases canônicas</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">as 9 frases da casa.</h2>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div>
+      <p class="display text-3xl mb-2">A NOITE VIRA HISTÓRIA.</p>
+      <p class="mono text-xs opacity-60">tagline · footer, signature, slogan principal</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">A NOITE TE ESPERA.</p>
+      <p class="mono text-xs opacity-60">convite · post de evento, story de sexta</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">VENHA INTEIRO.</p>
+      <p class="mono text-xs opacity-60">manifesto · hero, abertura, ornamento Caveat</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">A CASA FICA SUA.</p>
+      <p class="mono text-xs opacity-60">eventos privados · qualificação, primeira mensagem</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">UM SIM COM VISTA PRO MAR.</p>
+      <p class="mono text-xs opacity-60">destination wedding · landing, anúncio RS</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">SE É PRA VIVER, QUE SEJA INTEIRO.</p>
+      <p class="mono text-xs opacity-60">manifesto · sobre, abertura de campanha</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">A CASA ABERTA.</p>
+      <p class="mono text-xs opacity-60">hospitalidade · pacote, "your home for the night"</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">SEXTA COMEÇA ÀS 22H. SEU DOMINGO A GENTE DEVOLVE.</p>
+      <p class="mono text-xs opacity-60">tom · post divertido, agenda, IG bio sazonal</p>
+    </div>
+    <div>
+      <p class="display text-3xl mb-2">O SOL CAI. A PISTA SOBE.</p>
+      <p class="mono text-xs opacity-60">sunset · evento de pôr-do-sol, deck horário</p>
+    </div>
+  </div>
+
+  <p class="text-sm opacity-60 mt-12 max-w-2xl">
+    <b>Regra:</b> não inventar variações. Se precisa de copy nova, crie uma frase nova com voz consistente — não modifique uma canônica.
+    A repetição é o que constrói memória.
+  </p>
+</section>
+
+<!-- 11 ESTRUTURAS -->
+<section id="estru" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">11 — estruturas frasais</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">como construir uma frase nova.</h2>
+
+  <div class="space-y-12">
+    <div>
+      <p class="eyebrow opacity-60 mb-3">frase-bandeira</p>
+      <p class="display text-3xl md:text-5xl mb-3">[VERBO IMPERATIVO] + [SENSAÇÃO] + ".</p>
+      <p class="text-sm text-ink/70 max-w-2xl">Curta, sensorial, ponto final. Nunca exclamação. Exemplos:
+        <span class="hand text-xl text-ember"> venha inteiro. · dorme tarde. · come com a mão.</span></p>
+    </div>
+
+    <div>
+      <p class="eyebrow opacity-60 mb-3">micro-copy (subtítulo)</p>
+      <p class="text-2xl mb-3">[FATO CONCRETO] + ", " + [DETALHE QUE EMOCIONA].</p>
+      <p class="text-sm text-ink/70 max-w-2xl">Exemplo: "<i>Sex e sáb, 22h às 5h, com vista do porto e som ao vivo.</i>" — não confunde com hero, vai abaixo.</p>
+    </div>
+
+    <div>
+      <p class="eyebrow opacity-60 mb-3">CTA</p>
+      <p class="text-2xl mb-3">[VERBO DE AÇÃO] + [BENEFÍCIO IMPLÍCITO] + " →"</p>
+      <p class="text-sm text-ink/70 max-w-2xl">Bom: "Reservar mesa →", "Falar com a casa →". Ruim: "Clique aqui", "Saiba mais".</p>
+    </div>
+
+    <div>
+      <p class="eyebrow opacity-60 mb-3">storytelling de 3 batidas</p>
+      <ol class="space-y-2 text-base text-ink/85">
+        <li><b>1. Gancho sensorial</b> — uma imagem (sol caindo, cheiro de tainha, cordas afinando)</li>
+        <li><b>2. Cena</b> — quem está, fazendo o quê (a banda subindo, o casal trocando aliança, a cozinha apertando)</li>
+        <li><b>3. Convite ou conclusão</b> — o que o leitor faz com isso (vem, lembra, conta pra alguém)</li>
+      </ol>
+      <div class="card-paper mt-4">
+        <p class="hand text-xl text-ember mb-2">exemplo</p>
+        <p class="text-sm leading-relaxed text-ink/85">
+          O sol caiu atrás do porto. A banda afinou e o deck encheu de gente que não pretendia sair cedo.
+          A noite começou. <b>Sexta. 22h. A casa abre.</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 CANAIS -->
+<section id="canais" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">12 — exemplos por canal</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a mesma voz, em cada lugar.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">story instagram (15s)</p>
+      <p class="text-sm">Frase grande, foto cheia, 1 informação técnica embaixo.</p>
+      <div class="bg-ink text-cream rounded-md p-6 mt-3">
+        <p class="display text-2xl">SEXTA · 22H</p>
+        <p class="hand text-xl text-sun">a noite te espera.</p>
+        <p class="mono text-xs opacity-70 mt-3">link na bio</p>
+      </div>
+    </div>
+
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">legenda instagram (post)</p>
+      <p class="text-sm mb-3">3 linhas. Primeira sensorial, segunda técnica, terceira convite.</p>
+      <div class="bg-cream rounded-md p-4 text-sm">
+        <p>O sol cai e o deck enche.</p>
+        <p>Sexta · 22h às 5h · vista do porto.</p>
+        <p class="text-ember">venha inteiro.</p>
+      </div>
+    </div>
+
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">whatsapp · reservas</p>
+      <p class="text-sm mb-3">Útil, curto, gentil. Confirma + pede o mínimo.</p>
+      <div class="bg-[#ECE5DD] rounded-md p-3 text-sm space-y-2">
+        <p class="bg-white inline-block px-3 py-1.5 rounded-md">oi! reserva pra qual data e quantas pessoas?</p>
+      </div>
+    </div>
+
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">whatsapp · eventos</p>
+      <p class="text-sm mb-3">Caloroso, confiante. Pergunta data + nº de convidados, escuta antes de empurrar pacote.</p>
+      <div class="bg-[#ECE5DD] rounded-md p-3 text-sm space-y-2">
+        <p class="bg-white inline-block px-3 py-1.5 rounded-md">a casa fica sua. me conta a data, quantos convidados e se é cerimônia + festa ou só festa — daí desenho o pacote.</p>
+      </div>
+    </div>
+
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">email (newsletter)</p>
+      <p class="text-sm mb-3">Assunto seco, conteúdo solto.</p>
+      <div class="bg-cream rounded-md p-4 text-sm">
+        <p class="mono text-xs opacity-60">assunto:</p>
+        <p class="font-medium mb-3">sexta começa às 22h.</p>
+        <p>Banda Coyote sobe às 23h. O deck abre 21h30 com sunset. Sua mesa fica reservada até 22h45 — depois libera.</p>
+        <p class="mt-3 hand text-lg text-ember">a noite te espera.</p>
+      </div>
+    </div>
+
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">resposta a comentário</p>
+      <p class="text-sm mb-3">1 linha. Reconhece + responde + chama pra DM se for comercial.</p>
+      <div class="bg-cream rounded-md p-3 text-sm space-y-1">
+        <p><b>@maria.s</b> "tem casamento aí?"</p>
+        <p class="opacity-60">— sim, e tem vista do porto. me chama na DM que conto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 LADO A LADO -->
+<section id="lado" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">13 — ✅ vs ❌</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">quando a frase trai a casa.</h2>
+
+  <div class="space-y-6">
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-paper border-bad/30"><p class="eyebrow text-bad mb-2">não</p><p>"Venha viver uma experiência inesquecível na nossa casa premium!"</p></div>
+      <div class="card-paper border-ok/30"><p class="eyebrow text-ok mb-2">sim</p><p>"A casa abre sexta. Vem.";</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-paper border-bad/30"><p class="eyebrow text-bad mb-2">não</p><p>"Não perca essa oportunidade única! Garanta seu ingresso já!"</p></div>
+      <div class="card-paper border-ok/30"><p class="eyebrow text-ok mb-2">sim</p><p>"1º lote vai até dia 15. depois sobe."</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-paper border-bad/30"><p class="eyebrow text-bad mb-2">não</p><p>"Casamentos high-end com cenário paradisíaco e gastronomia internacional."</p></div>
+      <div class="card-paper border-ok/30"><p class="eyebrow text-ok mb-2">sim</p><p>"Um sim com vista pro mar — e a festa que acaba quando o sol nasce."</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-paper border-bad/30"><p class="eyebrow text-bad mb-2">não</p><p>"Olá! Tudo bem? Em que posso ajudar você hoje? 😊"</p></div>
+      <div class="card-paper border-ok/30"><p class="eyebrow text-ok mb-2">sim</p><p>"oi! reserva pra qual data?"</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-paper border-bad/30"><p class="eyebrow text-bad mb-2">não</p><p>"Galera, sexta tem rolê top na pista! Bora curtir!"</p></div>
+      <div class="card-paper border-ok/30"><p class="eyebrow text-ok mb-2">sim</p><p>"Sexta. 22h. banda sobe às 23h."</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-paper border-bad/30"><p class="eyebrow text-bad mb-2">não</p><p>"Devido a condições climáticas adversas, o evento foi cancelado."</p></div>
+      <div class="card-paper border-ok/30"><p class="eyebrow text-ok mb-2">sim</p><p>"A chuva venceu hoje. O show fica pra próxima sexta — ingresso vale."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 GLOSSÁRIO -->
+<section id="gloss" class="px-8 lg:px-24 py-24">
+  <p class="eyebrow text-ember mb-3">14 — glossário interno</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">como a casa chama as coisas.</h2>
+
+  <div class="grid md:grid-cols-2 gap-x-12">
+    <details open><summary>deck</summary><p class="mt-2 text-sm text-ink/70">área externa com vista do porto. é o coração da casa, não "varanda" nem "área externa".</p></details>
+    <details><summary>casa</summary><p class="mt-2 text-sm text-ink/70">o estabelecimento inteiro. preferido a "espaço", "local", "venue".</p></details>
+    <details><summary>cozinha</summary><p class="mt-2 text-sm text-ink/70">o time + o lugar onde se cozinha. preferido a "gastronomia".</p></details>
+    <details><summary>noite</summary><p class="mt-2 text-sm text-ink/70">o evento em si, das 22h até o sol nascer. não é "balada", "festa" ou "evento".</p></details>
+    <details><summary>banda</summary><p class="mt-2 text-sm text-ink/70">grupo musical da noite. preferido a "atração" ou "line-up".</p></details>
+    <details><summary>som</summary><p class="mt-2 text-sm text-ink/70">a música tocando. preferido a "ambiente musical", "playlist", "trilha".</p></details>
+    <details><summary>amanhecer</summary><p class="mt-2 text-sm text-ink/70">o fim da noite. promessa âncora — "a festa acaba quando o sol nasce".</p></details>
+    <details><summary>porto</summary><p class="mt-2 text-sm text-ink/70">vista canônica. sempre cite quando estiver vendendo evento privado ou destination wedding.</p></details>
+    <details><summary>destination wedding</summary><p class="mt-2 text-sm text-ink/70">casamento de gente de fora (RS principalmente). não traduzir — termo usado pelo público.</p></details>
+    <details><summary>convidado</summary><p class="mt-2 text-sm text-ink/70">quem vem ao evento privado. preferido a "guest", "participante".</p></details>
+    <details><summary>reserva</summary><p class="mt-2 text-sm text-ink/70">mesa garantida na noite. distinto de "ingresso" (que é entrada).</p></details>
+    <details><summary>couvert artístico</summary><p class="mt-2 text-sm text-ink/70">cobrança fixa por pessoa pra arte ao vivo. nunca chamar de "taxa" ou "ingresso disfarçado".</p></details>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="px-8 lg:px-24 py-16 bg-ink text-cream/80 relative">
+  <div class="grain"></div>
+  <p class="display text-5xl md:text-7xl text-cream mb-6">a noite vira história.</p>
+  <div class="flex flex-wrap gap-4 mono text-xs">
+    <a href="../../index.html" class="underline-offset-4 hover:underline">← site v1</a>
+    <a href="../marketing-v2/index.html" class="underline-offset-4 hover:underline">↗ ui kit v2</a>
+    <span class="opacity-60">brandbook v2 · 2026 · supersedes brandbook 2026</span>
+  </div>
+</footer>
+
+<script>
+  // Active nav tracking
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-pill a');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => obs.observe(s));
+
+  // Fade-up
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); fadeObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+</script>
+
+</body>
+</html>

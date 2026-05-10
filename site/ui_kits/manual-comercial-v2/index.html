@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Manual Comercial + Atendimento · EL COYOTE · INTERNO</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { ink:'#0E0E0E', deep:'#274156', ember:'#f58549', sun:'#f2c14e', terra:'#9e5641', sage:'#88a07d', mist:'#a9b0b3', cream:'#F4EFE6', sand:'#E6DCCB' },
+      fontFamily: { display:['Anton','sans-serif'], body:['Inter','sans-serif'], hand:['Caveat','cursive'], mono:['JetBrains Mono','monospace'] },
+    }},
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #F4EFE6; color: #0E0E0E; font-family: 'Inter', sans-serif; }
+  .display { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.92; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .hand { font-family: 'Caveat', cursive; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .card-paper { background: #fff; border: 1px solid rgba(14,14,14,0.10); border-radius: 12px; padding: 24px; }
+  .ok { color: #4f6d50; }
+  .bad { color: #b14747; }
+  .warn { color: #b1822c; }
+  .nav-pill {
+    position: fixed; left: 24px; top: 50%; transform: translateY(-50%); z-index: 60;
+    background: rgba(14,14,14,0.92); color: #F4EFE6; border-radius: 14px; padding: 14px 8px;
+  }
+  .nav-pill a { display: block; padding: 6px 10px; font-size: 11px; letter-spacing: 0.08em; opacity: .55; }
+  .nav-pill a:hover, .nav-pill a.active { opacity: 1; color: #f2c14e; }
+  @media (max-width: 1024px) { .nav-pill { display: none; } }
+  .stamp {
+    display: inline-block; padding: 6px 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .stamp.confirmar { background: #f2c14e; color: #0E0E0E; }
+  .stamp.regra { background: #0E0E0E; color: #F4EFE6; }
+  .stamp.escalar { background: #b14747; color: #F4EFE6; }
+  .mock-wa {
+    background: #ECE5DD; border-radius: 14px; padding: 14px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .mock-wa .head { font-size: 11px; opacity: .55; padding: 0 4px 4px; border-bottom: 1px solid rgba(0,0,0,.08); margin-bottom: 6px; }
+  .mock-wa .bub { padding: 8px 12px; border-radius: 8px; font-size: 13px; max-width: 88%; line-height: 1.4; }
+  .mock-wa .me { background: #DCF8C6; align-self: flex-end; }
+  .mock-wa .them { background: #fff; align-self: flex-start; }
+  .mock-wa .meta { font-size: 9px; opacity: .55; align-self: flex-end; padding-right: 4px; margin-top: -2px; }
+  .price-row td { padding: 12px; border-bottom: 1px solid rgba(0,0,0,.08); }
+  .price-row td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+  .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .grid-2col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="font-body antialiased">
+
+<!-- Sidebar -->
+<nav class="nav-pill">
+  <a href="#visao" class="active">01 visão geral</a>
+  <a href="#reservas">02 reservas</a>
+  <a href="#aniver">03 aniversariantes</a>
+  <a href="#pacotes">04 pacotes</a>
+  <a href="#inclui">05 o que inclui</a>
+  <a href="#bebidas">06 bebidas</a>
+  <a href="#politica">07 política</a>
+  <a href="#regua">08 régua</a>
+  <a href="#scripts">09 scripts</a>
+  <a href="#limites">10 limites</a>
+</nav>
+
+<!-- Header -->
+<header class="px-8 lg:px-24 pt-12 pb-16 border-b border-ink/10">
+  <div class="flex items-center justify-between mb-12">
+    <a href="../../index.html" class="eyebrow underline-offset-4 hover:underline">← voltar ao site</a>
+    <span class="eyebrow opacity-60">manual interno · v2 · 2026-05-09</span>
+  </div>
+  <p class="eyebrow text-ember mb-6">manual comercial + atendimento</p>
+  <h1 class="display text-7xl md:text-9xl mb-6">como<br/>a casa<br/>vende.</h1>
+  <p class="text-xl md:text-2xl max-w-3xl text-ink/75 leading-relaxed">
+    Manual operacional pra <b>Beto</b> (vendas/eventos privados) e <b>Lia</b> (atendimento/reservas).
+    Tudo aqui é interno — não publica, não posta, não vaza valor de desconto.
+  </p>
+  <div class="mt-10 flex flex-wrap gap-2 mono text-xs">
+    <span class="stamp regra">documento interno</span>
+    <span class="stamp confirmar">contém pontos a confirmar</span>
+    <span class="stamp regra">complementa brandbook v2</span>
+  </div>
+
+  <div class="mt-10 card-paper bg-ink/5 border-ink/15">
+    <p class="eyebrow opacity-70 mb-2">princípio-mãe</p>
+    <p class="display text-3xl md:text-5xl">DEVOLVER A CASA<br/>VAZIA É O PIOR<br/>NEGÓCIO QUE EXISTE.</p>
+    <p class="text-sm text-ink/70 mt-4 max-w-3xl">
+      Fechar com margem mínima é melhor que não fechar. Mas <b>com regras</b> — sem improviso, sem promessa fora do pacote, sem desconto sem aprovação. Esse manual é o trilho que permite negociar rápido sem virar bagunça.
+    </p>
+  </div>
+</header>
+
+<!-- 01 VISÃO GERAL -->
+<section id="visao" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">01 — visão geral</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">duas portas, uma casa.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-2">whatsapp · reservas</p>
+      <p class="display text-3xl mb-2">LIA</p>
+      <p class="text-sm text-ink/70 mb-4">(48) 99666-3645</p>
+      <p class="text-sm">Cobre tudo que é <b>noite pública</b>: reserva de mesa, lote promocional, lista free, aniversariante, dúvida de cardápio, horário, dress-code, chuva, cancelamento.</p>
+      <p class="hand text-xl text-ember mt-3">"oi! reserva pra qual data?"</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-2">whatsapp · eventos</p>
+      <p class="display text-3xl mb-2">BETO</p>
+      <p class="text-sm text-ink/70 mb-4">(48) 99174-4141</p>
+      <p class="text-sm">Cobre tudo que é <b>casa fechada</b>: casamento, aniversário grande, corporativo, formatura, festa de empresa, destination wedding RS, hospedagem dos convidados.</p>
+      <p class="hand text-xl text-ember mt-3">"a casa fica sua. me conta a data e quantos convidados."</p>
+    </div>
+  </div>
+
+  <p class="eyebrow opacity-60 mt-12 mb-4">quando uma porta passa pra outra</p>
+  <div class="card-paper">
+    <ul class="space-y-3 text-sm">
+      <li><b>Lia → Beto:</b> qualquer pergunta sobre fechar a casa (mais de 30 pessoas, evento privado, casamento, formatura). Lia repassa o número do Beto + nome + data tentativa.</li>
+      <li><b>Beto → Lia:</b> cliente quer só ir num sex/sáb público depois (não fechar) — Beto presenteia atenção e passa pra Lia montar reserva.</li>
+      <li><b>Beto → Rodrigo:</b> desconto acima da trilha do dia, pacote customizado fora do padrão, parceria nova com pousada, contrato CNPJ corporativo, imprensa.</li>
+      <li><b>Lia → Rodrigo:</b> reclamação grave, pedido de reembolso, aparição de imprensa, problema com fornecedor.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 02 RESERVAS -->
+<section id="reservas" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">02 — reservas (sex/sáb)</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a porta abre 22h.</h2>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-12">
+    <div class="card-paper">
+      <p class="eyebrow text-ok mb-2">lista free</p>
+      <p class="display text-3xl">ATÉ 23H</p>
+      <p class="text-sm text-ink/70 mt-3">Quem entrou na lista da casa entra de graça até 23h. Após 23h: paga ingresso normal. Mecânica pra encher a casa cedo.</p>
+      <p class="mono text-xs opacity-60 mt-3">nome + sobrenome + telefone até 21h do dia</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">lote promocional</p>
+      <p class="display text-3xl">R$ 30</p>
+      <p class="text-sm text-ink/70 mt-3">1º lote. Vende online (link Lia) e na portaria. Sobe quando o lote esgota.</p>
+      <p class="mono text-xs opacity-60 mt-3">próximos lotes: a definir conforme demanda</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-2">mesa</p>
+      <p class="display text-3xl">22H–22H45</p>
+      <p class="text-sm text-ink/70 mt-3">Mesa garantida até 22h45. Após esse horário libera pra fila. Lia confirma 1h antes via WhatsApp.</p>
+      <p class="mono text-xs opacity-60 mt-3">capacidade mínima por mesa: <span class="stamp confirmar">a confirmar</span></p>
+    </div>
+  </div>
+
+  <div class="card-paper">
+    <p class="eyebrow opacity-60 mb-3">script lia · reserva mesa (modelo)</p>
+    <div class="grid-2col">
+      <div class="mock-wa">
+        <div class="head">cliente · 14:32</div>
+        <div class="bub them">oi, queria reservar uma mesa pra sábado à noite</div>
+        <div class="bub me">oi! pra quantas pessoas e que horas vocês chegam?</div>
+        <div class="bub them">somos 6, chegamos uns 22h30</div>
+        <div class="bub me">fechado. mesa garantida até 22h45 — depois libera. seu nome completo + um telefone, por favor?</div>
+        <div class="bub them">Maria Souza, 51 99...</div>
+        <div class="bub me">reservado, Maria. ingresso/lote sai R$30 por pessoa na portaria. te confirmo 1h antes. ✦</div>
+      </div>
+      <div class="mock-wa">
+        <div class="head">cliente · 19:10</div>
+        <div class="bub them">tem como entrar de graça hoje?</div>
+        <div class="bub me">tem! lista free vai até 23h. me passa nome + sobrenome + telefone que adiciono pra você.</div>
+        <div class="bub them">João Pereira, 47 9...</div>
+        <div class="bub me">tá na lista. depois das 23h o ingresso vira R$30. te espero. ✦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ANIVERSARIANTES -->
+<section id="aniver" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">03 — aniversariantes</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">o aniversário tem trilha.</h2>
+
+  <p class="text-lg text-ink/80 max-w-3xl mb-8">
+    Aniversariante traz galera, garante consumo, vira foto, vira boca-a-boca. É das melhores conversões da casa.
+    A oferta padrão tem 3 alavancas: <b>lista de convidados</b>, <b>consumação</b> e um <b>mimo</b>.
+  </p>
+
+  <div class="card-paper mb-8">
+    <p class="eyebrow opacity-60 mb-3">pacote padrão (sex/sáb) <span class="stamp confirmar ml-2">valores a confirmar</span></p>
+    <table class="w-full text-sm">
+      <tbody>
+        <tr class="price-row"><td>lista de convidados</td><td>até X pessoas free na lista até 23h</td></tr>
+        <tr class="price-row"><td>consumação</td><td>R$Y por convidado, garantida no caixa</td></tr>
+        <tr class="price-row"><td>mimo da casa</td><td>1 drink Coyote ou bolinho de tainha pro aniversariante</td></tr>
+        <tr class="price-row"><td>nome no painel</td><td>aniversariante aparece nominal no painel da entrada</td></tr>
+      </tbody>
+    </table>
+    <p class="text-xs text-ink/60 mt-3">Lia pede ao Rodrigo confirmar X (nº de convidados free) e Y (consumação por pessoa) antes de divulgar.</p>
+  </div>
+
+  <div class="card-paper">
+    <p class="eyebrow opacity-60 mb-3">script lia · aniversariante</p>
+    <div class="mock-wa max-w-md">
+      <div class="bub them">faço aniversário dia 28, queria comemorar aí. tem alguma coisa pra mim?</div>
+      <div class="bub me">tem! conta: dia 28 cai sex ou sáb? quantos convidados aproximadamente?</div>
+      <div class="bub them">sexta, uns 15</div>
+      <div class="bub me">show. seus 15 entram free na lista até 23h. consumação sai R$Y por convidado, garantida no caixa. casa coloca seu nome no painel + um drink Coyote por minha conta. fecha?</div>
+      <div class="bub them">fecha</div>
+      <div class="bub me">manda nome completo + lista dos convidados (nome+telefone) até quinta às 21h. te espero. ✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PACOTES EVENTOS PRIVADOS -->
+<section id="pacotes" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-ink text-cream">
+  <p class="eyebrow text-ember mb-3">04 — eventos privados · pacotes</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">3 trilhas. dia da semana decide.</h2>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-12">
+    <div class="card-paper bg-cream/5 border-cream/20 text-cream">
+      <p class="eyebrow text-sun mb-2">trilha 1</p>
+      <p class="display text-2xl mb-3">TER A QUI</p>
+      <p class="display text-5xl text-ember">R$ 3.000</p>
+      <p class="hand text-xl text-sun mt-3">50% off do cheio.</p>
+      <p class="text-sm opacity-80 mt-4">Casa mais aberta a custo de oportunidade. Boa pra corporativo, lançamento, formatura compacta, casamento meio de semana.</p>
+    </div>
+    <div class="card-paper bg-cream/5 border-cream/20 text-cream">
+      <p class="eyebrow text-sun mb-2">trilha 2</p>
+      <p class="display text-2xl mb-3">SEX OU SÁB</p>
+      <p class="display text-5xl text-ember">R$ 6.000</p>
+      <p class="hand text-xl text-sun mt-3">preço cheio.</p>
+      <p class="text-sm opacity-80 mt-4">Premium. Casamento principal, festa grande, evento âncora. Conflito direto com a noite pública — abrir mão exige cobrir.</p>
+    </div>
+    <div class="card-paper bg-cream/5 border-cream/20 text-cream">
+      <p class="eyebrow text-sun mb-2">trilha 3</p>
+      <p class="display text-2xl mb-3">DOMINGO</p>
+      <p class="display text-5xl text-ember">R$ 4.500</p>
+      <p class="hand text-xl text-sun mt-3">25% off.</p>
+      <p class="text-sm opacity-80 mt-4">Casa não opera pública aos domingos. Boa pra cerimônia + festa intimista, brunch de casamento, batizado.</p>
+    </div>
+  </div>
+
+  <div class="card-paper bg-cream/5 border-cream/20 text-cream">
+    <p class="eyebrow text-sun mb-3">calculadora rápida — exemplo 50 convidados</p>
+    <table class="w-full text-sm">
+      <thead class="text-left mono text-xs opacity-60">
+        <tr><th class="pb-3">trilha</th><th>locação</th><th>+ open R$69×50</th><th>+ banda *</th><th>= total exemplo</th></tr>
+      </thead>
+      <tbody class="divide-y divide-cream/10">
+        <tr><td class="py-3">ter–qui</td><td>3.000</td><td>3.450</td><td>2.500</td><td class="font-bold">8.950</td></tr>
+        <tr><td class="py-3">sex–sáb</td><td>6.000</td><td>3.450</td><td>2.500</td><td class="font-bold">11.950</td></tr>
+        <tr><td class="py-3">domingo</td><td>4.500</td><td>3.450</td><td>2.500</td><td class="font-bold">10.450</td></tr>
+      </tbody>
+    </table>
+    <p class="mono text-xs opacity-60 mt-3">* banda = estimativa cachê médio · não incluso no pacote · varia por noiva/cliente</p>
+  </div>
+</section>
+
+<!-- 05 O QUE INCLUI -->
+<section id="inclui" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">05 — o que entra e o que é à parte</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a régua que evita briga.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card-paper border-ok/30">
+      <p class="eyebrow text-ok mb-4">incluso na locação</p>
+      <ul class="space-y-3 text-sm">
+        <li><b>✓ Deck.</b> espaço completo da casa, vista do porto.</li>
+        <li><b>✓ Som.</b> PA, mesa, microfone, técnico de operação.</li>
+        <li><b>✓ Luz.</b> ambiente, cênica básica, ponto de palco.</li>
+        <li><b>✓ DJ.</b> set ambiente, transição, repertório casa.</li>
+        <li><b>✓ Equipe operacional.</b> bar, garçons, cozinha base, segurança.</li>
+        <li><b>✓ Banheiros.</b> limpeza durante o evento.</li>
+        <li><b>✓ Estrutura básica</b> de mesas e cadeiras da casa.</li>
+      </ul>
+    </div>
+    <div class="card-paper border-warn/30">
+      <p class="eyebrow text-warn mb-4">à parte (cobrado separado)</p>
+      <ul class="space-y-3 text-sm">
+        <li><b>+ Banda ao vivo.</b> Beto cota com bandas parceiras ou indica.</li>
+        <li><b>+ Alimentação.</b> ver opções: cardápio degustação, jantar empratado, ilhas, finger food.</li>
+        <li><b>+ Decoração temática.</b> cerimonialista, flores, papelaria, mesa principal.</li>
+        <li><b>+ Hospedagem dos convidados.</b> Pousada Barra Mar Oficial é parceira atual; outras pousadas em colab aberta.</li>
+        <li><b>+ Cerimônia (casamento).</b> celebrante, espaço cenográfico, som de cerimônia separado.</li>
+        <li><b>+ Bolo, bem-casado, lembranças.</b> fornecedores indicados.</li>
+        <li><b>+ Foto e vídeo.</b> indicação de parceiros.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-paper mt-8 bg-deep text-cream">
+    <p class="eyebrow text-sun mb-3">regra de ouro</p>
+    <p class="text-lg leading-relaxed">
+      Se o cliente pedir algo fora da locação, Beto responde sempre primeiro com:
+      <b class="text-sun">"isso a gente cota separado, você prefere que eu indique fornecedor parceiro ou você já tem o seu?"</b>
+      Nunca prometer "tá incluso" sem checar.
+    </p>
+  </div>
+</section>
+
+<!-- 06 BEBIDAS -->
+<section id="bebidas" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">06 — pacote de bebidas</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">duas formas, uma escolha.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    <div class="card-paper">
+      <p class="eyebrow text-ember mb-2">modalidade A · open bar</p>
+      <p class="display text-3xl mb-3">A PARTIR DE R$ 69 / pessoa</p>
+      <p class="text-sm text-ink/70">
+        Cobrança fixa por convidado, bebida liberada por X horas (definir no fechamento).
+        Cliente sabe o custo na contratação — zero surpresa.
+      </p>
+      <table class="w-full text-sm mt-6">
+        <tbody>
+          <tr class="price-row"><td>essencial</td><td>R$ 69 — cerveja + refri + água</td></tr>
+          <tr class="price-row"><td>casa <span class="stamp confirmar ml-2">a confirmar</span></td><td>R$ 99 — + drinks da casa (Coyote, Beira-mar, Pôr do Sol)</td></tr>
+          <tr class="price-row"><td>premium <span class="stamp confirmar ml-2">a confirmar</span></td><td>R$ 149 — + destilados premium + espumante</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-2">modalidade B · comanda</p>
+      <p class="display text-3xl mb-3">CONSUMO INDIVIDUAL</p>
+      <p class="text-sm text-ink/70">
+        Cada convidado abre comanda e paga ao final. Locador não tem risco de open, mas perde controle do total.
+        Boa pra evento corporativo onde a empresa não banca bebida, ou casamento com perfil que bebe pouco.
+      </p>
+      <ul class="text-sm space-y-2 mt-6">
+        <li>— preços do cardápio normal da casa</li>
+        <li>— casa abre comanda no nome de cada convidado na entrada</li>
+        <li>— anfitrião pode optar por <b>open parcial</b>: assume X reais por pessoa, depois vira comanda (híbrido)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-paper bg-deep text-cream">
+    <p class="eyebrow text-sun mb-3">como Beto recomenda</p>
+    <ul class="text-sm space-y-2">
+      <li>— <b>Casamento jovem (25–35), público RS:</b> Open Casa R$99. RS bebe.</li>
+      <li>— <b>Casamento intimista, comida sentada:</b> Open Premium R$149. Vinho/espumante puxa o pacote.</li>
+      <li>— <b>Aniversário 40+:</b> Open Essencial R$69 ou comanda — público bebe menos volume.</li>
+      <li>— <b>Corporativo:</b> Comanda quase sempre. Empresa não cobre álcool no Brasil em 80% dos casos.</li>
+      <li>— <b>Formatura:</b> Híbrido. Open inicial 2h + comanda depois.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 POLÍTICA -->
+<section id="politica" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">07 — política comercial</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">sinal, contrato, alteração.</h2>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-12">
+    <div class="card-paper">
+      <p class="eyebrow text-bad mb-2">sinal</p>
+      <p class="display text-2xl mb-3">NÃO REEMBOLSÁVEL</p>
+      <p class="text-sm text-ink/70">
+        Cancelou, perde — independente do prazo (regra direta do Rodrigo).
+        % do sinal sobre valor total: <span class="stamp confirmar">a confirmar — sugestão default 30%</span>.
+      </p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-2">alteração de data</p>
+      <p class="display text-2xl mb-3">1× SEM CUSTO</p>
+      <p class="text-sm text-ink/70">
+        1 alteração permitida sem custo, mediante disponibilidade da nova data.
+        2ª alteração: cobrar taxa de remarcação (<span class="stamp confirmar">valor a confirmar</span>).
+      </p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-2">contrato</p>
+      <p class="display text-2xl mb-3">SEMPRE ESCRITO</p>
+      <p class="text-sm text-ink/70">
+        Nada fechado só por WhatsApp. Beto manda contrato após sinal pago. Modelo padrão a definir com Rodrigo.
+      </p>
+    </div>
+  </div>
+
+  <div class="card-paper bg-ember/10 border-ember/30">
+    <p class="eyebrow text-ember mb-3">filosofia interna · não publicar</p>
+    <p class="text-lg leading-relaxed text-ink/85">
+      "Fazemos qualquer negócio pra não quebrar."<br/>
+      <span class="text-sm text-ink/60">— Rodrigo, 2026-05-09.</span>
+    </p>
+    <p class="text-sm text-ink/75 mt-4 max-w-3xl">
+      Beto e Lia têm autonomia pra fechar mesmo com margem apertada — desde que dentro destes trilhos:
+    </p>
+    <ul class="text-sm text-ink/75 space-y-2 mt-3">
+      <li>✦ Aplicar trilha do dia direto (ter-qui, sex-sáb, dom) <b>sem precisar perguntar</b>.</li>
+      <li>✦ Desconto adicional <b>até 25%</b> sobre a trilha → autonomia Beto/Lia.</li>
+      <li>✦ Desconto <b>acima de 25%</b> sobre a trilha → <span class="stamp escalar">escalation Rodrigo</span>.</li>
+      <li>✦ Pacote customizado, mudança de pacote-base, contrato CNPJ, parceria nova → <span class="stamp escalar">escalation Rodrigo</span>.</li>
+      <li>✦ Vitrine pública: <b>nunca</b> publicizar "negociável", "promocional", "sob medida". Valor âncora cheio sempre.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 08 RÉGUA -->
+<section id="regua" class="px-8 lg:px-24 py-24 border-b border-ink/10 bg-sand/40">
+  <p class="eyebrow text-ember mb-3">08 — régua de atendimento</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">tempo, tom, escalation.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">tempo de resposta · meta</p>
+      <table class="w-full text-sm">
+        <tbody>
+          <tr class="price-row"><td>lia · horário comercial (10h–22h ter–dom)</td><td>até 30 min</td></tr>
+          <tr class="price-row"><td>lia · fora do comercial</td><td>até 2h</td></tr>
+          <tr class="price-row"><td>beto · horário comercial</td><td>até 1h</td></tr>
+          <tr class="price-row"><td>beto · fora do comercial</td><td>até 4h</td></tr>
+          <tr class="price-row"><td>madrugada (00h–10h)</td><td>auto-resposta + retoma 10h</td></tr>
+        </tbody>
+      </table>
+      <p class="mono text-xs opacity-60 mt-3"><span class="stamp confirmar">a confirmar com rodrigo</span> — defaults sugeridos.</p>
+    </div>
+    <div class="card-paper">
+      <p class="eyebrow opacity-60 mb-3">tom (referência brandbook v2)</p>
+      <ul class="text-sm space-y-2">
+        <li>— informal 78% · coração 72% · sugere 65%</li>
+        <li>— minúsculas no início de frase em DM</li>
+        <li>— ponto final sim, exclamação muito raro</li>
+        <li>— frases curtas (6–10 palavras)</li>
+        <li>— vocabulário proibido: balada, vip, premium, top, brother, galera, rolê, imperdível</li>
+        <li>— frases canônicas têm uso definido — não inventar variação</li>
+      </ul>
+      <p class="mono text-xs opacity-60 mt-3">→ <a class="underline" href="../brandbook-v2/index.html#voz">brandbook v2 · seção 08 · voz</a></p>
+    </div>
+  </div>
+
+  <div class="card-paper">
+    <p class="eyebrow opacity-60 mb-3">auto-resposta madrugada (modelo lia/beto)</p>
+    <div class="mock-wa max-w-lg">
+      <div class="head">cliente · 03:14</div>
+      <div class="bub them">oi, queria informação sobre casamento aí</div>
+      <div class="bub them">[lida automaticamente]</div>
+      <div class="bub me">oi! a casa dorme até 10h. te respondo daqui a pouco com tudo que precisa saber. enquanto isso, dá uma olhada: elcoyotepub.com/eventos ✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 SCRIPTS -->
+<section id="scripts" class="px-8 lg:px-24 py-24 border-b border-ink/10">
+  <p class="eyebrow text-ember mb-3">09 — scripts</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">a conversa que fecha.</h2>
+
+  <p class="eyebrow opacity-60 mb-6">beto · primeiro contato → qualificação</p>
+  <div class="grid md:grid-cols-2 gap-6 mb-12">
+    <div class="mock-wa">
+      <div class="head">noiva · porto alegre · 16:08</div>
+      <div class="bub them">oi! vi o site de vocês, queria saber sobre casamento aí</div>
+      <div class="bub me">oi! que bom que chegou. a casa fica sua — me conta o básico:</div>
+      <div class="bub me">— data tentativa (ou mês)<br/>— quantos convidados aproximadamente<br/>— cerimônia + festa, ou só festa</div>
+      <div class="bub them">15 de março, uns 80 convidados, cerimônia + festa</div>
+      <div class="bub me">show. 15/3 cai sábado — trilha cheia. te mando pacote-base por aqui em uns 10 minutos. seu nome?</div>
+    </div>
+    <div class="mock-wa">
+      <div class="head">noiva · 16:18</div>
+      <div class="bub me">Maria, segura o sinal:</div>
+      <div class="bub me">SÁBADO 15/3<br/>locação: R$ 6.000<br/>+ open casa R$99×80 = R$ 7.920<br/>+ banda (cota separado)<br/>+ alimentação (cota separado)<br/>+ deco (cota separado)<br/><br/><b>locação + open: R$ 13.920</b><br/><br/>incluso: deck, som, luz, dj, equipe.</div>
+      <div class="bub me">manda o que tá amarrando seu coração e o que ainda tá no ar — a gente desenha junto. ✦</div>
+    </div>
+  </div>
+
+  <p class="eyebrow opacity-60 mb-6">beto · negociação dentro da autonomia (-25%)</p>
+  <div class="card-paper mb-12">
+    <div class="grid-2col">
+      <div class="mock-wa">
+        <div class="bub them">tá um pouco acima do que a gente pode</div>
+        <div class="bub me">entendi. me conta: o teto pra locação tá em quanto?</div>
+        <div class="bub them">teríamos uns 4500 só pra casa</div>
+        <div class="bub me">consigo fazer R$ 4.500 mantendo deck/som/luz/dj. só tô abrindo mão de uns 25% — então preciso de sinal de 30% pra travar agora. fecha?</div>
+        <div class="bub them">fecha</div>
+      </div>
+      <div class="card-paper bg-ink/5">
+        <p class="eyebrow opacity-60 mb-3">por trás da conta</p>
+        <ul class="text-xs space-y-1 mono">
+          <li>trilha sex-sáb cheia: 6.000</li>
+          <li>desconto aplicado: -25% = 4.500</li>
+          <li>está dentro da autonomia beto</li>
+          <li>não precisa escalar rodrigo</li>
+          <li>se cliente pedisse 4.000 → escalation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="eyebrow opacity-60 mb-6">beto · pós-venda (manda no dia seguinte)</p>
+  <div class="mock-wa max-w-lg mb-12">
+    <div class="head">d+1 · 11:00</div>
+    <div class="bub me">Maria, bom dia. ontem foi noite. obrigado por confiar na casa.</div>
+    <div class="bub me">se quiser que a gente repasse fotos, peça do fotógrafo direto que eu intermedio.</div>
+    <div class="bub me">se algum convidado teu quiser fazer evento aqui, manda meu contato. casa é sua agora. ✦</div>
+  </div>
+
+  <p class="eyebrow opacity-60 mb-6">lia · cancelamento por chuva</p>
+  <div class="mock-wa max-w-lg">
+    <div class="head">cliente que comprou ingresso · 19:42</div>
+    <div class="bub them">e a chuva? tem evento hoje?</div>
+    <div class="bub me">a chuva venceu hoje. o show fica pra próxima sexta — seu ingresso vale, sem reapresentação.</div>
+    <div class="bub me">se preferir reembolso, me confirma por aqui que devolvo até amanhã.</div>
+    <div class="bub them">prefiro ir na próxima</div>
+    <div class="bub me">tá garantido. sexta 22h. ✦</div>
+  </div>
+</section>
+
+<!-- 10 LIMITES -->
+<section id="limites" class="px-8 lg:px-24 py-24 bg-ink text-cream">
+  <p class="eyebrow text-ember mb-3">10 — limites internos</p>
+  <h2 class="display text-5xl md:text-7xl mb-12">o que a casa nunca faz.</h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card-paper bg-cream/5 border-cream/20 text-cream">
+      <p class="eyebrow text-bad mb-4">não fazemos · regra dura</p>
+      <ul class="text-sm space-y-3">
+        <li>✗ aluguel sem sinal pago</li>
+        <li>✗ open bar premium grátis ou de cortesia em larga escala</li>
+        <li>✗ promessa de banda específica sem checar agenda da banda</li>
+        <li>✗ fechar contrato CNPJ sem revisão Rodrigo</li>
+        <li>✗ co-branding com pousada nova sem aprovação</li>
+        <li>✗ desconto >25% sobre trilha sem escalation</li>
+        <li>✗ mexer no pacote-base ("tira o dj e desconta") sem escalation</li>
+        <li>✗ comprometer data sem disponibilidade confirmada no calendário</li>
+      </ul>
+    </div>
+    <div class="card-paper bg-cream/5 border-cream/20 text-cream">
+      <p class="eyebrow text-warn mb-4">sempre confirmar com rodrigo</p>
+      <ul class="text-sm space-y-3">
+        <li>⚠ casamento com cláusula contratual fora do padrão</li>
+        <li>⚠ parceria nova com pousada / hotel / fornecedor</li>
+        <li>⚠ aparição imprensa, mídia, vídeo institucional</li>
+        <li>⚠ permuta (troca de serviço por divulgação)</li>
+        <li>⚠ evento beneficente, política, religioso</li>
+        <li>⚠ fechamento de mais de 1 evento na mesma data</li>
+        <li>⚠ alteração de cardápio padrão (cliente "mas eu queria...")</li>
+        <li>⚠ ingresso cortesia em volume (>5 pessoas)</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="display text-3xl md:text-5xl mt-16">DENTRO DESSES TRILHOS,<br/>BETO E LIA FECHAM.</p>
+  <p class="text-sm opacity-70 mt-4 max-w-2xl">Fora deles, a 5ª pessoa da conversa é o Rodrigo. Sem improviso, sem promessa que não cabe no contrato.</p>
+</section>
+
+<!-- Footer -->
+<footer class="px-8 lg:px-24 py-16 bg-sand">
+  <p class="eyebrow opacity-60 mb-4">documento interno · v2 · 2026-05-09</p>
+  <p class="display text-4xl md:text-6xl mb-6">a noite vira história.</p>
+  <div class="flex flex-wrap gap-4 mono text-xs">
+    <a href="../../index.html" class="underline-offset-4 hover:underline">← site v1</a>
+    <a href="../brandbook-v2/index.html" class="underline-offset-4 hover:underline">↗ brandbook v2</a>
+    <a href="../marketing-v2/index.html" class="underline-offset-4 hover:underline">↗ ui kit v2</a>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-pill a');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>

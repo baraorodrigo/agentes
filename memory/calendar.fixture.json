@@ -1,0 +1,50 @@
+{
+  "_note": "Fixture até pareamento real (Notion calendário ou Google). Semana Mon 2026-05-04 → Sun 2026-05-10.",
+  "items": [
+    { "id": "cal-001", "date": "2026-05-04", "start": "09:00", "end": "09:05", "category": "cron", "title": "Briefing diário", "agent": "jarbas", "detail": "Manda no privado pro Rodrigo" },
+    { "id": "cal-002", "date": "2026-05-04", "start": "10:00", "end": "10:05", "category": "cron", "title": "Aniversariantes da semana", "agent": "beto" },
+    { "id": "cal-003", "date": "2026-05-04", "start": "10:00", "end": "10:05", "category": "cron", "title": "Sugestão de conteúdo", "agent": "duda" },
+    { "id": "cal-004", "date": "2026-05-04", "start": "10:00", "end": "10:05", "category": "cron", "title": "Lembrete pré-evento", "agent": "beto" },
+    { "id": "cal-005", "date": "2026-05-04", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-006", "date": "2026-05-04", "start": "14:00", "end": "15:00", "category": "meu", "title": "Reunião contador", "detail": "fechamento abril" },
+    { "id": "cal-007", "date": "2026-05-04", "start": "16:00", "end": "16:30", "category": "post", "title": "Story Sertanejo sexta", "agent": "duda" },
+    { "id": "cal-008", "date": "2026-05-04", "start": "18:00", "end": "18:05", "category": "cron", "title": "Briefing dia do evento", "agent": "beto" },
+
+    { "id": "cal-010", "date": "2026-05-05", "start": "09:00", "end": "09:05", "category": "cron", "title": "Briefing diário", "agent": "jarbas" },
+    { "id": "cal-011", "date": "2026-05-05", "start": "10:00", "end": "10:05", "category": "cron", "title": "Lembrete pré-evento", "agent": "beto" },
+    { "id": "cal-012", "date": "2026-05-05", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-013", "date": "2026-05-05", "start": "12:00", "end": "12:30", "category": "vencimento", "title": "Aluguel R$ 4.500", "detail": "boleto Sicoob — pagar até 15h" },
+    { "id": "cal-014", "date": "2026-05-05", "start": "14:00", "end": "15:00", "category": "post", "title": "Reels bastidores cozinha", "agent": "duda" },
+    { "id": "cal-015", "date": "2026-05-05", "start": "18:00", "end": "18:05", "category": "cron", "title": "Briefing dia do evento", "agent": "beto" },
+
+    { "id": "cal-020", "date": "2026-05-06", "start": "09:00", "end": "09:05", "category": "cron", "title": "Briefing diário", "agent": "jarbas" },
+    { "id": "cal-021", "date": "2026-05-06", "start": "10:00", "end": "10:05", "category": "cron", "title": "Lembrete pré-evento", "agent": "beto" },
+    { "id": "cal-022", "date": "2026-05-06", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-023", "date": "2026-05-06", "start": "18:00", "end": "18:05", "category": "cron", "title": "Briefing dia do evento", "agent": "beto" },
+    { "id": "cal-024", "date": "2026-05-06", "start": "21:00", "end": "01:00", "endDayOffset": 1, "category": "evento", "title": "Quarta do Bruno & Dupla", "detail": "Sertanejo · cover 15" },
+
+    { "id": "cal-030", "date": "2026-05-07", "start": "09:00", "end": "09:05", "category": "cron", "title": "Briefing diário", "agent": "jarbas" },
+    { "id": "cal-031", "date": "2026-05-07", "start": "10:00", "end": "10:05", "category": "cron", "title": "Lembrete pré-evento", "agent": "beto" },
+    { "id": "cal-032", "date": "2026-05-07", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-033", "date": "2026-05-07", "start": "15:00", "end": "16:00", "category": "meu", "title": "Médico — checkup" },
+    { "id": "cal-034", "date": "2026-05-07", "start": "18:00", "end": "18:05", "category": "cron", "title": "Briefing dia do evento", "agent": "beto" },
+
+    { "id": "cal-040", "date": "2026-05-08", "start": "09:00", "end": "09:05", "category": "cron", "title": "Briefing diário", "agent": "jarbas" },
+    { "id": "cal-041", "date": "2026-05-08", "start": "10:00", "end": "10:05", "category": "cron", "title": "Lembrete pré-evento", "agent": "beto" },
+    { "id": "cal-042", "date": "2026-05-08", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-043", "date": "2026-05-08", "start": "14:00", "end": "14:30", "category": "post", "title": "Story divulgação Sertaneja Uni", "agent": "duda" },
+    { "id": "cal-044", "date": "2026-05-08", "start": "18:00", "end": "18:05", "category": "cron", "title": "Briefing dia do evento", "agent": "beto" },
+    { "id": "cal-045", "date": "2026-05-08", "start": "22:00", "end": "04:00", "endDayOffset": 1, "category": "evento", "title": "Sertaneja Universitária", "detail": "DJ Lucca + ao vivo · cover 20" },
+
+    { "id": "cal-050", "date": "2026-05-09", "start": "09:00", "end": "09:05", "category": "cron", "title": "Briefing diário", "agent": "jarbas" },
+    { "id": "cal-051", "date": "2026-05-09", "start": "10:00", "end": "10:05", "category": "cron", "title": "Lembrete pré-evento", "agent": "beto" },
+    { "id": "cal-052", "date": "2026-05-09", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-053", "date": "2026-05-09", "start": "16:00", "end": "16:30", "category": "post", "title": "Reels divulgação Rock Night", "agent": "duda" },
+    { "id": "cal-054", "date": "2026-05-09", "start": "18:00", "end": "18:05", "category": "cron", "title": "Briefing dia do evento", "agent": "beto" },
+    { "id": "cal-055", "date": "2026-05-09", "start": "22:00", "end": "04:00", "endDayOffset": 1, "category": "evento", "title": "Rock Night", "detail": "Banda Strike + DJ residente · cover 25" },
+
+    { "id": "cal-060", "date": "2026-05-10", "start": "11:00", "end": "11:05", "category": "cron", "title": "Resumo pós-evento", "agent": "jarbas" },
+    { "id": "cal-061", "date": "2026-05-10", "start": "11:00", "end": "11:05", "category": "cron", "title": "Ranking semanal", "agent": "beto" },
+    { "id": "cal-062", "date": "2026-05-10", "start": "all-day", "category": "meu", "title": "Dia das Mães · família" }
+  ]
+}

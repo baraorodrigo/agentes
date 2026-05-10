@@ -1,7 +1,7 @@
 # MAPA.md — Índice Geral do El Coyote OS
 
 > Leia este arquivo primeiro. Ele é o mapa de tudo.
-> Atualizado: 2026-05-06
+> Atualizado: 2026-05-09
 
 ---
 
@@ -16,6 +16,19 @@ Contém as identidades, regras, skills e memória de todos os agentes de IA que 
 
 ---
 
+## Status (snapshot)
+
+- **Beto ⚡** ✅ ONLINE em produção (VPS auto-gerenciada `nano.elcoyotepub.com`, Haiku 4.5)
+- **Jarbas 🐺** local dev, lapidação Bloco A em curso
+- **Tomás 📊** local dev (PLAYBOOK + 3 skills + memória + rotinas prontos) — falta deploy VPS + pareamento DM
+- **Raul 🔍** local dev (PLAYBOOK + 3 skills + memória + 1 rotina pronto) — sub-agent do Jarbas, sem canal próprio; falta deploy VPS
+- **Lia 💬** local dev (PLAYBOOK + 4 skills + memória pronta) — reativa, sem cron próprio; falta deploy VPS + pareamento WhatsApp público
+- **Duda 🎸** local dev (PLAYBOOK + 3 skills + memória + 2 rotinas pronto) — falta deploy VPS + Telegram topic Marketing
+- **Gil 🎪** local dev (PLAYBOOK + 4 skills + memória + 3 rotinas pronto) — falta deploy VPS + pareamento DM
+- Detalhes vivos: `MEMORY.md` + `memory/projects.md`
+
+---
+
 ## Arquivos raiz
 
 | Arquivo | O que é |
@@ -23,9 +36,12 @@ Contém as identidades, regras, skills e memória de todos os agentes de IA que 
 | `SOUL.md` | Personalidade e valores do Jarbas |
 | `USER.md` | Perfil completo do Rodrigo |
 | `IDENTITY.md` | Dados concretos do Jarbas (nome, emoji, background) |
-| `AGENTS.md` | Regras operacionais, segurança, sistemas |
+| `AGENTS.md` | Regras operacionais, segurança, sistemas, Trilha C de escalation |
 | `BOOT.md` | Checklist de inicialização de cada sessão |
-| `MEMORY.md` | Índice da memória (aponta pros arquivos em `memoria/`) |
+| `HEARTBEAT.md` | Sinal de vida (estado mínimo entre sessões) |
+| `TOOLS.md` | Lista de tools disponíveis pra esta sessão |
+| `MEMORY.md` | Índice da memória (aponta pros arquivos em `memory/`) |
+| `PLANO-MULTIAGENTES.md` | Plano vivo das 5 fases do El Coyote OS (v2.0) |
 
 ---
 
@@ -33,24 +49,25 @@ Contém as identidades, regras, skills e memória de todos os agentes de IA que 
 
 | Pasta | Conteúdo |
 |-------|---------|
-| `agentes/` | Personalidade e instruções de cada agente especializado |
-| `skills/` | Procedimentos de extração de dados (PNE, Bar Fácil) |
-| `rotinas/` | Scripts das tarefas agendadas (crons) |
-| `memoria/` | Memória persistente: eventos, promoters, decisões, lições |
+| `agentes/` | Personalidade e instruções de cada agente especializado (Beto/Duda/Lia/Tomás/Gil/Raul) |
+| `skills/` | Procedimentos de extração de dados (PNE, Bar Fácil) e operações |
+| `rotinas/` | Scripts das tarefas agendadas (crons — briefing, ranking, lembretes) |
+| `memory/` | Memória persistente: projetos, decisões, lições, pessoas, eventos, pendências |
+| `memoria/` | ⚠️ DEPRECATED — substituída por `memory/`. Stub redirecionando |
 
 ---
 
 ## Os 7 Agentes
 
-| # | Nome | Papel | Canal |
-|---|------|-------|-------|
-| 1 | Jarbas 🐺 | Hub/CEO | WhatsApp privado Rodrigo |
-| 2 | Beto ⚡ | Promoters | WhatsApp Grupo Promoters |
-| 3 | Duda 🎸 | Marketing | Telegram Topic |
-| 4 | Lia 💬 | Atendimento | WhatsApp Público |
-| 5 | Tomás 📊 | Financeiro | Chat privado Rodrigo |
-| 6 | Gil 🎪 | Eventos | Chat privado Rodrigo |
-| 7 | Raul 🔍 | Intel/Análise | Background (sub-agente) |
+| # | Nome | Papel | Canal | Modelo | Status |
+|---|------|-------|-------|--------|--------|
+| 1 | Jarbas 🐺 | Hub/CEO | WhatsApp privado Rodrigo | Haiku → Trilha C | Local dev |
+| 2 | Beto ⚡ | Promoters | WhatsApp +5548991092404 | Haiku 4.5 | ✅ ONLINE |
+| 3 | Duda 🎸 | Marketing | Telegram Topic | Haiku | Local dev |
+| 4 | Lia 💬 | Atendimento | WhatsApp Público | Haiku | Local dev |
+| 5 | Tomás 📊 | Financeiro | DM Rodrigo | Sonnet 4.6 | Local dev |
+| 6 | Gil 🎪 | Eventos | DM Rodrigo | Haiku | Local dev |
+| 7 | Raul 🔍 | Intel/Análise | Background (sub-agente Jarbas) | Sonnet 4.6 | Local dev |
 
 ---
 

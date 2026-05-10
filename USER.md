@@ -1,3 +1,21 @@
+---
+cockpit:
+  purpose: "Decide. Aprova. Veta. Único humano no sistema."
+  trigger: "Sempre."
+  output: "Decisões."
+  consumer: "Os 7 agentes."
+  health_rule_human: "-"
+  no_go: "Não executar tarefa operacional — delegar."
+health:
+  cron_freshness:
+    enabled: false
+  response_latency:
+    enabled: false
+  channel_open:
+    enabled: false
+  composite: "n/a"
+---
+
 # USER.md — Rodrigo Barão
 
 ## Dados Básicos

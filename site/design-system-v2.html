@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EL COYOTE — Design System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:    '#0E0E0E',     // logo / text on light
+        deep:   '#274156',     // night ocean — primary brand
+        sage:   '#88a07d',     // vegetation
+        sun:    '#f2c14e',     // golden hour
+        ember:  '#f58549',     // sunset orange — accent
+        terra:  '#9e5641',     // wood deck / earth
+        mist:   '#a9b0b3',     // morning haze
+        cream:  '#F4EFE6',     // warm paper / off-white
+        sand:   '#E6DCCB',     // warm tonal
+      },
+      fontFamily: {
+        display: ['Anton', 'Impact', 'sans-serif'],
+        sans:    ['Inter', 'system-ui', 'sans-serif'],
+        hand:    ['Caveat', 'cursive'],
+        mono:    ['JetBrains Mono', 'ui-monospace', 'monospace'],
+      },
+    }
+  }
+}
+</script>
+
+<style>
+  html, body { background: #F4EFE6; color: #0E0E0E; }
+  .display { font-family: 'Anton', Impact, sans-serif; letter-spacing: 0.005em; line-height: 0.92; text-transform: uppercase; }
+  .eyebrow { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.32em; font-weight: 700; text-transform: uppercase; }
+  .grain { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.06  0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0.4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+  .hairline { border-color: rgba(14,14,14,0.12); }
+  .hairline-strong { border-color: rgba(14,14,14,0.22); }
+  .smallcaps { font-feature-settings: "smcp" on, "c2sc" on; }
+  .scratch { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: rgba(245,133,73,0.65); }
+
+  /* tick marker bar (used on labels) */
+  .tick::before {
+    content: ""; display: inline-block; width: 18px; height: 2px;
+    background: currentColor; margin-right: 10px; vertical-align: middle;
+  }
+
+  /* photo treatment: warm grade overlay for any real photo */
+  .photo-grade { position: relative; }
+  .photo-grade > img { display: block; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05) saturate(1.06); }
+  .photo-grade::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(245,133,73,0.06) 0%, rgba(39,65,86,0.18) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  /* button base */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+         font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: 0.18em;
+         text-transform: uppercase; font-size: 12px;
+         padding: 16px 26px; border-radius: 999px; transition: all 180ms ease;
+         border: 1.5px solid transparent; cursor: pointer; white-space: nowrap; }
+  .btn-primary  { background: #0E0E0E; color: #F4EFE6; }
+  .btn-primary:hover  { background: #f58549; color: #0E0E0E; }
+  .btn-secondary { background: transparent; color: #0E0E0E; border-color: #0E0E0E; }
+  .btn-secondary:hover { background: #0E0E0E; color: #F4EFE6; }
+  .btn-ghost     { background: transparent; color: #0E0E0E; padding-left: 4px; padding-right: 4px;
+                   border-radius: 0; border-bottom: 1.5px solid #0E0E0E; }
+  .btn-ghost:hover { color: #f58549; border-color: #f58549; }
+  .btn-disabled  { background: rgba(14,14,14,0.08); color: rgba(14,14,14,0.35); cursor: not-allowed; }
+
+  /* form */
+  .field {
+    display: block; width: 100%;
+    background: transparent; border: none;
+    border-bottom: 1.5px solid rgba(14,14,14,0.32);
+    padding: 12px 2px; font-family: 'Inter', sans-serif; font-size: 16px;
+    color: #0E0E0E; outline: none;
+    transition: border-color 180ms ease;
+  }
+  .field::placeholder { color: rgba(14,14,14,0.42); }
+  .field:focus { border-color: #f58549; }
+  .field-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+                 letter-spacing: 0.32em; text-transform: uppercase; color: #0E0E0E; opacity: 0.7; }
+  .field-error { border-color: #f58549 !important; }
+  .field-error-msg { color: #f58549; font-size: 13px; margin-top: 6px; }
+
+  /* anchor nav */
+  .anchor-nav a { transition: color 160ms ease; }
+  .anchor-nav a:hover { color: #f58549; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHELL
+═══════════════════════════════════════════════════════════════ -->
+
+<header class="border-b hairline sticky top-0 bg-cream/95 backdrop-blur z-40">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-5 flex items-center justify-between gap-6">
+    <div class="flex items-center gap-4">
+      <img src="assets/v2/logo-elcoyote-black.png" alt="EL COYOTE" class="h-7 lg:h-8 w-auto"/>
+      <div class="hidden md:block pl-4 border-l hairline-strong">
+        <div class="eyebrow text-ink/60">Design System · v 2.0</div>
+        <div class="text-xs text-ink/45 font-mono mt-0.5">Imbituba · SC · 2026</div>
+      </div>
+    </div>
+    <nav class="anchor-nav hidden lg:flex items-center gap-7 text-sm font-semibold tracking-wide">
+      <a href="#concept">conceito</a>
+      <a href="#color">cor</a>
+      <a href="#type">tipo</a>
+      <a href="#logo">logo</a>
+      <a href="#components">componentes</a>
+      <a href="#photo">foto</a>
+      <a href="#voice">voz</a>
+      <a href="#previews">previews</a>
+    </nav>
+    <a href="#concept" class="btn btn-primary !py-3 !px-5 text-[11px]">começar</a>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     1 · COVER
+═══════════════════════════════════════════════════════════════ -->
+
+<section class="relative overflow-hidden border-b hairline">
+  <div class="absolute inset-0 grain opacity-30 pointer-events-none"></div>
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 pt-12 lg:pt-20 pb-16 lg:pb-24 relative">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+      <div class="lg:col-span-7">
+        <div class="eyebrow text-ember mb-6">design · system · 2026</div>
+        <h1 class="display text-[16vw] lg:text-[180px] text-ink leading-[0.88]">
+          a noite<br>vira<br>história.
+        </h1>
+        <p class="mt-8 max-w-xl text-lg lg:text-xl leading-relaxed text-ink/75">
+          Sistema visual do <strong class="text-ink">EL COYOTE</strong> — um pub
+          à beira-mar em Imbituba onde o pôr do sol abre a noite, a noite abre a pista,
+          e tudo o que acontece ali vira lembrança no dia seguinte.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <span class="btn btn-secondary !py-2.5 !px-4 !text-[10px]">pub & live music</span>
+          <span class="btn btn-secondary !py-2.5 !px-4 !text-[10px]">deck com vista</span>
+          <span class="btn btn-secondary !py-2.5 !px-4 !text-[10px]">eventos privados</span>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="relative aspect-[4/5] photo-grade overflow-hidden">
+          <img src="assets/v2/foto-sunset-deck.jpg" alt="Deck com vista para o pôr do sol no porto de Imbituba"/>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-xs font-mono text-ink/50">
+          <span>↳ deck · pôr do sol · porto de imbituba</span>
+          <span>05:45 AM · 27.MAR.2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     2 · BRAND CONCEPT
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="concept" class="border-b hairline">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-deep">01 · conceito</div>
+        <div class="hand mt-4 font-hand text-3xl text-terra italic">a verdade<br>visual.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl text-ink leading-[0.95] max-w-3xl">
+          litoral<br>brasileiro<br>com <span class="text-ember">alma</span><br>de pub.
+        </h2>
+        <div class="mt-12 grid md:grid-cols-3 gap-10">
+          <div>
+            <div class="eyebrow text-ink/55 mb-3 tick">tensão criativa</div>
+            <p class="text-ink/80 leading-relaxed">
+              <strong class="text-ink">Sol e suor.</strong> A marca nasce no encontro entre a
+              luz dourada do deck ao entardecer e a intensidade da pista depois das 22h. Nem só
+              praia, nem só balada — as duas coisas ao mesmo tempo.
+            </p>
+          </div>
+          <div>
+            <div class="eyebrow text-ink/55 mb-3 tick">caráter</div>
+            <p class="text-ink/80 leading-relaxed">
+              Tipografia <strong class="text-ink">condensada e firme</strong>, paleta de
+              <strong class="text-ink">hora dourada</strong>, fotografia <strong class="text-ink">documental</strong>
+              e gestos manuscritos. Sofisticado sem ser frio.
+              Local sem ser pequeno.
+            </p>
+          </div>
+          <div>
+            <div class="eyebrow text-ink/55 mb-3 tick">o que evitamos</div>
+            <p class="text-ink/80 leading-relaxed">
+              <span class="scratch">néon roxo de balada genérica</span><br>
+              <span class="scratch">flyer com 47 fontes</span><br>
+              <span class="scratch">luxo gelado de open bar</span><br>
+              <span class="scratch">lifestyle de banco de imagens</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillars -->
+        <div class="mt-16 grid md:grid-cols-5 gap-px bg-ink/10 border hairline">
+          <div class="bg-cream p-6">
+            <div class="display text-4xl text-ember">01</div>
+            <div class="mt-3 font-bold tracking-wider text-sm uppercase">livre</div>
+            <p class="text-sm text-ink/65 mt-2 leading-relaxed">A casa das almas livres. Dança como bem entende.</p>
+          </div>
+          <div class="bg-cream p-6">
+            <div class="display text-4xl text-ember">02</div>
+            <div class="mt-3 font-bold tracking-wider text-sm uppercase">quente</div>
+            <p class="text-sm text-ink/65 mt-2 leading-relaxed">Luz âmbar, abraço, voz rouca. Calor humano antes de tudo.</p>
+          </div>
+          <div class="bg-cream p-6">
+            <div class="display text-4xl text-ember">03</div>
+            <div class="mt-3 font-bold tracking-wider text-sm uppercase">intenso</div>
+            <p class="text-sm text-ink/65 mt-2 leading-relaxed">Se é pra viver, que seja com intensidade. Sem meio-termo.</p>
+          </div>
+          <div class="bg-cream p-6">
+            <div class="display text-4xl text-ember">04</div>
+            <div class="mt-3 font-bold tracking-wider text-sm uppercase">poético</div>
+            <p class="text-sm text-ink/65 mt-2 leading-relaxed">A música atravessa. O pôr do sol fica. A frase certa cola.</p>
+          </div>
+          <div class="bg-cream p-6">
+            <div class="display text-4xl text-ember">05</div>
+            <div class="mt-3 font-bold tracking-wider text-sm uppercase">litorâneo</div>
+            <p class="text-sm text-ink/65 mt-2 leading-relaxed">Imbituba no DNA. Mar, vento, costa. Lugar com endereço.</p>
+          </div>
+        </div>
+
+        <blockquote class="mt-16 max-w-3xl border-l-2 border-ember pl-6">
+          <p class="display text-3xl lg:text-4xl text-ink leading-tight">
+            “mais que eventos —<br>criamos momentos<br>inesquecíveis.”
+          </p>
+          <footer class="mt-4 eyebrow text-ink/50">— proposta de valor</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     3 · COLOR SYSTEM
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="color" class="border-b hairline bg-cream">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-deep">02 · cor</div>
+        <div class="hand mt-4 font-hand text-3xl text-terra italic">colhidas<br>no nascer<br>do sol.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl text-ink leading-[0.95]">
+          uma paleta<br>com hora marcada.
+        </h2>
+        <p class="mt-6 max-w-2xl text-ink/75 leading-relaxed text-lg">
+          Cada cor saiu de um momento real do EL COYOTE — o azul do mar antes das 6h,
+          o âmbar do sol cruzando o porto, o âmbar-laranja da pele depois de uma noite de música.
+          Combinadas, elas pintam a passagem do dia para a noite.
+        </p>
+      </div>
+    </div>
+
+    <!-- Hero swatch row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-px bg-ink/10 border hairline">
+      <!-- ink (bedrock) -->
+      <div class="bg-ink p-5 aspect-[3/4] flex flex-col justify-between text-cream">
+        <div>
+          <div class="text-[10px] font-mono opacity-60 tracking-widest">01 / BASE</div>
+          <div class="display text-2xl mt-1">Coyote<br>Ink</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs opacity-80">#0E0E0E</div>
+          <div class="text-[11px] opacity-60 mt-1">tipografia · logo · noite</div>
+        </div>
+      </div>
+      <!-- deep (primary) -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-cream" style="background:#274156">
+        <div>
+          <div class="text-[10px] font-mono opacity-70 tracking-widest">02 / PRIMÁRIA</div>
+          <div class="display text-2xl mt-1">Mar<br>Antes do Sol</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs opacity-90">#274156</div>
+          <div class="text-[11px] opacity-70 mt-1">institucional · headers</div>
+        </div>
+      </div>
+      <!-- ember (accent — sunset) -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-ink" style="background:#f58549">
+        <div>
+          <div class="text-[10px] font-mono opacity-65 tracking-widest">03 / ACENTO</div>
+          <div class="display text-2xl mt-1">Brasa<br>do Pôr do Sol</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs">#f58549</div>
+          <div class="text-[11px] opacity-70 mt-1">CTA · destaque · energia</div>
+        </div>
+      </div>
+      <!-- sun -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-ink" style="background:#f2c14e">
+        <div>
+          <div class="text-[10px] font-mono opacity-65 tracking-widest">04 / SECUNDÁRIA</div>
+          <div class="display text-2xl mt-1">Hora<br>Dourada</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs">#f2c14e</div>
+          <div class="text-[11px] opacity-70 mt-1">celebração · convite</div>
+        </div>
+      </div>
+      <!-- terra -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-cream" style="background:#9e5641">
+        <div>
+          <div class="text-[10px] font-mono opacity-70 tracking-widest">05 / NEUTRO QUENTE</div>
+          <div class="display text-2xl mt-1">Madeira<br>do Deck</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs opacity-90">#9e5641</div>
+          <div class="text-[11px] opacity-70 mt-1">superfícies · texturas</div>
+        </div>
+      </div>
+      <!-- sage -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-ink" style="background:#88a07d">
+        <div>
+          <div class="text-[10px] font-mono opacity-70 tracking-widest">06 / NATUREZA</div>
+          <div class="display text-2xl mt-1">Mato<br>do Morro</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs">#88a07d</div>
+          <div class="text-[11px] opacity-70 mt-1">contraste · suporte</div>
+        </div>
+      </div>
+      <!-- mist -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-ink" style="background:#a9b0b3">
+        <div>
+          <div class="text-[10px] font-mono opacity-70 tracking-widest">07 / SUPORTE</div>
+          <div class="display text-2xl mt-1">Bruma<br>de Manhã</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs">#a9b0b3</div>
+          <div class="text-[11px] opacity-70 mt-1">linhas · estados inativos</div>
+        </div>
+      </div>
+      <!-- cream -->
+      <div class="p-5 aspect-[3/4] flex flex-col justify-between text-ink" style="background:#F4EFE6">
+        <div>
+          <div class="text-[10px] font-mono opacity-65 tracking-widest">08 / FUNDO</div>
+          <div class="display text-2xl mt-1">Areia<br>de Praia</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs">#F4EFE6</div>
+          <div class="text-[11px] opacity-70 mt-1">papel · fundo padrão</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combinations -->
+    <div class="mt-16">
+      <div class="eyebrow text-ink/55 mb-6">combinações recomendadas</div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="aspect-video relative overflow-hidden p-8 flex flex-col justify-between" style="background:#0E0E0E;color:#f58549">
+          <div class="font-mono text-xs opacity-80">A · NOITE COMBUSTÍVEL</div>
+          <div>
+            <div class="display text-3xl text-cream">a noite começa<br>com brasa.</div>
+            <div class="font-mono text-[10px] mt-3 text-cream/60">#0E0E0E + #f58549 + #F4EFE6</div>
+          </div>
+        </div>
+        <div class="aspect-video relative overflow-hidden p-8 flex flex-col justify-between" style="background:#274156;color:#f2c14e">
+          <div class="font-mono text-xs opacity-80">B · ENTARDECER NO PORTO</div>
+          <div>
+            <div class="display text-3xl text-cream">o céu pega<br>fogo às 18h.</div>
+            <div class="font-mono text-[10px] mt-3 text-cream/60">#274156 + #f2c14e + #F4EFE6</div>
+          </div>
+        </div>
+        <div class="aspect-video relative overflow-hidden p-8 flex flex-col justify-between" style="background:#F4EFE6;color:#9e5641">
+          <div class="font-mono text-xs opacity-70">C · DOMINGO DE RESSACA</div>
+          <div>
+            <div class="display text-3xl text-ink">o cheiro<br>de madeira fica.</div>
+            <div class="font-mono text-[10px] mt-3 text-ink/55">#F4EFE6 + #9e5641 + #0E0E0E</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distribution rule -->
+    <div class="mt-12 grid md:grid-cols-[1fr_2fr] gap-10 items-center border-t hairline pt-12">
+      <div>
+        <div class="eyebrow text-ink/55 mb-3">regra 60 · 30 · 10</div>
+        <p class="text-ink/70 leading-relaxed">
+          <strong>60%</strong> Areia (cream) ou Coyote Ink — fundo dominante.<br>
+          <strong>30%</strong> Mar Antes do Sol ou Madeira do Deck — apoio.<br>
+          <strong>10%</strong> Brasa ou Hora Dourada — só nos pontos de calor.
+        </p>
+      </div>
+      <div class="h-12 flex overflow-hidden">
+        <div class="w-[60%] bg-cream border-r hairline flex items-center justify-center font-mono text-[10px] text-ink/55">60%</div>
+        <div class="w-[30%]" style="background:#274156"></div>
+        <div class="w-[10%]" style="background:#f58549"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     4 · TYPOGRAPHY
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="type" class="border-b hairline">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-deep">03 · tipografia</div>
+        <div class="hand mt-4 font-hand text-3xl text-terra italic">peso<br>e respiro.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl text-ink leading-[0.95]">
+          duas vozes,<br>uma assinatura.
+        </h2>
+        <p class="mt-6 max-w-2xl text-ink/75 leading-relaxed text-lg">
+          <strong>Anton</strong> faz o barulho — condensada, geométrica, descende direto da família
+          do logotipo do EL COYOTE. <strong>Inter</strong> é a voz que conversa — humanista, neutra,
+          confortável em UI e parágrafos longos. <strong>Caveat</strong> entra raramente,
+          como um bilhete deixado na mesa.
+        </p>
+      </div>
+    </div>
+
+    <!-- Type specimens -->
+    <div class="grid lg:grid-cols-12 gap-10">
+      <!-- Display -->
+      <div class="lg:col-span-7 border hairline p-8 lg:p-10">
+        <div class="flex items-baseline justify-between mb-8">
+          <div>
+            <div class="eyebrow text-ember">display</div>
+            <div class="font-mono text-xs text-ink/55 mt-1">Anton · Regular · 0.005em</div>
+          </div>
+          <div class="font-mono text-xs text-ink/40">A → Z · 0 → 9</div>
+        </div>
+        <div class="display text-[15vw] lg:text-[140px] leading-[0.85]">a noite<br>vira<br>história.</div>
+        <div class="mt-8 grid grid-cols-3 gap-px bg-ink/10 border-t hairline pt-px">
+          <div class="bg-cream pt-6">
+            <div class="display text-[80px] leading-none">96</div>
+            <div class="text-xs font-mono text-ink/55 mt-2">DISPLAY · HERO</div>
+          </div>
+          <div class="bg-cream pt-6">
+            <div class="display text-[56px] leading-none">56</div>
+            <div class="text-xs font-mono text-ink/55 mt-2">H1 · TÍTULO</div>
+          </div>
+          <div class="bg-cream pt-6">
+            <div class="display text-[36px] leading-none">36</div>
+            <div class="text-xs font-mono text-ink/55 mt-2">H2 · SEÇÃO</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body sans -->
+      <div class="lg:col-span-5 border hairline p-8 lg:p-10">
+        <div class="mb-6">
+          <div class="eyebrow text-ember">complementar</div>
+          <div class="font-mono text-xs text-ink/55 mt-1">Inter · 300 / 400 / 600 / 700</div>
+        </div>
+
+        <div class="space-y-5">
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">H3 · 24 / 600</div>
+            <div class="text-2xl font-semibold leading-tight">A casa das almas livres.</div>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">SUBTÍTULO · 18 / 400</div>
+            <div class="text-lg text-ink/85">Sexta e sábado, das 22h às 5h. Live music, deck, vista pro mar.</div>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">CORPO · 16 / 400</div>
+            <div class="leading-relaxed text-ink/80">
+              No EL COYOTE, a noite começa lenta — uma cerveja gelada com a vista do porto
+              pegando fogo. Quando escurece de vez, o som sobe e a pista lota.
+              Quem fica até o amanhecer leva história pra casa.
+            </div>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">UI · 14 / 500</div>
+            <div class="font-medium">Reservar mesa · Ver agenda · Falar conosco</div>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">CAPS · 11 / 700 / 0.32em</div>
+            <div class="eyebrow">P R Ó X I M O · S H O W</div>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">MONO · 12 / 400</div>
+            <div class="font-mono text-xs text-ink/70">SEX · 22:00 · OPEN UNTIL 05:00</div>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono text-ink/40 mb-1">HAND · CAVEAT</div>
+            <div class="font-hand text-3xl text-terra leading-tight">a noite te espera.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Type rules -->
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ink/55 mb-2 tick">use</div>
+        <p class="text-sm text-ink/75 leading-relaxed">
+          Display em <strong>caixa alta</strong>, sempre. É o equity do logotipo.
+          Anton respira em tamanhos grandes — <strong>nunca</strong> use abaixo de 28px.
+        </p>
+      </div>
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ink/55 mb-2 tick">misture</div>
+        <p class="text-sm text-ink/75 leading-relaxed">
+          Anton + Inter Light formam o par ouro: peso contra respiro.
+          O Caveat vira ornamento — <strong>uma frase por peça</strong>, não mais.
+        </p>
+      </div>
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ember mb-2 tick">evite</div>
+        <p class="text-sm text-ink/75 leading-relaxed">
+          <span class="scratch">Anton em corpo de texto</span><br>
+          <span class="scratch">três fontes na mesma peça</span><br>
+          <span class="scratch">Caveat em CTA ou navegação</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     5 · LOGO
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="logo" class="border-b hairline bg-ink text-cream">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-12">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-ember">04 · logo</div>
+        <div class="hand mt-4 font-hand text-3xl text-sun italic">o uivo<br>silencioso.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl leading-[0.95]">
+          o coyote<br>vive no <span class="text-ember">o</span>.
+        </h2>
+        <p class="mt-6 max-w-2xl text-cream/70 leading-relaxed text-lg">
+          O logotipo é uma palavra inteira sem espaço — <strong>ELCOYOTE</strong> — com a cabeça
+          do coyote habitando o O central. É o nome que vira símbolo. Use sempre o
+          arquivo oficial. <strong class="text-sun">Replace with official SVG logo</strong>
+          para mídias finais.
+        </p>
+      </div>
+    </div>
+
+    <!-- Logo lockups -->
+    <div class="grid md:grid-cols-3 gap-px bg-cream/10 border border-cream/15">
+      <!-- on light (positive) -->
+      <div class="bg-cream p-10 flex flex-col justify-between min-h-[280px]">
+        <div class="eyebrow text-ink/55">A · POSITIVO · sobre claro</div>
+        <div class="flex-1 flex items-center justify-center">
+          <img src="assets/v2/logo-elcoyote-black.png" alt="EL COYOTE — versão preta" class="w-full max-w-[420px]"/>
+        </div>
+        <div class="text-xs font-mono text-ink/50">uso preferencial · sobre Areia, Bruma ou foto clara</div>
+      </div>
+      <!-- on dark (negative) -->
+      <div class="p-10 flex flex-col justify-between min-h-[280px]" style="background:#0E0E0E">
+        <div class="eyebrow text-cream/60">B · NEGATIVO · sobre escuro</div>
+        <div class="flex-1 flex items-center justify-center">
+          <img src="assets/v2/logo-elcoyote-white.png" alt="EL COYOTE — versão branca" class="w-full max-w-[420px]"/>
+        </div>
+        <div class="text-xs font-mono text-cream/50">uso noturno · sobre Coyote Ink, Mar ou foto noite</div>
+      </div>
+      <!-- on color (ember) -->
+      <div class="p-10 flex flex-col justify-between min-h-[280px]" style="background:#f58549">
+        <div class="eyebrow text-ink/65">C · BRASA · sobre acento</div>
+        <div class="flex-1 flex items-center justify-center">
+          <img src="assets/v2/logo-elcoyote-black.png" alt="EL COYOTE — sobre Brasa" class="w-full max-w-[420px]"/>
+        </div>
+        <div class="text-xs font-mono text-ink/55">peças de festa · convites · CTA hero</div>
+      </div>
+    </div>
+
+    <!-- horizontal lockup with tagline -->
+    <div class="mt-10 grid md:grid-cols-2 gap-px bg-cream/10 border border-cream/15">
+      <div class="bg-cream p-10 flex items-center justify-between gap-8 min-h-[200px] flex-wrap">
+        <img src="assets/v2/logo-elcoyote-black.png" alt="EL COYOTE" class="h-10 lg:h-12"/>
+        <div class="text-right">
+          <div class="eyebrow text-ink/55">PUB · LIVE MUSIC · EVENTOS</div>
+          <div class="text-xs font-mono text-ink/40 mt-1">IMBITUBA — SC — DESDE 2017</div>
+        </div>
+      </div>
+      <div class="p-10 flex items-center justify-between gap-8 min-h-[200px] flex-wrap" style="background:#274156">
+        <img src="assets/v2/logo-elcoyote-white.png" alt="EL COYOTE — branca" class="h-10 lg:h-12"/>
+        <div class="text-right">
+          <div class="eyebrow text-cream/70">a noite vira história</div>
+          <div class="text-xs font-mono text-cream/45 mt-1">@ELCOYOTEPUB · ELCOYOTEPUB.COM</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear space + don'ts -->
+    <div class="mt-10 grid md:grid-cols-2 gap-6">
+      <div class="border border-cream/15 p-8">
+        <div class="eyebrow text-cream/60 mb-4">área de proteção</div>
+        <p class="text-sm text-cream/70 leading-relaxed mb-6">
+          Reserve em torno do logo uma margem mínima equivalente à <strong>altura do "O"</strong>
+          do coyote em todos os lados. Nada cruza essa fronteira.
+        </p>
+        <div class="bg-cream/5 border border-cream/15 p-6 relative">
+          <div class="absolute inset-3 border border-dashed border-ember/40"></div>
+          <img src="assets/v2/logo-elcoyote-white.png" alt="" class="relative h-8 mx-auto"/>
+        </div>
+      </div>
+      <div class="border border-ember/30 p-8">
+        <div class="eyebrow text-ember mb-4">não faça</div>
+        <ul class="space-y-2 text-sm text-cream/75">
+          <li class="scratch">distorcer, esticar ou rotacionar</li>
+          <li class="scratch">aplicar gradiente ou sombra</li>
+          <li class="scratch">trocar o coyote por outro símbolo</li>
+          <li class="scratch">recriar com outra fonte</li>
+          <li class="scratch">usar sobre fundo de baixo contraste</li>
+          <li class="scratch">contornar com outline ou stroke</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     6 · UI COMPONENTS
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="components" class="border-b hairline">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-deep">05 · componentes</div>
+        <div class="hand mt-4 font-hand text-3xl text-terra italic">a casa<br>em peças.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl text-ink leading-[0.95]">
+          componentes<br>de uma casa noturna.
+        </h2>
+      </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="border hairline">
+      <div class="bg-cream/60 px-8 py-4 border-b hairline flex items-baseline justify-between">
+        <div class="eyebrow">botões</div>
+        <div class="font-mono text-xs text-ink/45">.btn</div>
+      </div>
+      <div class="p-8 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <div class="text-xs font-mono text-ink/55 mb-3">PRIMARY · CTA</div>
+          <button class="btn btn-primary">reservar mesa</button>
+          <p class="mt-3 text-xs text-ink/55">Ação principal. Uma por tela.</p>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-ink/55 mb-3">SECONDARY</div>
+          <button class="btn btn-secondary">ver agenda</button>
+          <p class="mt-3 text-xs text-ink/55">Ação alternativa. Outline preto.</p>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-ink/55 mb-3">GHOST · LINK</div>
+          <button class="btn btn-ghost">saiba mais →</button>
+          <p class="mt-3 text-xs text-ink/55">Texto + sublinhado. Sem fundo.</p>
+        </div>
+        <div>
+          <div class="text-xs font-mono text-ink/55 mb-3">DISABLED</div>
+          <button class="btn btn-disabled" disabled>esgotado</button>
+          <p class="mt-3 text-xs text-ink/55">Estado inativo. Cinza Bruma.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="mt-10 grid lg:grid-cols-3 gap-6">
+
+      <!-- Pillar card -->
+      <div class="border hairline bg-cream">
+        <div class="px-6 py-4 border-b hairline flex items-baseline justify-between">
+          <div class="eyebrow">pilar</div>
+          <div class="font-mono text-xs text-ink/45">.card-pillar</div>
+        </div>
+        <div class="p-7 flex flex-col h-full">
+          <div class="display text-7xl text-ember">01</div>
+          <div class="mt-3 display text-2xl text-ink">livre</div>
+          <p class="mt-3 text-sm text-ink/70 leading-relaxed">
+            A casa das almas livres. Ninguém te julga porque você foi pra dançar
+            e não pra ser visto. Aqui o ego fica na porta.
+          </p>
+          <div class="mt-auto pt-6 border-t hairline mt-6 flex items-center justify-between">
+            <span class="font-mono text-xs text-ink/45">PILAR · 01/05</span>
+            <span class="font-hand text-2xl text-terra leading-none">livre.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event card -->
+      <div class="border hairline bg-ink text-cream overflow-hidden">
+        <div class="px-6 py-4 border-b border-cream/15 flex items-baseline justify-between">
+          <div class="eyebrow text-cream/65">evento</div>
+          <div class="font-mono text-xs text-cream/40">.card-event</div>
+        </div>
+        <div class="aspect-[16/10] photo-grade">
+          <img src="assets/v2/foto-sunset-celebration.jpg" alt="Pôr do sol no deck"/>
+          <div class="absolute top-4 left-4 bg-ember text-ink px-3 py-1.5 eyebrow !text-[10px] z-10">SEX · 16 · MAI</div>
+          <div class="absolute bottom-4 right-4 z-10 font-mono text-[10px] text-cream/85 tracking-widest">22:00 → 05:00</div>
+        </div>
+        <div class="p-6">
+          <div class="display text-3xl leading-tight">noite do<br>brasas vivas</div>
+          <p class="mt-3 text-sm text-cream/75 leading-relaxed">
+            DJ residente + convidado especial. Pista aberta no deck.
+            Open com pulseira até 23h.
+          </p>
+          <div class="mt-5 flex items-center justify-between">
+            <div>
+              <div class="font-mono text-[10px] text-cream/55 tracking-widest">A PARTIR DE</div>
+              <div class="display text-xl">R$ 40</div>
+            </div>
+            <button class="btn btn-primary !bg-ember !text-ink !py-3 !px-5 text-[10px]">garantir lugar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simple content card -->
+      <div class="border hairline bg-cream">
+        <div class="px-6 py-4 border-b hairline flex items-baseline justify-between">
+          <div class="eyebrow">conteúdo</div>
+          <div class="font-mono text-xs text-ink/45">.card-content</div>
+        </div>
+        <div class="p-7">
+          <div class="eyebrow text-ember mb-3">eventos privados</div>
+          <h4 class="display text-3xl leading-tight">a casa<br>fica sua.</h4>
+          <p class="mt-4 text-sm text-ink/75 leading-relaxed">
+            Casamento, formatura, aniversário. O EL COYOTE inteiro,
+            com a vista do porto, pra quem você ama.
+          </p>
+          <a href="#" class="btn btn-ghost mt-6">conversar com a casa</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FORMS -->
+    <div class="mt-10 border hairline">
+      <div class="bg-cream/60 px-8 py-4 border-b hairline flex items-baseline justify-between">
+        <div class="eyebrow">formulários</div>
+        <div class="font-mono text-xs text-ink/45">.field</div>
+      </div>
+      <div class="p-8 grid lg:grid-cols-2 gap-12">
+
+        <!-- Reservation form -->
+        <form class="space-y-6">
+          <div>
+            <div class="field-label">nome</div>
+            <input type="text" class="field" placeholder="Como te chamamos na lista"/>
+          </div>
+          <div>
+            <div class="field-label">tipo de evento</div>
+            <select class="field appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 fill=%22none%22 stroke=%22%230E0E0E%22 stroke-width=%221.5%22><path d=%22M1 1l5 5 5-5%22/></svg>')] bg-no-repeat bg-[right_4px_center]">
+              <option>noite no pub (sex/sáb)</option>
+              <option>show com convidado</option>
+              <option>aluguel para evento privado</option>
+              <option>casamento na casa</option>
+            </select>
+          </div>
+          <div>
+            <div class="field-label">conta pra gente</div>
+            <textarea class="field resize-none" rows="3" placeholder="Quantas pessoas, qual data, o que você imagina"></textarea>
+          </div>
+          <div>
+            <div class="field-label">whatsapp</div>
+            <input type="tel" class="field field-error" value="48 99666"/>
+            <div class="field-error-msg">⚠ digite o número completo com DDD</div>
+          </div>
+          <div class="pt-2 flex items-center justify-between flex-wrap gap-3">
+            <button type="button" class="btn btn-primary">enviar pedido</button>
+            <span class="font-mono text-xs text-ink/45">resposta em até 24h</span>
+          </div>
+        </form>
+
+        <!-- Field rules -->
+        <div class="space-y-4">
+          <div class="eyebrow text-ink/55">regras de campo</div>
+          <ul class="space-y-3 text-sm text-ink/75">
+            <li class="flex gap-3"><span class="text-ember mt-1">→</span> <span><strong>Hairline embaixo, nunca caixa.</strong> Conversa com a estética editorial e libera respiro.</span></li>
+            <li class="flex gap-3"><span class="text-ember mt-1">→</span> <span><strong>Label em caps + tracking 0.32em.</strong> Sempre acima do campo, em opacidade 0.7.</span></li>
+            <li class="flex gap-3"><span class="text-ember mt-1">→</span> <span><strong>Erro = Brasa.</strong> Borda muda de cor, mensagem em #f58549 com prefixo ⚠.</span></li>
+            <li class="flex gap-3"><span class="text-ember mt-1">→</span> <span><strong>Foco = Brasa.</strong> Borda inferior vira #f58549 ao receber atenção.</span></li>
+            <li class="flex gap-3"><span class="text-ember mt-1">→</span> <span><strong>Placeholder fala humano.</strong> Em vez de "digite seu nome", "como te chamamos na lista".</span></li>
+          </ul>
+          <div class="mt-6 p-5 bg-cream border-l-2 border-ember">
+            <div class="eyebrow text-ink/55 mb-2">copy de input — exemplo</div>
+            <p class="text-sm text-ink/75 leading-relaxed">
+              Não escreva "preencha os campos abaixo".
+              Escreva <strong>"conta pra gente o que você quer celebrar"</strong>.
+              O formulário também é a marca falando.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BADGES + AUX -->
+    <div class="mt-10 grid md:grid-cols-2 gap-6">
+      <div class="border hairline p-8">
+        <div class="eyebrow mb-5">badges &amp; tags</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 bg-ink text-cream eyebrow !text-[10px]">ao vivo</span>
+          <span class="px-3 py-1.5 bg-ember text-ink eyebrow !text-[10px]">esta semana</span>
+          <span class="px-3 py-1.5 bg-sun text-ink eyebrow !text-[10px]">vendendo</span>
+          <span class="px-3 py-1.5 border hairline-strong eyebrow !text-[10px]">esgotado</span>
+          <span class="px-3 py-1.5 bg-deep text-cream eyebrow !text-[10px]">privado</span>
+          <span class="px-3 py-1.5 bg-sage text-ink eyebrow !text-[10px]">deck aberto</span>
+        </div>
+      </div>
+      <div class="border hairline p-8">
+        <div class="eyebrow mb-5">divisor de seção</div>
+        <div class="flex items-center gap-4 text-ink/30">
+          <span class="font-mono text-[10px]">·</span>
+          <div class="flex-1 h-px bg-ink/15"></div>
+          <span class="display text-xl text-ember">↯</span>
+          <div class="flex-1 h-px bg-ink/15"></div>
+          <span class="font-mono text-[10px]">·</span>
+        </div>
+        <p class="mt-5 text-xs text-ink/55 font-mono">divisor padrão · usado entre blocos editoriais longos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     7 · PHOTOGRAPHY
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="photo" class="border-b hairline bg-cream">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-deep">06 · fotografia</div>
+        <div class="hand mt-4 font-hand text-3xl text-terra italic">documental.<br>quente.<br>real.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl text-ink leading-[0.95]">
+          foto que cheira<br>a noite passada.
+        </h2>
+        <p class="mt-6 max-w-2xl text-ink/75 leading-relaxed text-lg">
+          Documental, nunca posada. <strong>Hora dourada</strong> ao entardecer,
+          <strong>lente quente</strong> à noite. Privilegie <strong>gestos</strong> —
+          mão erguida, riso de cabeça pra trás, copo se chocando — sobre composição perfeita.
+          Granulação leve. Sombra preservada. Branco nunca branco.
+        </p>
+      </div>
+    </div>
+
+    <!-- Hero photo (real) -->
+    <div class="grid lg:grid-cols-[2fr_1fr] gap-6">
+      <figure class="relative photo-grade aspect-[16/9]">
+        <img src="assets/v2/foto-sunset-deck.jpg" alt="Deck do EL COYOTE com vista para o pôr do sol no porto de Imbituba"/>
+        <figcaption class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-cream z-10">
+          <div>
+            <div class="eyebrow text-cream/85">foto · oficial</div>
+            <div class="display text-3xl mt-1 leading-tight">o deck<br>antes da gente chegar.</div>
+          </div>
+          <div class="font-mono text-[10px] text-cream/70 tracking-widest text-right hidden md:block">
+            27 · MAR · 2026<br>05:45 · NASCER DO SOL<br>F/2.8 · ISO 200
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="relative photo-grade aspect-square lg:aspect-auto">
+        <img src="assets/v2/foto-sunset-celebration.jpg" alt="Pessoa celebrando o pôr do sol no deck"/>
+        <figcaption class="absolute bottom-5 left-5 right-5 text-cream z-10">
+          <div class="eyebrow text-cream/85">foto · gesto</div>
+          <div class="display text-2xl mt-1 leading-tight">braço pro alto.<br>sol no horizonte.</div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Photo placeholders (asks) -->
+    <div class="mt-12">
+      <div class="eyebrow text-ink/55 mb-5">o que ainda precisa ser fotografado</div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- placeholder template -->
+        <div class="aspect-[4/5] border-2 border-dashed border-ink/20 p-5 flex flex-col justify-between bg-sand/40">
+          <div class="font-mono text-[10px] text-ink/55 tracking-widest">PLACEHOLDER · 01</div>
+          <div>
+            <div class="text-2xl font-bold leading-tight">[ foto real:<br>festa lotada<br>com luz âmbar ]</div>
+            <p class="mt-3 text-xs text-ink/55">corpos próximos · suor leve · luz quente · sem flash direto</p>
+          </div>
+        </div>
+        <div class="aspect-[4/5] border-2 border-dashed border-ink/20 p-5 flex flex-col justify-between bg-sand/40">
+          <div class="font-mono text-[10px] text-ink/55 tracking-widest">PLACEHOLDER · 02</div>
+          <div>
+            <div class="text-2xl font-bold leading-tight">[ foto real:<br>amigos<br>brindando ]</div>
+            <p class="mt-3 text-xs text-ink/55">tilt-shift suave · foco no copo · risada de fundo desfocada</p>
+          </div>
+        </div>
+        <div class="aspect-[4/5] border-2 border-dashed border-ink/20 p-5 flex flex-col justify-between bg-sand/40">
+          <div class="font-mono text-[10px] text-ink/55 tracking-widest">PLACEHOLDER · 03</div>
+          <div>
+            <div class="text-2xl font-bold leading-tight">[ foto real:<br>casamento<br>no deck ]</div>
+            <p class="mt-3 text-xs text-ink/55">noiva sem buquê · hora dourada · nada de gerundio</p>
+          </div>
+        </div>
+        <div class="aspect-[4/5] border-2 border-dashed border-ink/20 p-5 flex flex-col justify-between bg-sand/40">
+          <div class="font-mono text-[10px] text-ink/55 tracking-widest">PLACEHOLDER · 04</div>
+          <div>
+            <div class="text-2xl font-bold leading-tight">[ foto real:<br>banda<br>ao vivo ]</div>
+            <p class="mt-3 text-xs text-ink/55">vocalista olho fechado · spot lateral âmbar · cabos no chão</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo do/don't -->
+    <div class="mt-10 grid md:grid-cols-2 gap-6">
+      <div class="border-2 border-ink/15 p-6">
+        <div class="eyebrow text-deep mb-4 tick">faça</div>
+        <ul class="space-y-2 text-sm text-ink/80">
+          <li>↳ luz quente, hora dourada ou âmbar de ambiente</li>
+          <li>↳ gestos espontâneos, ângulos baixos, mão na cara</li>
+          <li>↳ deck e mar quase sempre presentes na composição</li>
+          <li>↳ grão leve, contraste +5%, saturação levemente puxada</li>
+          <li>↳ pessoas reais da casa — clientes, banda, equipe</li>
+        </ul>
+      </div>
+      <div class="border-2 border-ember/40 p-6">
+        <div class="eyebrow text-ember mb-4 tick">não faça</div>
+        <ul class="space-y-2 text-sm text-ink/75">
+          <li class="scratch">flash direto frontal de balada</li>
+          <li class="scratch">stock photo de "amigos felizes"</li>
+          <li class="scratch">filtro vintage saturado tipo 2014</li>
+          <li class="scratch">retrato isolado em fundo branco</li>
+          <li class="scratch">drone genérico de praia paradisíaca</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     8 · VOICE & TONE
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="voice" class="border-b hairline">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-deep">07 · voz</div>
+        <div class="hand mt-4 font-hand text-3xl text-terra italic">a frase<br>certa cola.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl text-ink leading-[0.95]">
+          a gente fala<br>como quem conhece.
+        </h2>
+        <p class="mt-6 max-w-2xl text-ink/75 leading-relaxed text-lg">
+          Português brasileiro, tom de quem mora em cidade pequena de praia mas conhece o mundo.
+          <strong>Informal e elegante.</strong> <strong>Poético sem ser piegas.</strong>
+          Frase curta, verbo no presente, imagem concreta antes de adjetivo abstrato.
+        </p>
+      </div>
+    </div>
+
+    <!-- Personality dials -->
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ink/55 mb-3">eixo 1</div>
+        <div class="flex items-center justify-between">
+          <span class="font-bold">formal</span>
+          <span class="font-bold text-ember">informal</span>
+        </div>
+        <div class="mt-2 h-1.5 bg-ink/10 rounded-full relative"><div class="absolute h-full bg-ember rounded-full" style="width:78%"></div></div>
+      </div>
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ink/55 mb-3">eixo 2</div>
+        <div class="flex items-center justify-between">
+          <span class="font-bold">cabeça</span>
+          <span class="font-bold text-ember">coração</span>
+        </div>
+        <div class="mt-2 h-1.5 bg-ink/10 rounded-full relative"><div class="absolute h-full bg-ember rounded-full" style="width:72%"></div></div>
+      </div>
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ink/55 mb-3">eixo 3</div>
+        <div class="flex items-center justify-between">
+          <span class="font-bold">explica</span>
+          <span class="font-bold text-ember">sugere</span>
+        </div>
+        <div class="mt-2 h-1.5 bg-ink/10 rounded-full relative"><div class="absolute h-full bg-ember rounded-full" style="width:65%"></div></div>
+      </div>
+    </div>
+
+    <!-- Say / Don't say -->
+    <div class="grid md:grid-cols-2 gap-px bg-ink/10 border hairline">
+      <!-- Say -->
+      <div class="bg-cream p-8">
+        <div class="eyebrow text-deep mb-6 tick">diga assim ✓</div>
+        <ul class="space-y-5">
+          <li class="border-b hairline pb-4">
+            <div class="display text-2xl text-ink leading-tight">"a noite te espera."</div>
+            <div class="font-mono text-[10px] mt-2 text-ink/45">CTA · CONTEXTO: HOMEPAGE / RESERVAS</div>
+          </li>
+          <li class="border-b hairline pb-4">
+            <div class="display text-2xl text-ink leading-tight">"sexta começa às 22h.<br>seu domingo a gente devolve."</div>
+            <div class="font-mono text-[10px] mt-2 text-ink/45">AGENDA · CABEÇALHO</div>
+          </li>
+          <li class="border-b hairline pb-4">
+            <div class="display text-2xl text-ink leading-tight">"a casa fica sua."</div>
+            <div class="font-mono text-[10px] mt-2 text-ink/45">EVENTOS PRIVADOS · HERO</div>
+          </li>
+          <li class="border-b hairline pb-4">
+            <div class="display text-2xl text-ink leading-tight">"o sol cai. a pista sobe."</div>
+            <div class="font-mono text-[10px] mt-2 text-ink/45">SOCIAL · POST DE EVENTO</div>
+          </li>
+          <li>
+            <div class="display text-2xl text-ink leading-tight">"se é pra viver, que seja inteiro."</div>
+            <div class="font-mono text-[10px] mt-2 text-ink/45">MANIFESTO · ASSINATURA</div>
+          </li>
+        </ul>
+      </div>
+      <!-- Don't say -->
+      <div class="bg-cream p-8">
+        <div class="eyebrow text-ember mb-6 tick">não diga assim ✗</div>
+        <ul class="space-y-5">
+          <li class="border-b hairline pb-4">
+            <div class="text-xl text-ink/65 leading-tight scratch">"venha viver uma experiência inesquecível"</div>
+            <div class="font-mono text-[10px] mt-2 text-ember">→ vazio. todo mundo diz isso.</div>
+          </li>
+          <li class="border-b hairline pb-4">
+            <div class="text-xl text-ink/65 leading-tight scratch">"o melhor pub da região 🔥🔥🔥"</div>
+            <div class="font-mono text-[10px] mt-2 text-ember">→ hype + emoji genérico = perde sofisticação.</div>
+          </li>
+          <li class="border-b hairline pb-4">
+            <div class="text-xl text-ink/65 leading-tight scratch">"ambiente exclusivo high-end vip premium"</div>
+            <div class="font-mono text-[10px] mt-2 text-ember">→ luxo gelado. EL COYOTE é caloroso.</div>
+          </li>
+          <li class="border-b hairline pb-4">
+            <div class="text-xl text-ink/65 leading-tight scratch">"prepare-se para a melhor noite da sua vida"</div>
+            <div class="font-mono text-[10px] mt-2 text-ember">→ promete demais e entrega genérico.</div>
+          </li>
+          <li>
+            <div class="text-xl text-ink/65 leading-tight scratch">"agende já sua mesa e não perca!!!"</div>
+            <div class="font-mono text-[10px] mt-2 text-ember">→ urgência fake + exclamação. corta.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- vocabulary -->
+    <div class="mt-10 grid md:grid-cols-2 gap-6">
+      <div class="border hairline p-6">
+        <div class="eyebrow text-ink/55 mb-4">vocabulário do EL COYOTE</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">deck</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">noite</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">brasa</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">vista</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">história</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">a casa</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">amanhecer</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">a pista</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">o porto</span>
+          <span class="px-3 py-1.5 bg-deep text-cream rounded-full text-xs font-medium">imbituba</span>
+        </div>
+      </div>
+      <div class="border-2 border-ember/40 p-6">
+        <div class="eyebrow text-ember mb-4">palavras proibidas</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">balada</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">vip</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">premium</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">experiência</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">inesquecível</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">exclusivo</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">high-end</span>
+          <span class="px-3 py-1.5 border hairline-strong rounded-full text-xs scratch">incrível</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     9 · LANDING PREVIEWS
+═══════════════════════════════════════════════════════════════ -->
+
+<section id="previews" class="bg-ink text-cream">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-10 mb-16">
+      <div class="lg:col-span-3">
+        <div class="eyebrow text-ember">08 · previews</div>
+        <div class="hand mt-4 font-hand text-3xl text-sun italic">como o<br>sistema vive.</div>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="display text-5xl lg:text-7xl leading-[0.95]">
+          o sistema<br>em uso.
+        </h2>
+        <p class="mt-6 max-w-2xl text-cream/65 leading-relaxed text-lg">
+          Quatro recortes de página — pra mostrar como cor, tipo, foto e voz se montam juntos.
+          A página completa fica numa próxima entrega; isto é só o esqueleto vivo.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+
+      <!-- HERO PREVIEW -->
+      <div class="border border-cream/15 overflow-hidden">
+        <div class="px-6 py-3 border-b border-cream/15 flex items-baseline justify-between">
+          <div class="eyebrow text-cream/70">A · hero homepage</div>
+          <div class="font-mono text-xs text-cream/40">/</div>
+        </div>
+        <div class="relative aspect-[16/10] photo-grade">
+          <img src="assets/v2/foto-sunset-deck.jpg" alt=""/>
+          <div class="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink/85 z-10"></div>
+          <div class="absolute inset-0 z-20 p-7 flex flex-col justify-between">
+            <div class="flex items-start justify-between gap-3">
+              <img src="assets/v2/logo-elcoyote-white.png" alt="" class="h-5"/>
+              <nav class="text-[10px] tracking-widest font-bold flex gap-4 text-cream/80">
+                <span>AGENDA</span><span>EVENTOS</span><span>CONTATO</span>
+              </nav>
+            </div>
+            <div>
+              <div class="eyebrow text-ember mb-2">PUB · LIVE MUSIC · DECK</div>
+              <div class="display text-4xl lg:text-5xl text-cream leading-[0.92]">
+                a noite<br>te espera.
+              </div>
+              <div class="mt-4 flex flex-wrap gap-2 items-center">
+                <button class="btn btn-primary !bg-ember !text-ink !py-3 !px-4 !text-[10px]">reservar mesa</button>
+                <button class="btn btn-secondary !text-cream !border-cream !py-3 !px-4 !text-[10px]">ver agenda</button>
+                <span class="font-hand text-2xl text-sun ml-3">venha inteiro.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT CARD SECTION -->
+      <div class="border border-cream/15 bg-cream text-ink overflow-hidden">
+        <div class="px-6 py-3 border-b hairline flex items-baseline justify-between">
+          <div class="eyebrow">B · agenda · próximos shows</div>
+          <div class="font-mono text-xs text-ink/45">/agenda</div>
+        </div>
+        <div class="p-7">
+          <div class="flex items-end justify-between mb-5">
+            <div>
+              <div class="eyebrow text-ember mb-1">esta semana</div>
+              <div class="display text-3xl">o que vem<br>aí na casa.</div>
+            </div>
+            <a href="#" class="btn btn-ghost !text-[10px]">ver tudo →</a>
+          </div>
+          <div class="space-y-px bg-ink/10 border hairline">
+            <div class="bg-cream p-4 grid grid-cols-[64px_1fr_auto] items-center gap-4">
+              <div class="text-center">
+                <div class="display text-3xl text-ember leading-none">16</div>
+                <div class="font-mono text-[10px] text-ink/55 mt-1">SEX · MAI</div>
+              </div>
+              <div>
+                <div class="font-bold uppercase tracking-wide text-sm">brasas vivas</div>
+                <div class="text-xs text-ink/60">DJ residente + convidado · open até 23h</div>
+              </div>
+              <span class="px-2 py-1 bg-sun text-ink eyebrow !text-[9px]">vendendo</span>
+            </div>
+            <div class="bg-cream p-4 grid grid-cols-[64px_1fr_auto] items-center gap-4">
+              <div class="text-center">
+                <div class="display text-3xl leading-none">17</div>
+                <div class="font-mono text-[10px] text-ink/55 mt-1">SÁB · MAI</div>
+              </div>
+              <div>
+                <div class="font-bold uppercase tracking-wide text-sm">noite analógica</div>
+                <div class="text-xs text-ink/60">banda ao vivo · vinil · pista no deck</div>
+              </div>
+              <span class="px-2 py-1 bg-ember text-ink eyebrow !text-[9px]">esta semana</span>
+            </div>
+            <div class="bg-cream p-4 grid grid-cols-[64px_1fr_auto] items-center gap-4 opacity-60">
+              <div class="text-center">
+                <div class="display text-3xl leading-none">23</div>
+                <div class="font-mono text-[10px] text-ink/55 mt-1">SEX · MAI</div>
+              </div>
+              <div>
+                <div class="font-bold uppercase tracking-wide text-sm">aniversário da casa</div>
+                <div class="text-xs text-ink/60">9 anos · convidado especial</div>
+              </div>
+              <span class="px-2 py-1 border hairline-strong eyebrow !text-[9px]">esgotado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRIVATE EVENTS SECTION -->
+      <div class="border border-cream/15 overflow-hidden lg:col-span-1" style="background:#274156">
+        <div class="px-6 py-3 border-b border-cream/15 flex items-baseline justify-between">
+          <div class="eyebrow text-cream/70">C · eventos privados</div>
+          <div class="font-mono text-xs text-cream/40">/eventos</div>
+        </div>
+        <div class="p-7 lg:p-9 grid md:grid-cols-2 gap-6">
+          <div>
+            <div class="eyebrow text-sun mb-3">a casa fica sua</div>
+            <div class="display text-4xl text-cream leading-[0.95]">
+              casamento<br>
+              formatura<br>
+              <span class="text-sun">aniversário<br>da firma</span>
+            </div>
+            <p class="mt-5 text-sm text-cream/70 leading-relaxed max-w-xs">
+              O EL COYOTE inteiro pra quem você ama.
+              Vista do porto, deck preparado, equipe da casa cuidando do resto.
+            </p>
+            <button class="btn !bg-ember !text-ink mt-6 !py-3 !px-5 !text-[10px]">conversar com a casa</button>
+          </div>
+          <div class="aspect-[3/4] photo-grade">
+            <img src="assets/v2/foto-sunset-celebration.jpg" alt=""/>
+            <div class="absolute bottom-3 left-3 right-3 z-10">
+              <div class="font-hand text-2xl text-sun leading-tight">um sim<br>com vista pro mar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT SECTION -->
+      <div class="border border-cream/15 overflow-hidden bg-cream text-ink">
+        <div class="px-6 py-3 border-b hairline flex items-baseline justify-between">
+          <div class="eyebrow">D · contato &amp; rodapé</div>
+          <div class="font-mono text-xs text-ink/45">/contato</div>
+        </div>
+        <div class="p-7 lg:p-9">
+          <div class="display text-4xl leading-[0.95]">a casa<br>aberta.</div>
+
+          <div class="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
+            <div>
+              <div class="eyebrow text-ink/55 mb-1">whatsapp</div>
+              <a href="tel:+5548996663645" class="font-bold tracking-wide hover:text-ember">+55 48 99666-3645</a>
+            </div>
+            <div>
+              <div class="eyebrow text-ink/55 mb-1">instagram</div>
+              <a href="#" class="font-bold tracking-wide hover:text-ember">@elcoyotepub</a>
+            </div>
+            <div>
+              <div class="eyebrow text-ink/55 mb-1">site</div>
+              <a href="#" class="font-bold tracking-wide hover:text-ember">elcoyotepub.com</a>
+            </div>
+            <div>
+              <div class="eyebrow text-ink/55 mb-1">funcionamento</div>
+              <div class="font-bold tracking-wide">SEX · SÁB · 22h → 5h</div>
+            </div>
+            <div class="col-span-2">
+              <div class="eyebrow text-ink/55 mb-1">endereço</div>
+              <div class="font-bold tracking-wide">Imbituba — Santa Catarina · litoral sul</div>
+            </div>
+          </div>
+
+          <div class="mt-7 pt-5 border-t hairline flex items-end justify-between flex-wrap gap-3">
+            <img src="assets/v2/logo-elcoyote-black.png" alt="" class="h-6"/>
+            <div class="font-mono text-[10px] text-ink/50 text-right">© ELCOYOTE 2026<br>A NOITE VIRA HISTÓRIA</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════ -->
+
+<footer class="bg-cream text-ink">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 grid md:grid-cols-3 gap-8 items-end">
+    <div class="md:col-span-2">
+      <div class="eyebrow text-ink/55 mb-3">design system · v2.0</div>
+      <div class="display text-3xl lg:text-4xl">a noite vira história.</div>
+      <p class="mt-4 max-w-md text-sm text-ink/60">
+        Sistema visual EL COYOTE · Imbituba · 2026.
+        Próximas entregas: site, social media kit, sinalização da casa, embalagem.
+      </p>
+    </div>
+    <div class="text-right">
+      <img src="assets/v2/logo-elcoyote-black.png" alt="EL COYOTE" class="h-7 ml-auto"/>
+      <div class="mt-3 font-mono text-[10px] text-ink/50">
+        @ELCOYOTEPUB · ELCOYOTEPUB.COM<br>
+        +55 48 99666-3645
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

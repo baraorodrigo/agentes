@@ -1,0 +1,26 @@
+{
+  "_note": "Fixture até pareamento real (Notion ou banco próprio). Drop em kanban persiste só na sessão.",
+  "financeiro": {
+    "caixa":   { "valor": 18420, "trend": "estável" },
+    "a_receber": { "valor": 12300, "venc_semana": 4500 },
+    "a_pagar":   { "valor": 14800, "venc_semana": 6200 },
+    "atualizado": "2026-05-08T11:00:00-03:00"
+  },
+  "eventos": [
+    { "id": "evt-101", "title": "Sertaneja Universitária",   "date": "2026-05-08", "stage": "execucao",   "atracao": "DJ Lucca + voz ao vivo", "cover": 20, "lead": "beto", "detail": "Lista pronta · 480 nomes" },
+    { "id": "evt-102", "title": "Rock Night",                 "date": "2026-05-09", "stage": "divulgacao", "atracao": "Banda Strike + DJ residente", "cover": 25, "lead": "duda", "detail": "Posts agendados · falta storie" },
+    { "id": "evt-103", "title": "Quarta do Bruno & Dupla",    "date": "2026-05-13", "stage": "confirmado", "atracao": "Bruno & Dupla", "cover": 15, "lead": "gil", "detail": "Contrato assinado · pago 50%" },
+    { "id": "evt-104", "title": "Festa Junina antecipada",    "date": "2026-05-22", "stage": "confirmando", "atracao": "Trio Tribo", "cover": 20, "lead": "gil", "detail": "Aguardando datas alternativas" },
+    { "id": "evt-105", "title": "Aniversário 5 anos Coyote",  "date": "2026-06-07", "stage": "ideia", "atracao": "?", "cover": 0, "lead": "duda", "detail": "Brief inicial — ainda sem atração" },
+    { "id": "evt-106", "title": "Réveillon 2026/27",          "date": "2026-12-31", "stage": "ideia", "atracao": "?", "cover": 0, "lead": "gil", "detail": "Cogitando temática" },
+    { "id": "evt-107", "title": "Pagode na Laje (sex passada)", "date": "2026-05-02", "stage": "fechado", "atracao": "Grupo Resenha", "cover": 15, "lead": "beto", "detail": "Lucro acima do esperado" }
+  ],
+  "propostas": [
+    { "id": "prop-201", "cliente": "Júlia (aniversário 30)",       "tipo": "aniversario",  "stage": "brief",     "valor": null,  "contato": "WhatsApp Lia 06/05", "ultimo_update": "2026-05-06" },
+    { "id": "prop-202", "cliente": "TechSC — happy hour empresa",  "tipo": "empresarial",  "stage": "orcamento", "valor": 4200,  "contato": "Email RH",            "ultimo_update": "2026-05-07" },
+    { "id": "prop-203", "cliente": "Casamento Bia & Pedro",        "tipo": "casamento",    "stage": "enviado",   "valor": 12500, "contato": "Direct Insta",        "ultimo_update": "2026-05-05" },
+    { "id": "prop-204", "cliente": "Confraria Motoclube",          "tipo": "empresarial",  "stage": "enviado",   "valor": 3200,  "contato": "Telefone",            "ultimo_update": "2026-05-04" },
+    { "id": "prop-205", "cliente": "Aniversário 18 — Mateus",      "tipo": "aniversario",  "stage": "fechado",   "valor": 1800,  "contato": "Mãe do cliente",       "ultimo_update": "2026-05-01" },
+    { "id": "prop-206", "cliente": "Despedida solteiro Felipe",    "tipo": "aniversario",  "stage": "perdido",   "valor": 2400,  "contato": "WhatsApp",             "ultimo_update": "2026-04-28" }
+  ]
+}

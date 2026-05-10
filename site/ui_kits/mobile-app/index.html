@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EL COYOTE — App da casa · UI kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0E0E0E', deep: '#274156', sage: '#88a07d',
+        sun: '#f2c14e', ember: '#f58549', terra: '#9e5641',
+        mist: '#a9b0b3', cream: '#F4EFE6', sand: '#E6DCCB',
+      },
+      fontFamily: {
+        display: ['Anton', 'Impact', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        hand: ['Caveat', 'cursive'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#E6DCCB;color:#0E0E0E;font-weight:300;-webkit-font-smoothing:antialiased}
+  .display{font-family:'Anton',Impact,sans-serif;text-transform:uppercase;line-height:.92;letter-spacing:.005em}
+  .eyebrow{font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.32em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:18px;height:1px;background:currentColor;opacity:.7}
+  .eyebrow.no-rule::before{display:none}
+  .grain{position:relative}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  .photo-grade{position:relative}
+  .photo-grade::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,133,73,.06) 0%,transparent 30%,transparent 55%,rgba(14,14,14,.78) 100%);pointer-events:none;z-index:1}
+  .photo-grade>*{position:relative;z-index:2}
+  .tilt-l{transform:rotate(-2.5deg)}
+  .tilt-r{transform:rotate(2deg)}
+  .pulse-dot{animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(245,133,73,.5)}50%{opacity:.7;box-shadow:0 0 0 8px rgba(245,133,73,0)}}
+  .ember-line{height:1px;background:linear-gradient(90deg,transparent,#f58549,transparent)}
+  .hairline{border:0;border-top:1px solid rgba(14,14,14,.12)}
+  .hairline-dark{border:0;border-top:1px solid rgba(244,239,230,.12)}
+
+  /* iOS device frame */
+  .device{
+    width:380px;height:820px;border-radius:54px;
+    background:#000;padding:9px;flex-shrink:0;
+    box-shadow:0 40px 80px rgba(14,14,14,.18),0 0 0 1px rgba(14,14,14,.12);
+    position:relative;
+  }
+  .device::before{ /* dynamic island */
+    content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);
+    width:120px;height:34px;border-radius:22px;background:#000;z-index:50;
+  }
+  .screen{
+    width:100%;height:100%;border-radius:46px;overflow:hidden;
+    position:relative;background:#F4EFE6;
+  }
+  .screen .scroll{
+    position:absolute;inset:0;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .ios-status{
+    height:54px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;
+    padding:0 32px 6px;font-family:-apple-system,system-ui,sans-serif;font-weight:600;font-size:15px;
+    position:relative;z-index:30;
+  }
+  .ios-status .right{display:flex;gap:6px;align-items:center}
+  .ios-home-bar{
+    position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+    width:130px;height:5px;border-radius:100px;background:rgba(14,14,14,.25);z-index:60;
+  }
+  .ios-home-bar.dark{background:rgba(244,239,230,.6)}
+
+  /* mobile content helpers (scoped to .screen) */
+  .screen .content{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+  .screen .tabbar{
+    height:74px;flex-shrink:0;display:flex;border-top:1px solid rgba(14,14,14,.08);
+    background:rgba(244,239,230,.92);backdrop-filter:blur(14px);
+    padding-bottom:14px;
+  }
+  .screen .tabbar.dark{background:rgba(14,14,14,.92);border-top-color:rgba(244,239,230,.08)}
+  .screen .tabbar a{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(14,14,14,.45);transition:color .2s;
+  }
+  .screen .tabbar a.active{color:#f58549}
+  .screen .tabbar.dark a{color:rgba(244,239,230,.45)}
+  .screen .tabbar.dark a.active{color:#f2c14e}
+
+  .frame-label{
+    margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:.32em;text-transform:uppercase;color:rgba(14,14,14,.45);
+    text-align:center;
+  }
+  .frame-num{
+    font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:rgba(14,14,14,.35);letter-spacing:.32em;margin-top:4px;text-align:center;
+  }
+
+  /* hero image fallback (color blocks com gradient — sem assets externos) */
+  .hero-img{
+    background:
+      linear-gradient(180deg,rgba(14,14,14,.1) 0%,rgba(14,14,14,.45) 60%,rgba(14,14,14,.92) 100%),
+      radial-gradient(ellipse at 70% 30%, #f58549 0%, #9e5641 35%, #274156 70%, #0E0E0E 100%);
+    background-blend-mode:multiply,normal;
+  }
+  .hero-img-2{
+    background:
+      linear-gradient(180deg,rgba(14,14,14,.05) 0%,rgba(14,14,14,.5) 70%,rgba(14,14,14,.95) 100%),
+      radial-gradient(ellipse at 30% 50%, #f2c14e 0%, #f58549 30%, #9e5641 60%, #0E0E0E 100%);
+    background-blend-mode:multiply,normal;
+  }
+  .hero-img-3{
+    background:
+      linear-gradient(160deg,#274156 0%,#1a3147 50%,#0E0E0E 100%);
+  }
+
+  /* QR aesthetic block */
+  .qr{
+    width:140px;height:140px;background:#0E0E0E;
+    background-image:
+      linear-gradient(90deg,#0E0E0E 50%,#F4EFE6 50%),
+      linear-gradient(0deg,#0E0E0E 50%,#F4EFE6 50%);
+    background-size:14px 14px,14px 14px;
+    background-position:0 0,7px 7px;
+    border-radius:8px;
+    position:relative;
+  }
+  .qr::before,.qr::after{
+    content:"";position:absolute;width:32px;height:32px;
+    border:8px solid #0E0E0E;background:#F4EFE6;border-radius:4px;
+  }
+  .qr::before{top:8px;left:8px}
+  .qr::after{top:8px;right:8px}
+
+  /* perforation between ticket halves */
+  .perf{
+    height:1px;border-top:1px dashed rgba(14,14,14,.3);
+    position:relative;margin:16px -20px;
+  }
+  .perf::before,.perf::after{
+    content:"";position:absolute;width:20px;height:20px;border-radius:9999px;background:#E6DCCB;top:-10px;
+  }
+  .perf::before{left:-10px}
+  .perf::after{right:-10px}
+
+  /* legend chip / agenda mini */
+  .agenda-card{
+    display:flex;align-items:center;gap:14px;padding:14px;border-radius:14px;
+    background:rgba(14,14,14,.04);border:1px solid rgba(14,14,14,.06);
+  }
+  .stamp-date{
+    flex-shrink:0;width:54px;text-align:center;padding:8px 6px;border-radius:10px;
+    background:#0E0E0E;color:#F4EFE6;
+  }
+  .stamp-date .d{font-family:'Anton',sans-serif;font-size:24px;line-height:.9}
+  .stamp-date .m{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;margin-top:3px;color:#f2c14e}
+
+  /* menu */
+  .menu-tab{
+    flex:1;padding:10px 0;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(14,14,14,.45);border-bottom:1px solid transparent;cursor:pointer;text-align:center;
+  }
+  .menu-tab.active{color:#0E0E0E;border-bottom-color:#f58549}
+</style>
+</head>
+<body>
+
+<!-- ============== HEADER ============== -->
+<header class="px-6 lg:px-12 pt-12 lg:pt-16 pb-12 max-w-[1600px] mx-auto">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="w-1.5 h-1.5 rounded-full bg-ember pulse-dot inline-block"></span>
+    <span class="font-mono text-[10px] tracking-[.32em] uppercase text-ink/55">EL COYOTE · UI KIT MOBILE · v1</span>
+  </div>
+  <h1 class="display text-[56px] sm:text-[80px] lg:text-[112px]">app da casa<span class="text-ember">.</span></h1>
+  <div class="grid lg:grid-cols-12 gap-8 mt-8 max-w-5xl">
+    <p class="lg:col-span-7 text-ink/70 text-lg leading-relaxed">a noite vira história — agora no bolso. quatro telas pra acompanhar a casa: o que vem aí, o detalhe da noite, o ingresso na portaria, e o cardápio do bar à cozinha.</p>
+    <span class="lg:col-span-5 font-hand text-ember text-[44px] tilt-l leading-none self-end">venha inteiro.</span>
+  </div>
+  <hr class="hairline mt-12">
+</header>
+
+<!-- ============== DEVICE FRAMES ============== -->
+<main class="px-6 lg:px-12 pb-24 max-w-[1600px] mx-auto">
+  <div class="flex flex-wrap justify-center gap-10 lg:gap-14">
+
+    <!-- ============== TELA 1: HOJE ============== -->
+    <div>
+      <div class="device">
+        <div class="screen">
+          <!-- HERO COVER (full bleed) -->
+          <div class="absolute inset-0 hero-img"></div>
+          <div class="absolute inset-0 grain"></div>
+
+          <div class="scroll">
+            <!-- iOS status -->
+            <div class="ios-status text-cream">
+              <span>9:41</span>
+              <div class="right">
+                <i data-lucide="signal" class="w-3.5 h-3.5"></i>
+                <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+                <i data-lucide="battery-full" class="w-4 h-4"></i>
+              </div>
+            </div>
+
+            <!-- top bar -->
+            <div class="px-6 pt-4 flex items-center justify-between text-cream relative z-10">
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-ember pulse-dot"></span>
+                <span class="display text-[18px] tracking-wider">EL COYOTE</span>
+              </div>
+              <button class="w-10 h-10 rounded-full bg-cream/15 backdrop-blur flex items-center justify-center">
+                <i data-lucide="menu" class="w-4 h-4 text-cream"></i>
+              </button>
+            </div>
+
+            <!-- hero content -->
+            <div class="content px-6 pb-2 relative z-10 text-cream">
+              <div class="flex-1 flex flex-col justify-end pb-6">
+                <div class="eyebrow text-sun mb-4 no-rule">
+                  <span class="w-2 h-2 rounded-full bg-ember pulse-dot inline-block"></span>
+                  <span>AO VIVO · SEX</span>
+                </div>
+                <div class="font-mono text-[10px] tracking-[.32em] text-cream/70 uppercase mb-2">21 NOV · 22h → 5h</div>
+                <h2 class="display text-[64px] leading-[.86]">a noite<br>te&nbsp;espera.</h2>
+                <span class="font-hand text-sun text-[28px] tilt-l block mt-3 leading-none">banda da casa.</span>
+
+                <div class="mt-6 flex items-center justify-between">
+                  <div>
+                    <div class="display text-[28px]">R$40</div>
+                    <div class="font-mono text-[9px] tracking-[.24em] uppercase text-cream/60 mt-1">1º LOTE · PISTA</div>
+                  </div>
+                  <button class="bg-ember text-ink px-5 py-3 rounded-full text-[10px] font-bold tracking-[.18em] uppercase flex items-center gap-2">
+                    reservar
+                    <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- próximas (sobre a foto, mas com bg fade) -->
+              <div class="-mx-6 px-6 pt-5 pb-3 bg-gradient-to-b from-transparent to-ink/95">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="eyebrow text-sun no-rule"><span>PRÓXIMAS</span></div>
+                  <span class="font-mono text-[9px] tracking-[.24em] uppercase text-cream/60">ver tudo →</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- agenda (fundo escuro) -->
+            <div class="bg-ink text-cream px-6 pt-1 pb-3 relative z-10">
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-3 py-2 border-b border-cream/10">
+                  <div class="flex-shrink-0 w-12 text-center">
+                    <div class="display text-[22px] leading-none">22</div>
+                    <div class="font-mono text-[8px] tracking-[.24em] text-sun mt-1">NOV</div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-mono text-[9px] tracking-[.24em] uppercase text-cream/55">SÁB · 18h</div>
+                    <div class="display text-[18px] mt-0.5">sunset deck</div>
+                  </div>
+                  <div class="font-mono text-[11px] text-sun">R$30</div>
+                </div>
+                <div class="flex items-center gap-3 py-2 border-b border-cream/10">
+                  <div class="flex-shrink-0 w-12 text-center">
+                    <div class="display text-[22px] leading-none">28</div>
+                    <div class="font-mono text-[8px] tracking-[.24em] text-sun mt-1">NOV</div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-mono text-[9px] tracking-[.24em] uppercase text-cream/55">SEX · 22h</div>
+                    <div class="display text-[18px] mt-0.5">pagode na vista</div>
+                  </div>
+                  <div class="font-mono text-[11px] text-sun">R$45</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- tab bar -->
+            <nav class="tabbar dark relative z-10">
+              <a class="active">
+                <i data-lucide="moon" class="w-4 h-4"></i>
+                <span>Hoje</span>
+              </a>
+              <a>
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Agenda</span>
+              </a>
+              <a>
+                <i data-lucide="ticket" class="w-4 h-4"></i>
+                <span>Ingresso</span>
+              </a>
+              <a>
+                <i data-lucide="utensils" class="w-4 h-4"></i>
+                <span>Cardápio</span>
+              </a>
+            </nav>
+            <div class="ios-home-bar dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-label">hoje</div>
+      <div class="frame-num">01 · home</div>
+    </div>
+
+    <!-- ============== TELA 2: EVENTO ============== -->
+    <div>
+      <div class="device">
+        <div class="screen">
+          <div class="scroll">
+            <!-- iOS status -->
+            <div class="ios-status text-cream">
+              <span>9:41</span>
+              <div class="right">
+                <i data-lucide="signal" class="w-3.5 h-3.5"></i>
+                <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+                <i data-lucide="battery-full" class="w-4 h-4"></i>
+              </div>
+            </div>
+
+            <!-- top bar (sobre hero) -->
+            <div class="absolute top-[54px] left-0 right-0 px-5 flex items-center justify-between text-cream z-30">
+              <button class="w-9 h-9 rounded-full bg-cream/15 backdrop-blur flex items-center justify-center">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              </button>
+              <span class="font-mono text-[9px] tracking-[.32em] uppercase">EVENTO</span>
+              <button class="w-9 h-9 rounded-full bg-cream/15 backdrop-blur flex items-center justify-center">
+                <i data-lucide="heart" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <!-- hero -->
+            <div class="content">
+              <div class="relative h-[300px] flex-shrink-0 photo-grade">
+                <div class="absolute inset-0 hero-img-2"></div>
+                <div class="absolute inset-0 grain"></div>
+                <div class="absolute left-5 right-5 bottom-5 text-cream">
+                  <div class="eyebrow text-sun no-rule mb-2"><span>LIVE MUSIC</span></div>
+                  <div class="font-mono text-[10px] tracking-[.24em] uppercase text-cream/70 mb-1">SEX · 21 NOV · 22h → 5h</div>
+                  <h1 class="display text-[44px] leading-[.86]">banda<br>da casa</h1>
+                </div>
+              </div>
+
+              <!-- corpo scroll -->
+              <div class="flex-1 overflow-auto bg-cream px-5 pt-5 pb-2">
+                <p class="text-[15px] leading-relaxed text-ink/80">pagode raiz e som da casa. a pista responde, a noite vai até o sol pintar o porto.</p>
+
+                <div class="eyebrow text-ember mt-6 mb-3"><span>LINEUP</span></div>
+                <div class="space-y-0">
+                  <div class="flex items-baseline justify-between py-2.5 border-b border-ink/10">
+                    <div>
+                      <div class="font-medium text-[14px]">DJ Lobo</div>
+                      <div class="font-mono text-[10px] text-ink/55 uppercase tracking-wider">abertura</div>
+                    </div>
+                    <span class="font-mono text-[12px] text-ember">22:00</span>
+                  </div>
+                  <div class="flex items-baseline justify-between py-2.5 border-b border-ink/10">
+                    <div>
+                      <div class="font-medium text-[14px]">Banda Coyote</div>
+                      <div class="font-mono text-[10px] text-ink/55 uppercase tracking-wider">show principal</div>
+                    </div>
+                    <span class="font-mono text-[12px] text-ember">23:00</span>
+                  </div>
+                  <div class="flex items-baseline justify-between py-2.5 border-b border-ink/10">
+                    <div>
+                      <div class="font-medium text-[14px]">Convidado surpresa</div>
+                      <div class="font-mono text-[10px] text-ink/55 uppercase tracking-wider">a casa não conta</div>
+                    </div>
+                    <span class="font-mono text-[12px] text-ember">01:30</span>
+                  </div>
+                  <div class="flex items-baseline justify-between py-2.5">
+                    <div>
+                      <div class="font-medium text-[14px]">DJ Sunrise</div>
+                      <div class="font-mono text-[10px] text-ink/55 uppercase tracking-wider">after</div>
+                    </div>
+                    <span class="font-mono text-[12px] text-ember">03:00</span>
+                  </div>
+                </div>
+
+                <span class="font-hand text-ember text-[26px] tilt-l block mt-4 leading-none">a noite acaba só com o sol.</span>
+              </div>
+
+              <!-- footer fixo -->
+              <div class="bg-ink text-cream px-5 py-4 flex items-center justify-between flex-shrink-0">
+                <div>
+                  <div class="display text-[24px] leading-none">R$40</div>
+                  <div class="font-mono text-[9px] tracking-[.24em] uppercase text-cream/60 mt-1">1º LOTE</div>
+                </div>
+                <button class="bg-ember text-ink px-5 py-3 rounded-full text-[10px] font-bold tracking-[.18em] uppercase flex items-center gap-2">
+                  comprar
+                  <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+                </button>
+              </div>
+            </div>
+            <div class="ios-home-bar dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-label">evento</div>
+      <div class="frame-num">02 · detalhe</div>
+    </div>
+
+    <!-- ============== TELA 3: INGRESSO ============== -->
+    <div>
+      <div class="device">
+        <div class="screen">
+          <div class="absolute inset-0 hero-img-3"></div>
+          <div class="absolute inset-0 grain"></div>
+
+          <div class="scroll">
+            <!-- iOS status -->
+            <div class="ios-status text-cream">
+              <span>9:41</span>
+              <div class="right">
+                <i data-lucide="signal" class="w-3.5 h-3.5"></i>
+                <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+                <i data-lucide="battery-full" class="w-4 h-4"></i>
+              </div>
+            </div>
+
+            <!-- top bar -->
+            <div class="px-5 flex items-center justify-between text-cream relative z-10">
+              <button class="w-9 h-9 rounded-full bg-cream/15 backdrop-blur flex items-center justify-center">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              </button>
+              <span class="font-mono text-[9px] tracking-[.32em] uppercase">INGRESSO</span>
+              <button class="w-9 h-9 rounded-full bg-cream/15 backdrop-blur flex items-center justify-center">
+                <i data-lucide="share" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <!-- conteúdo -->
+            <div class="content text-cream relative z-10 px-5">
+              <div class="flex-1 flex flex-col justify-center items-center">
+                <div class="eyebrow text-sun no-rule mb-3"><span>APRESENTE NA ENTRADA</span></div>
+                <span class="font-hand text-sun text-[28px] tilt-r block mb-6 leading-none">venha inteiro.</span>
+
+                <!-- ticket card -->
+                <div class="w-full bg-cream text-ink rounded-2xl p-5 relative" style="box-shadow:0 30px 60px rgba(0,0,0,.4)">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="font-mono text-[9px] tracking-[.24em] uppercase text-ink/55">SEX · 21 NOV</div>
+                      <h3 class="display text-[28px] leading-[.86] mt-1">banda<br>da casa</h3>
+                    </div>
+                    <div class="text-right">
+                      <div class="font-mono text-[8px] tracking-[.24em] uppercase text-ember">EL COYOTE</div>
+                      <div class="font-mono text-[8px] tracking-[.24em] uppercase text-ink/55 mt-1">IMBITUBA</div>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-center my-5">
+                    <div class="qr"></div>
+                  </div>
+
+                  <div class="font-mono text-center text-[13px] tracking-[.24em] text-ink mb-3">EC · 21N · 7B42</div>
+
+                  <div class="perf"></div>
+
+                  <div class="grid grid-cols-3 gap-2 text-center pt-1">
+                    <div>
+                      <div class="font-mono text-[8px] tracking-[.24em] uppercase text-ink/55">NOME</div>
+                      <div class="font-medium text-[12px] mt-1">Maria S.</div>
+                    </div>
+                    <div>
+                      <div class="font-mono text-[8px] tracking-[.24em] uppercase text-ink/55">SETOR</div>
+                      <div class="font-medium text-[12px] mt-1">Pista</div>
+                    </div>
+                    <div>
+                      <div class="font-mono text-[8px] tracking-[.24em] uppercase text-ink/55">LOTE</div>
+                      <div class="font-medium text-[12px] mt-1">1º</div>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="font-mono text-[9px] tracking-[.24em] uppercase text-cream/60 text-center mt-5">+18 · documento na entrada · porta abre 22h</p>
+              </div>
+            </div>
+
+            <!-- tab bar -->
+            <nav class="tabbar dark relative z-10">
+              <a>
+                <i data-lucide="moon" class="w-4 h-4"></i>
+                <span>Hoje</span>
+              </a>
+              <a>
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Agenda</span>
+              </a>
+              <a class="active">
+                <i data-lucide="ticket" class="w-4 h-4"></i>
+                <span>Ingresso</span>
+              </a>
+              <a>
+                <i data-lucide="utensils" class="w-4 h-4"></i>
+                <span>Cardápio</span>
+              </a>
+            </nav>
+            <div class="ios-home-bar dark"></div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-label">ingresso</div>
+      <div class="frame-num">03 · ticket</div>
+    </div>
+
+    <!-- ============== TELA 4: CARDÁPIO ============== -->
+    <div>
+      <div class="device">
+        <div class="screen" style="background:#F4EFE6">
+          <div class="scroll">
+            <!-- iOS status -->
+            <div class="ios-status text-ink">
+              <span>9:41</span>
+              <div class="right">
+                <i data-lucide="signal" class="w-3.5 h-3.5"></i>
+                <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+                <i data-lucide="battery-full" class="w-4 h-4"></i>
+              </div>
+            </div>
+
+            <!-- header -->
+            <div class="px-5 pt-2 pb-4">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-ember pulse-dot"></span>
+                  <span class="display text-[16px]">EL COYOTE</span>
+                </div>
+                <button class="w-9 h-9 rounded-full bg-ink/5 flex items-center justify-center">
+                  <i data-lucide="search" class="w-4 h-4 text-ink"></i>
+                </button>
+              </div>
+              <div class="eyebrow text-ember mb-2"><span>CARDÁPIO</span></div>
+              <h2 class="display text-[44px] leading-[.86]">do bar<br>à&nbsp;cozinha.</h2>
+              <span class="font-hand text-ember text-[24px] tilt-l block mt-3 leading-none">brasa que não apaga.</span>
+            </div>
+
+            <!-- tabs -->
+            <div class="px-5 flex border-b border-ink/10">
+              <div class="menu-tab active">bar</div>
+              <div class="menu-tab">cozinha</div>
+              <div class="menu-tab">sem álcool</div>
+            </div>
+
+            <!-- list -->
+            <div class="content overflow-auto px-5 pt-4 pb-2">
+              <div class="eyebrow text-ink/55 no-rule mb-3"><span>DRINKS DA CASA</span></div>
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-ink/8">
+                  <div class="flex-1">
+                    <div class="font-semibold text-[14px]">Coyote</div>
+                    <div class="text-[12px] text-ink/65 mt-0.5 leading-snug">cachaça envelhecida, mel, limão-galego, manjericão</div>
+                  </div>
+                  <span class="font-mono text-[12px] text-ember font-semibold">R$32</span>
+                </div>
+                <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-ink/8">
+                  <div class="flex-1">
+                    <div class="font-semibold text-[14px]">Beira-mar</div>
+                    <div class="text-[12px] text-ink/65 mt-0.5 leading-snug">gin, tônica de capim-santo, sal de hibisco</div>
+                  </div>
+                  <span class="font-mono text-[12px] text-ember font-semibold">R$36</span>
+                </div>
+                <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-ink/8">
+                  <div class="flex-1">
+                    <div class="font-semibold text-[14px]">Pôr do sol</div>
+                    <div class="text-[12px] text-ink/65 mt-0.5 leading-snug">mezcal, maracujá, pimenta-rosa</div>
+                  </div>
+                  <span class="font-mono text-[12px] text-ember font-semibold">R$38</span>
+                </div>
+              </div>
+
+              <div class="eyebrow text-ink/55 no-rule mb-3"><span>CERVEJAS</span></div>
+              <div class="space-y-3">
+                <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-ink/8">
+                  <div class="flex-1">
+                    <div class="font-semibold text-[14px]">Pilsen long neck</div>
+                    <div class="text-[12px] text-ink/65 mt-0.5">355ml</div>
+                  </div>
+                  <span class="font-mono text-[12px] text-ember font-semibold">R$14</span>
+                </div>
+                <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-ink/8">
+                  <div class="flex-1">
+                    <div class="font-semibold text-[14px]">IPA da casa</div>
+                    <div class="text-[12px] text-ink/65 mt-0.5">chopp 400ml · cítrica</div>
+                  </div>
+                  <span class="font-mono text-[12px] text-ember font-semibold">R$22</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- tab bar -->
+            <nav class="tabbar">
+              <a>
+                <i data-lucide="moon" class="w-4 h-4"></i>
+                <span>Hoje</span>
+              </a>
+              <a>
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Agenda</span>
+              </a>
+              <a>
+                <i data-lucide="ticket" class="w-4 h-4"></i>
+                <span>Ingresso</span>
+              </a>
+              <a class="active">
+                <i data-lucide="utensils" class="w-4 h-4"></i>
+                <span>Cardápio</span>
+              </a>
+            </nav>
+            <div class="ios-home-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-label">cardápio</div>
+      <div class="frame-num">04 · menu</div>
+    </div>
+
+  </div>
+
+  <!-- footer -->
+  <div class="ember-line mt-24 mb-8"></div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 max-w-[1600px] mx-auto">
+    <div class="font-mono text-[10px] tracking-[.32em] uppercase text-ink/55">EL COYOTE · UI KIT MOBILE · 2026 · v1</div>
+    <div class="font-mono text-[10px] tracking-[.32em] uppercase text-ink/45">a noite vira história</div>
+  </div>
+</main>
+
+<script>
+  if (window.lucide) lucide.createIcons();
+</script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 - **Agente:** Beto
 - **Destino:** WhatsApp Grupo Promoters
 - **Condição:** Só envia se há evento ativo na semana. Senão, completa silenciosamente.
-- **Skill usada:** `skills/extrair-pne.md`
+- **Skill usada:** `skills/extrair-pne/SKILL.md`
 
 ## Prompt
 

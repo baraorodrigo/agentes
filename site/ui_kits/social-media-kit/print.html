@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Social Media Kit · EL COYOTE · versão impressão A4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+  /* ============================================================
+     SOCIAL MEDIA KIT · A4 print, 14 páginas
+     Pra quem produz pra @elcoyotepub: copy, story, feed, carrossel.
+     ============================================================ */
+  :root {
+    --ink: #0E0E0E; --deep: #274156; --ember: #f58549; --sun: #f2c14e;
+    --terra: #9e5641; --sage: #88a07d; --mist: #a9b0b3; --cream: #F4EFE6; --sand: #E6DCCB;
+    --ok: #4f6d50; --bad: #b14747;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #d9d3c7; font-family: 'Inter', sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 40px 16px; }
+  .page {
+    width: 210mm; min-height: 297mm;
+    background: var(--cream);
+    padding: 16mm 18mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child { page-break-after: auto; }
+  .page.dark { background: var(--ink); color: var(--cream); }
+  .page.deep { background: var(--deep); color: var(--cream); }
+  .page.sand { background: var(--sand); }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .stack { display: block; padding: 0; gap: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .printbar { display: none !important; }
+  }
+
+  /* Tipografia */
+  .display { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.92; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase; }
+  .hand { font-family: 'Caveat', cursive; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .runner-top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 6mm; border-bottom: 0.3mm solid currentColor;
+    opacity: 0.6; font-size: 8pt; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .runner-bottom {
+    position: absolute; bottom: 10mm; left: 18mm; right: 18mm;
+    display: flex; justify-content: space-between;
+    opacity: 0.55; font-size: 8pt; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+  .hairline { height: 0.3mm; background: currentColor; opacity: 0.18; }
+
+  .frame { border: 0.3mm solid rgba(14,14,14,0.18); border-radius: 2mm; padding: 4mm; }
+  .frame.dark { border-color: rgba(244,239,230,0.2); }
+  .frame.bg-deep { background: var(--deep); color: var(--cream); border-color: transparent; }
+  .frame.bg-ink { background: rgba(14,14,14,0.06); }
+  .frame.bg-white { background: rgba(255,255,255,.7); }
+
+  .h1 { font-size: 56pt; line-height: 0.95; margin-bottom: 6mm; }
+  .h2 { font-size: 28pt; line-height: 0.95; margin-bottom: 4mm; }
+  .h3 { font-size: 14pt; font-weight: 600; margin-bottom: 2mm; }
+  .body { font-size: 10pt; line-height: 1.5; }
+  .small { font-size: 8.5pt; line-height: 1.45; opacity: 0.78; }
+  .micro { font-size: 7.5pt; line-height: 1.4; opacity: 0.65; }
+
+  /* Voice bars */
+  .voice-bar { height: 1.4mm; background: rgba(14,14,14,0.1); border-radius: 99mm; margin-top: 1.5mm; }
+  .voice-bar > span { display: block; height: 100%; background: var(--ember); border-radius: 99mm; }
+
+  /* Chips vocabulário */
+  .chip { display: inline-block; padding: 1mm 3mm; border: 0.2mm solid currentColor; border-radius: 99mm; font-size: 8pt; margin: 0.6mm; opacity: 0.85; }
+  .chip.no { color: var(--bad); text-decoration: line-through; }
+  .chip.yes { color: var(--ok); }
+
+  /* Pair sim/não */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-bottom: 3mm; }
+  .pair .item { padding: 3mm; border-radius: 1.5mm; font-size: 8.5pt; line-height: 1.4; }
+  .pair .item.no { border: 0.3mm solid var(--bad); }
+  .pair .item.yes { border: 0.3mm solid var(--ok); }
+  .pair .lbl { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5mm; }
+  .pair .item.no .lbl { color: var(--bad); }
+  .pair .item.yes .lbl { color: var(--ok); }
+
+  /* Swatches mini */
+  .swatch { height: 18mm; border-radius: 1mm; display: flex; flex-direction: column; justify-content: flex-end; padding: 2mm; color: var(--cream); box-shadow: inset 0 0 0 0.2mm rgba(0,0,0,.1); }
+  .swatch.light { color: var(--ink); }
+  .swatch .name { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; opacity: .9; }
+  .swatch .hex { font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; opacity: .7; }
+
+  /* Templates IG */
+  .ig {
+    background: var(--ink); color: var(--cream);
+    border-radius: 2mm; padding: 4mm;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .ig .meta-tag { font-family: 'JetBrains Mono', monospace; font-size: 6pt; letter-spacing: 0.15em; text-transform: uppercase; opacity: .55; }
+  .ig.story { aspect-ratio: 9/16; }
+  .ig.feed { aspect-ratio: 1; }
+  .ig.reels { aspect-ratio: 9/16; }
+
+  /* Calendário */
+  table.cal { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+  table.cal th, table.cal td { padding: 2mm 2.5mm; border-bottom: 0.2mm solid rgba(0,0,0,.1); vertical-align: top; }
+  table.cal th { font-family: 'JetBrains Mono', monospace; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.55; text-align: left; }
+  table.cal td.day { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 11pt; width: 16mm; padding-top: 2.5mm; }
+  table.cal td.kind { font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; width: 32mm; }
+
+  /* Captions card */
+  .caption-card {
+    background: var(--cream); border: 0.3mm dashed rgba(14,14,14,.25);
+    border-radius: 2mm; padding: 4mm; font-size: 9pt; line-height: 1.45;
+  }
+  .caption-card .head { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.55; margin-bottom: 2mm; }
+  .caption-card .ember { color: var(--ember); }
+
+  /* Floating print bar */
+  .printbar {
+    position: fixed; top: 16px; right: 16px; z-index: 99;
+    background: var(--ink); color: var(--cream); border: none;
+    padding: 10px 16px; border-radius: 999px; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  }
+  .printbar:hover { background: var(--ember); }
+
+  ul.clean { list-style: none; }
+  ul.clean li { padding: 1mm 0; }
+
+  /* Hashtag pill */
+  .tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 8pt; padding: 1mm 2.5mm; border-radius: 99mm; background: rgba(14,14,14,.06); margin: 0.5mm; }
+  .tag.dark { background: rgba(244,239,230,.12); }
+</style>
+</head>
+<body>
+
+<button class="printbar" onclick="window.print()">⎙ imprimir / salvar pdf</button>
+
+<div class="stack">
+
+<!-- ===================== COVER ===================== -->
+<section class="page dark">
+  <div class="runner-top" style="border-bottom-color: rgba(244,239,230,.3);"><span>EL COYOTE · social media kit</span><span>2026</span></div>
+
+  <div style="margin-top: 75mm;">
+    <p class="eyebrow" style="color: var(--ember);">social media kit · @elcoyotepub</p>
+    <p class="display" style="font-size: 92pt; line-height: 0.88; margin-top: 8mm;">
+      A NOITE<br/>POSTA<br/>SOZINHA.
+    </p>
+    <p class="hand" style="font-size: 30pt; color: var(--sun); margin-top: 8mm;">copy, voz, templates, calendário.</p>
+  </div>
+
+  <div style="position: absolute; bottom: 18mm; left: 18mm; right: 18mm;">
+    <div class="hairline" style="background: rgba(244,239,230,.3); margin-bottom: 4mm;"></div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <p class="eyebrow" style="opacity: .7;">pra quem produz conteúdo pra casa</p>
+        <p class="small" style="opacity: .55; margin-top: 2mm;">tudo que precisa pra postar sem desviar · v1 · 2026</p>
+      </div>
+      <p class="mono" style="font-size: 8pt; opacity: .55;">complementa brandbook v2</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUMÁRIO + EM 30s ===================== -->
+<section class="page">
+  <div class="runner-top"><span>EL COYOTE · social media kit</span><span>SUMÁRIO</span></div>
+  <h1 class="display h1" style="margin-top: 14mm;">EM 30 SEGUNDOS.</h1>
+
+  <div class="grid-2" style="margin-top: 6mm;">
+    <div>
+      <p class="eyebrow" style="color: var(--ember); margin-bottom: 2mm;">o que é a casa</p>
+      <p class="body">EL COYOTE é a casa rock à beira-mar de Imbituba — onde a noite começa às 22h e termina com sol nascendo. Não é balada. Não é restaurante. Não é resort.</p>
+      <p class="hand" style="font-size: 22pt; color: var(--ember); margin-top: 4mm;">a noite vira história.</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="opacity:.55; margin-bottom: 2mm;">5 pilares</p>
+      <ul class="clean small">
+        <li><b>livre.</b> vem do jeito que vem.</li>
+        <li><b>quente.</b> acolhe. abraça.</li>
+        <li><b>intenso.</b> som alto, comida farta.</li>
+        <li><b>poético.</b> a noite tem verso.</li>
+        <li><b>litorâneo.</b> vista pro mar é parte da identidade.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hairline" style="margin: 8mm 0 6mm;"></div>
+
+  <p class="eyebrow" style="opacity:.55;">sumário</p>
+  <table class="cal" style="margin-top: 2mm;">
+    <tbody>
+      <tr><td class="mono" style="opacity:.55; width: 12mm;">01</td><td>Voz · 78 / 72 / 65 + 5 registros</td><td class="mono" style="text-align:right; opacity:.55;">03</td></tr>
+      <tr><td class="mono" style="opacity:.55;">02</td><td>Vocabulário · proibido × preferido</td><td class="mono" style="text-align:right; opacity:.55;">04</td></tr>
+      <tr><td class="mono" style="opacity:.55;">03</td><td>9 frases canônicas · uso por contexto</td><td class="mono" style="text-align:right; opacity:.55;">05</td></tr>
+      <tr><td class="mono" style="opacity:.55;">04</td><td>Estruturas frasais · fórmulas pra escrever novo</td><td class="mono" style="text-align:right; opacity:.55;">06</td></tr>
+      <tr><td class="mono" style="opacity:.55;">05</td><td>Mini brand guide · paleta + tipo + fotografia</td><td class="mono" style="text-align:right; opacity:.55;">07</td></tr>
+      <tr><td class="mono" style="opacity:.55;">06</td><td>Templates · story 9:16</td><td class="mono" style="text-align:right; opacity:.55;">08</td></tr>
+      <tr><td class="mono" style="opacity:.55;">07</td><td>Templates · feed 1:1</td><td class="mono" style="text-align:right; opacity:.55;">09</td></tr>
+      <tr><td class="mono" style="opacity:.55;">08</td><td>Templates · carrossel · 3 layouts</td><td class="mono" style="text-align:right; opacity:.55;">10</td></tr>
+      <tr><td class="mono" style="opacity:.55;">09</td><td>Bio IG + hashtags + emoji</td><td class="mono" style="text-align:right; opacity:.55;">11</td></tr>
+      <tr><td class="mono" style="opacity:.55;">10</td><td>Calendário semanal tipo</td><td class="mono" style="text-align:right; opacity:.55;">12</td></tr>
+      <tr><td class="mono" style="opacity:.55;">11</td><td>Captions prontos · 8 modelos</td><td class="mono" style="text-align:right; opacity:.55;">13</td></tr>
+      <tr><td class="mono" style="opacity:.55;">12</td><td>✅ × ❌ · quando a frase trai a casa</td><td class="mono" style="text-align:right; opacity:.55;">14</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>02</span></div>
+</section>
+
+<!-- ===================== 01 VOZ ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>01 · VOZ</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">01 — voz</p>
+  <h2 class="display h1" style="margin-top: 4mm;">COMO A CASA FALA.</h2>
+
+  <div class="grid-3" style="margin-top: 8mm;">
+    <div>
+      <div style="display: flex; justify-content: space-between;"><span class="mono" style="font-size: 8pt;">informal</span><span class="mono" style="font-size: 8pt;">78%</span></div>
+      <div class="voice-bar"><span style="width:78%"></span></div>
+      <p class="small" style="margin-top: 2mm;">"a noite te espera." > "esperamos sua presença."</p>
+    </div>
+    <div>
+      <div style="display: flex; justify-content: space-between;"><span class="mono" style="font-size: 8pt;">coração</span><span class="mono" style="font-size: 8pt;">72%</span></div>
+      <div class="voice-bar"><span style="width:72%"></span></div>
+      <p class="small" style="margin-top: 2mm;">sente antes de explicar. emoção primeiro, info depois.</p>
+    </div>
+    <div>
+      <div style="display: flex; justify-content: space-between;"><span class="mono" style="font-size: 8pt;">sugere</span><span class="mono" style="font-size: 8pt;">65%</span></div>
+      <div class="voice-bar"><span style="width:65%"></span></div>
+      <p class="small" style="margin-top: 2mm;">convida sem empurrar. sem "imperdível", "corre", "última chance".</p>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 10mm;">5 registros · mesma voz, contextos diferentes</p>
+
+  <div class="grid-2" style="margin-top: 3mm;">
+    <div class="frame bg-white">
+      <p class="eyebrow" style="color: var(--ember);">convite (story de evento)</p>
+      <p class="display" style="font-size: 18pt; margin-top: 2mm;">SEXTA. 22H.</p>
+      <p class="micro" style="margin-top: 1mm;">direto, sensorial, curto.</p>
+    </div>
+    <div class="frame bg-white">
+      <p class="eyebrow" style="color: var(--ember);">manifesto (hero, sobre)</p>
+      <p class="hand" style="font-size: 22pt; color: var(--ember); margin-top: 1mm;">se é pra viver, que seja inteiro.</p>
+      <p class="micro" style="margin-top: 1mm;">poético, raro.</p>
+    </div>
+    <div class="frame bg-white">
+      <p class="eyebrow" style="color: var(--ember);">serviço (FAQ, op)</p>
+      <p class="body" style="margin-top: 1mm;">"abrimos sex e sáb, das 22h às 5h. quer reservar?"</p>
+      <p class="micro" style="margin-top: 1mm;">claro, gentil, útil.</p>
+    </div>
+    <div class="frame bg-white">
+      <p class="eyebrow" style="color: var(--ember);">vendas (DM evento privado)</p>
+      <p class="body" style="margin-top: 1mm;">"a casa fica sua. me conta a data e quantos convidados."</p>
+      <p class="micro" style="margin-top: 1mm;">caloroso, confiante.</p>
+    </div>
+    <div class="frame bg-white" style="grid-column: span 2;">
+      <p class="eyebrow" style="color: var(--ember);">crise (cancelamento, problema, atraso)</p>
+      <p class="body" style="margin-top: 1mm;">"a chuva venceu hoje. o show fica pra próxima sexta. quem comprou ingresso está garantido."</p>
+      <p class="micro" style="margin-top: 1mm;">humano, transparente, presente.</p>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>03</span></div>
+</section>
+
+<!-- ===================== 02 VOCABULÁRIO ===================== -->
+<section class="page">
+  <div class="runner-top"><span>02 · VOCABULÁRIO</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">02 — vocabulário</p>
+  <h2 class="display h1" style="margin-top: 4mm;">PALAVRA<br/>É MÓVEL DA CASA.</h2>
+
+  <div class="grid-2" style="margin-top: 10mm;">
+    <div>
+      <p class="eyebrow" style="color: var(--bad);">proibido</p>
+      <div style="margin-top: 4mm; line-height: 2;">
+        <span class="chip no">balada</span><span class="chip no">vip</span><span class="chip no">premium</span><span class="chip no">experiência</span><span class="chip no">inesquecível</span><span class="chip no">exclusivo</span><span class="chip no">high-end</span><span class="chip no">incrível</span><span class="chip no">imperdível</span><span class="chip no">top</span><span class="chip no">rolê</span><span class="chip no">brother</span><span class="chip no">galera</span><span class="chip no">curtir</span><span class="chip no">night</span><span class="chip no">corre</span><span class="chip no">última chance</span><span class="chip no">não perca</span>
+      </div>
+      <p class="small" style="margin-top: 6mm; max-width: 80mm;">Cada uma é clichê de casa de eventos genérica. EL COYOTE não compete nesse campo.</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="color: var(--ok);">preferido</p>
+      <div style="margin-top: 4mm; line-height: 2;">
+        <span class="chip yes">noite</span><span class="chip yes">casa</span><span class="chip yes">vista</span><span class="chip yes">mar</span><span class="chip yes">sol</span><span class="chip yes">amanhecer</span><span class="chip yes">deck</span><span class="chip yes">banda</span><span class="chip yes">voz</span><span class="chip yes">abraço</span><span class="chip yes">inteiro</span><span class="chip yes">vivo</span><span class="chip yes">história</span><span class="chip yes">sim</span><span class="chip yes">porto</span><span class="chip yes">litoral</span><span class="chip yes">cozinha</span><span class="chip yes">som</span><span class="chip yes">vem</span><span class="chip yes">fica</span>
+      </div>
+      <p class="small" style="margin-top: 6mm; max-width: 80mm;">Concretas, sensoriais, com peso emocional. Cabem em frase de 6 a 10 palavras.</p>
+    </div>
+  </div>
+
+  <div class="frame bg-ink" style="margin-top: 8mm;">
+    <p class="eyebrow" style="color: var(--ember);">regrinha rápida pra dúvida</p>
+    <p class="body" style="margin-top: 2mm;">Se a palavra cabe num pôster de balada genérica em qualquer cidade, não cabe aqui. Se a palavra só faz sentido <b>nesta casa específica</b>, à beira do porto, com banda tocando — cabe.</p>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>04</span></div>
+</section>
+
+<!-- ===================== 03 FRASES CANÔNICAS ===================== -->
+<section class="page dark">
+  <div class="runner-top" style="border-bottom-color: rgba(244,239,230,.3);"><span>03 · FRASES CANÔNICAS</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">03 — 9 frases canônicas</p>
+  <h2 class="display h1" style="margin-top: 4mm;">NÃO INVENTA.<br/>USA UMA DESSAS.</h2>
+
+  <div class="grid-3" style="margin-top: 8mm; gap: 6mm;">
+    <div><p class="display" style="font-size: 14pt;">A NOITE VIRA HISTÓRIA.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">tagline · footer, slogan</p></div>
+    <div><p class="display" style="font-size: 14pt;">A NOITE TE ESPERA.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">convite · post de evento, story</p></div>
+    <div><p class="display" style="font-size: 14pt;">VENHA INTEIRO.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">manifesto · hero, ornamento Caveat</p></div>
+    <div><p class="display" style="font-size: 14pt;">A CASA FICA SUA.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">eventos privados · DM, post pacote</p></div>
+    <div><p class="display" style="font-size: 14pt;">UM SIM COM VISTA PRO MAR.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">destination wedding · landing RS</p></div>
+    <div><p class="display" style="font-size: 14pt;">SE É PRA VIVER, QUE SEJA INTEIRO.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">manifesto · sobre, abertura</p></div>
+    <div><p class="display" style="font-size: 14pt;">A CASA ABERTA.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">hospitalidade · pacote</p></div>
+    <div><p class="display" style="font-size: 12pt;">SEXTA COMEÇA ÀS 22H. SEU DOMINGO A GENTE DEVOLVE.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">tom · IG bio sazonal</p></div>
+    <div><p class="display" style="font-size: 14pt;">O SOL CAI. A PISTA SOBE.</p><p class="mono" style="font-size: 7pt; opacity: .55; margin-top: 1.5mm;">sunset · evento de pôr-do-sol</p></div>
+  </div>
+
+  <div class="frame dark" style="margin-top: 12mm;">
+    <p class="eyebrow" style="color: var(--sun);">regra</p>
+    <p class="small" style="margin-top: 2mm; max-width: 140mm;">Não inventar variações ("a noite te aguarda", "casa aberta pra você"). Se precisa de copy nova, <b>cria frase nova com voz consistente</b> — não modifica uma canônica. Repetição é o que constrói memória.</p>
+  </div>
+
+  <div class="runner-bottom" style="opacity:.5;"><span>EL COYOTE · 2026</span><span>05</span></div>
+</section>
+
+<!-- ===================== 04 ESTRUTURAS FRASAIS ===================== -->
+<section class="page">
+  <div class="runner-top"><span>04 · ESTRUTURAS FRASAIS</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">04 — fórmulas</p>
+  <h2 class="display h1" style="margin-top: 4mm;">COMO ESCREVER<br/>UMA FRASE NOVA.</h2>
+
+  <div style="margin-top: 8mm;">
+    <p class="eyebrow" style="opacity:.55;">frase-bandeira (display, hero)</p>
+    <p class="display" style="font-size: 22pt; margin-top: 2mm;">[VERBO IMPERATIVO] + [SENSAÇÃO] + .</p>
+    <p class="small" style="margin-top: 2mm;">Curta, sensorial, ponto final. Nunca exclamação. <span class="hand" style="font-size: 16pt; color: var(--ember);">venha inteiro. · come com a mão. · dorme tarde.</span></p>
+  </div>
+
+  <div style="margin-top: 6mm;">
+    <p class="eyebrow" style="opacity:.55;">micro-copy (subtítulo / legenda 1ª linha)</p>
+    <p class="h3" style="margin-top: 2mm;">[FATO CONCRETO] + ", " + [DETALHE QUE EMOCIONA].</p>
+    <p class="small">Ex: "Sex e sáb, 22h às 5h, com vista do porto e som ao vivo."</p>
+  </div>
+
+  <div style="margin-top: 6mm;">
+    <p class="eyebrow" style="opacity:.55;">CTA (último item da legenda)</p>
+    <p class="h3" style="margin-top: 2mm;">[VERBO DE AÇÃO] + [BENEFÍCIO IMPLÍCITO] + " →"</p>
+    <p class="small">Bom: "Reservar mesa →", "Falar com a casa →". Ruim: "Clique aqui", "Saiba mais".</p>
+  </div>
+
+  <div style="margin-top: 6mm;">
+    <p class="eyebrow" style="opacity:.55;">storytelling de 3 batidas (legenda longa, carrossel)</p>
+    <ol class="body" style="list-style: none; margin-top: 2mm;">
+      <li style="padding: 1.5mm 0;"><b>1. Gancho sensorial</b> — uma imagem (sol caindo, cordas afinando, deck enchendo)</li>
+      <li style="padding: 1.5mm 0;"><b>2. Cena</b> — quem está, fazendo o quê</li>
+      <li style="padding: 1.5mm 0;"><b>3. Convite ou conclusão</b> — o que o leitor faz com isso</li>
+    </ol>
+    <div class="frame bg-ink" style="margin-top: 3mm;">
+      <p class="hand" style="font-size: 16pt; color: var(--ember);">exemplo</p>
+      <p class="small" style="margin-top: 1mm;">O sol caiu atrás do porto. A banda afinou e o deck encheu de gente que não pretendia sair cedo. A noite começou. <b>Sexta. 22h. A casa abre.</b></p>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>06</span></div>
+</section>
+
+<!-- ===================== 05 MINI BRAND GUIDE ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>05 · MINI BRAND GUIDE</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">05 — visual mínimo pra produzir</p>
+  <h2 class="display h1" style="margin-top: 4mm;">PALETA, TIPO,<br/>FOTOGRAFIA.</h2>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">paleta — 8 cores, hex e papel semântico</p>
+  <div class="grid-4" style="margin-top: 3mm;">
+    <div class="swatch" style="background: var(--ink);"><span class="name">ink</span><span class="hex">#0E0E0E</span></div>
+    <div class="swatch" style="background: var(--deep);"><span class="name">deep</span><span class="hex">#274156</span></div>
+    <div class="swatch" style="background: var(--ember);"><span class="name">ember</span><span class="hex">#f58549</span></div>
+    <div class="swatch light" style="background: var(--sun);"><span class="name">sun</span><span class="hex">#f2c14e</span></div>
+    <div class="swatch" style="background: var(--terra);"><span class="name">terra</span><span class="hex">#9e5641</span></div>
+    <div class="swatch" style="background: var(--sage);"><span class="name">sage</span><span class="hex">#88a07d</span></div>
+    <div class="swatch light" style="background: var(--cream);"><span class="name">cream</span><span class="hex">#F4EFE6</span></div>
+    <div class="swatch light" style="background: var(--sand);"><span class="name">sand</span><span class="hex">#E6DCCB</span></div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div>
+      <p class="eyebrow" style="opacity:.55;">tipografia (Google Fonts)</p>
+      <p style="font-family: 'Anton', sans-serif; font-size: 28pt; line-height: 0.9; text-transform: uppercase; margin-top: 2mm;">ANTON</p>
+      <p class="micro">display · MAIÚSCULA · ≥28px</p>
+      <p style="font-family: 'Inter', sans-serif; font-size: 14pt; margin-top: 2mm;">Inter 300 · 400 · 600</p>
+      <p class="micro">corpo, UI, legendas</p>
+      <p class="hand" style="font-size: 22pt; color: var(--ember); margin-top: 2mm;">Caveat — ornamento</p>
+      <p class="micro">manuscrita ember · máx 1 por seção</p>
+      <p class="mono" style="font-size: 10pt; margin-top: 2mm;">JetBrains Mono</p>
+      <p class="micro">eyebrow, data, técnico</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="opacity:.55;">fotografia</p>
+      <ul class="clean small" style="margin-top: 2mm;">
+        <li><b class="ok" style="color: var(--ok);">✓</b> hora dourada e azul</li>
+        <li><b class="ok" style="color: var(--ok);">✓</b> gente prioritária — gestos, mãos, costas</li>
+        <li><b class="ok" style="color: var(--ok);">✓</b> grão visível, contraste 1.06 · sat 0.92 · bri 0.96</li>
+        <li><b class="ok" style="color: var(--ok);">✓</b> enquadramento generoso</li>
+        <li style="margin-top: 2mm;"><b class="bad" style="color: var(--bad);">✗</b> flash duro de celular</li>
+        <li><b class="bad" style="color: var(--bad);">✗</b> filtro saturado, HDR, vinheta</li>
+        <li><b class="bad" style="color: var(--bad);">✗</b> legenda sobre foto sem máscara</li>
+        <li><b class="bad" style="color: var(--bad);">✗</b> bandeja com prato sozinho · grupo posando com taça</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>07</span></div>
+</section>
+
+<!-- ===================== 06 TEMPLATES STORY ===================== -->
+<section class="page">
+  <div class="runner-top"><span>06 · TEMPLATES STORY</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">06 — templates story · 9:16 · 1080×1920</p>
+  <h2 class="display h2" style="margin-top: 3mm;">3 LAYOUTS DE STORY.</h2>
+
+  <div class="grid-3" style="margin-top: 6mm;">
+    <div>
+      <div class="ig story" style="background: var(--ink);">
+        <div>
+          <p class="meta-tag" style="color: var(--sun);">SEX · 21 NOV · 22H</p>
+          <p class="hand" style="font-size: 14pt; color: var(--ember); margin-top: 2mm;">a noite te espera.</p>
+        </div>
+        <div>
+          <p class="display" style="font-size: 20pt; line-height: 0.92;">BANDA<br/>COYOTE</p>
+        </div>
+        <p class="meta-tag" style="opacity: .55;">elcoyotepub.com</p>
+      </div>
+      <p class="micro mono" style="margin-top: 2mm;">A · evento · frase grande no meio</p>
+      <p class="micro" style="margin-top: 1mm;">— top: data + frase manuscrita ornamento<br/>— centro: ANTON 92px MAIÚSCULA<br/>— rodapé: link, sem CTA gritado</p>
+    </div>
+    <div>
+      <div class="ig story" style="background-image: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.85));">
+        <div></div>
+        <div>
+          <p class="meta-tag" style="color: var(--sun);">SUNSET</p>
+          <p class="display" style="font-size: 22pt; line-height: 0.92; margin-top: 1mm;">O SOL CAI.<br/>A PISTA SOBE.</p>
+          <p class="hand" style="font-size: 13pt; color: var(--ember); margin-top: 3mm;">domingo · 18h.</p>
+        </div>
+      </div>
+      <p class="micro mono" style="margin-top: 2mm;">B · sobre foto · escurecida 45→85%</p>
+      <p class="micro" style="margin-top: 1mm;">— foto chapando todo o frame<br/>— gradient escuro top→bottom pra leitura<br/>— frase canônica no terço inferior</p>
+    </div>
+    <div>
+      <div class="ig story" style="background: var(--cream); color: var(--ink);">
+        <p class="meta-tag" style="opacity:.6;">aviso</p>
+        <div>
+          <p class="display" style="font-size: 22pt; line-height: 0.92; color: var(--ink);">A CHUVA<br/>VENCEU<br/>HOJE.</p>
+          <p class="body" style="margin-top: 4mm; color: var(--ink);">o show fica pra próxima sexta.<br/>ingresso vale.</p>
+        </div>
+        <p class="hand" style="font-size: 16pt; color: var(--ember);">a casa fica.</p>
+      </div>
+      <p class="micro mono" style="margin-top: 2mm;">C · crise · papel cream</p>
+      <p class="micro" style="margin-top: 1mm;">— fundo cream, frase em ink<br/>— transparência, presença<br/>— ornamento ember pra fechar</p>
+    </div>
+  </div>
+
+  <div class="frame bg-ink" style="margin-top: 6mm;">
+    <p class="eyebrow" style="color: var(--ember);">regra dos 3 elementos</p>
+    <p class="body" style="margin-top: 2mm;">
+      Em qualquer story: <b>1 frase grande + 1 dado técnico + 1 ornamento Caveat</b>. Tira tudo o resto. Quando ficar em dúvida sobre adicionar, <b>tira</b> em vez de adicionar.
+    </p>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>08</span></div>
+</section>
+
+<!-- ===================== 07 TEMPLATES FEED ===================== -->
+<section class="page">
+  <div class="runner-top"><span>07 · TEMPLATES FEED</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">07 — templates feed · 1:1 · 1080×1080</p>
+  <h2 class="display h2" style="margin-top: 3mm;">3 LAYOUTS DE FEED.</h2>
+
+  <div class="grid-3" style="margin-top: 6mm;">
+    <div>
+      <div class="ig feed" style="background: var(--ink);">
+        <p class="meta-tag" style="color: var(--sun);">EVENTOS PRIVADOS</p>
+        <p class="display" style="font-size: 22pt; line-height: 0.92;">UM SIM<br/>COM VISTA<br/>PRO MAR.</p>
+        <p class="hand" style="font-size: 16pt; color: var(--ember);">a casa fica sua.</p>
+      </div>
+      <p class="micro mono" style="margin-top: 2mm;">A · pacote/serviço</p>
+    </div>
+    <div>
+      <div class="ig feed" style="background: var(--cream); color: var(--ink); border: 0.3mm solid rgba(0,0,0,.1);">
+        <p class="meta-tag" style="opacity: .6;">21 NOV · SEX</p>
+        <p class="display" style="font-size: 28pt; line-height: 0.95; color: var(--ink);">BANDA<br/>COYOTE</p>
+        <p class="hand" style="font-size: 16pt; color: var(--ember);">22h · porta abre.</p>
+      </div>
+      <p class="micro mono" style="margin-top: 2mm;">B · evento próximo</p>
+    </div>
+    <div>
+      <div class="ig feed" style="background: var(--deep); color: var(--cream);">
+        <p class="meta-tag" style="color: var(--sun);">DEPOIS DA NOITE</p>
+        <p class="hand" style="font-size: 28pt; color: var(--sun);">a noite</p>
+        <p class="display" style="font-size: 36pt; line-height: 0.92;">VIRA<br/>HISTÓRIA.</p>
+        <p class="meta-tag" style="opacity: .55;">@elcoyotepub</p>
+      </div>
+      <p class="micro mono" style="margin-top: 2mm;">C · manifesto/d+1 pós-evento</p>
+    </div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">legenda padrão · 3 linhas</p>
+  <div class="frame bg-ink" style="margin-top: 3mm;">
+    <p class="body"><b>linha 1 — sensorial:</b> O sol cai e o deck enche.</p>
+    <p class="body"><b>linha 2 — técnica:</b> Sexta · 22h às 5h · vista do porto.</p>
+    <p class="body" style="color: var(--ember);"><b>linha 3 — convite:</b> venha inteiro.</p>
+    <p class="micro" style="margin-top: 3mm;">3 linhas. Espaço entre cada. Não é parágrafo corrido. Sem emoji entre frases — emoji vai antes da linha 3 só (✦, ⚡, 🌅 — máximo 1).</p>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>09</span></div>
+</section>
+
+<!-- ===================== 08 CARROSSEL ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>08 · CARROSSEL</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">08 — carrossel · 5 cards · 1080×1080</p>
+  <h2 class="display h2" style="margin-top: 3mm;">3 LAYOUTS DE CARROSSEL.</h2>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 6mm;">A · manifesto em 5 batidas</p>
+  <div class="grid-4" style="margin-top: 2mm; grid-template-columns: repeat(5, 1fr); gap: 2mm;">
+    <div class="ig" style="aspect-ratio: 1; background: var(--ink); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">01/05</p><p class="display" style="font-size: 13pt; line-height: 0.95;">A NOITE<br/>VIRA<br/>HISTÓRIA.</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--deep); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">02/05</p><p class="body" style="font-size: 8pt; color: var(--cream);">somos casa de quem mora ali e de quem viaja pra estar.</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--terra); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">03/05</p><p class="body" style="font-size: 8pt; color: var(--cream);">rock, pagode, raiz, beira-mar. casamento com sol nascendo.</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--sage); padding: 3mm; color: var(--ink);"><p class="meta-tag" style="opacity:.6;">04/05</p><p class="body" style="font-size: 8pt;">a casa abre sex e sáb. o domingo a gente devolve.</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--ember); padding: 3mm;"><p class="meta-tag" style="opacity:.6; color: var(--ink);">05/05</p><p class="hand" style="font-size: 18pt; color: var(--ink);">venha inteiro.</p><p class="meta-tag" style="opacity:.6; color: var(--ink);">@elcoyotepub</p></div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 6mm;">B · evento · capa + ficha + cena + cena + CTA</p>
+  <div class="grid-4" style="margin-top: 2mm; grid-template-columns: repeat(5, 1fr); gap: 2mm;">
+    <div class="ig" style="aspect-ratio: 1; background: var(--ink); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">SEX 21·NOV</p><p class="display" style="font-size: 14pt;">BANDA<br/>COYOTE</p><p class="hand" style="font-size: 13pt; color: var(--ember);">22h.</p></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--cream); color: var(--ink); padding: 3mm; border: 0.2mm solid rgba(0,0,0,.1);"><p class="meta-tag" style="opacity:.6;">FICHA</p><p class="body" style="font-size: 8pt; line-height: 1.3;">portas 22h<br/>banda 23h<br/>set lista 1ª 2026<br/>R$30 1º lote</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--deep); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">CENA</p><p class="body" style="font-size: 8.5pt; color: var(--cream); line-height: 1.4;">o sol caiu atrás do porto. a banda afinou.</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--terra); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">CENA</p><p class="body" style="font-size: 8.5pt; color: var(--cream); line-height: 1.4;">o deck encheu de gente que não pretendia sair cedo.</p><span></span></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--ember); padding: 3mm; color: var(--ink);"><p class="meta-tag">CTA</p><p class="display" style="font-size: 14pt;">A NOITE<br/>TE ESPERA.</p><p class="meta-tag">link na bio →</p></div>
+  </div>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 6mm;">C · ranking/listas (top 3 drinks · top 3 noites do mês)</p>
+  <div class="grid-4" style="margin-top: 2mm; grid-template-columns: repeat(4, 1fr); gap: 2mm;">
+    <div class="ig" style="aspect-ratio: 1; background: var(--deep); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">CAPA</p><p class="display" style="font-size: 14pt;">3 DRINKS<br/>DA CASA.</p><p class="hand" style="font-size: 13pt; color: var(--ember);">arrasta →</p></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--ink); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">01</p><p class="display" style="font-size: 18pt;">COYOTE</p><p class="body" style="font-size: 7.5pt; opacity: .85;">tequila, hibisco, lima.</p></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--ink); padding: 3mm;"><p class="meta-tag" style="color: var(--sun);">02</p><p class="display" style="font-size: 18pt;">BEIRA-MAR</p><p class="body" style="font-size: 7.5pt; opacity: .85;">gin, manjericão, sal.</p></div>
+    <div class="ig" style="aspect-ratio: 1; background: var(--ember); padding: 3mm; color: var(--ink);"><p class="meta-tag">03</p><p class="display" style="font-size: 18pt;">PÔR DO SOL</p><p class="body" style="font-size: 7.5pt;">cachaça, maracujá, mel.</p></div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>10</span></div>
+</section>
+
+<!-- ===================== 09 BIO + HASHTAGS ===================== -->
+<section class="page">
+  <div class="runner-top"><span>09 · BIO + HASHTAGS</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">09 — bio · hashtags · emoji</p>
+  <h2 class="display h1" style="margin-top: 4mm;">A FICHA DO PERFIL.</h2>
+
+  <p class="eyebrow" style="opacity:.55; margin-top: 8mm;">bio instagram · @elcoyotepub</p>
+  <div class="frame bg-ink" style="margin-top: 3mm;">
+    <p class="body" style="font-family: 'Inter', sans-serif;">
+      🌅 a noite vira história.<br/>
+      casa rock à beira-mar · imbituba/sc desde 2017<br/>
+      sex/sáb · 22h às 5h · domingo a gente devolve<br/>
+      eventos privados · um sim com vista pro mar →
+    </p>
+  </div>
+  <p class="micro" style="margin-top: 2mm;">4 linhas, 1 emoji só (sol nascendo). Última linha sempre tem CTA com seta apontando pro link na bio. Não usa "📍", "📞", "✨" — direto a linha de propósito.</p>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div>
+      <p class="eyebrow" style="opacity:.55;">hashtags fixas (todo post)</p>
+      <div style="margin-top: 3mm;">
+        <span class="tag">#elcoyote</span><span class="tag">#elcoyotepub</span><span class="tag">#imbituba</span><span class="tag">#imbitubaSC</span><span class="tag">#litoralSC</span><span class="tag">#santacatarina</span>
+      </div>
+      <p class="eyebrow" style="opacity:.55; margin-top: 5mm;">eventos noite pública</p>
+      <div style="margin-top: 3mm;">
+        <span class="tag">#bandaaovivo</span><span class="tag">#rockaovivo</span><span class="tag">#noiteimbituba</span><span class="tag">#barimbituba</span><span class="tag">#deckcomvista</span>
+      </div>
+      <p class="eyebrow" style="opacity:.55; margin-top: 5mm;">destination wedding · RS</p>
+      <div style="margin-top: 3mm;">
+        <span class="tag">#destinationwedding</span><span class="tag">#casamentoaolar</span><span class="tag">#casamentoSC</span><span class="tag">#casamentonapraia</span><span class="tag">#noivasdo<wbr/>RS</span><span class="tag">#barradaIbiraquera</span>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow" style="opacity:.55;">emoji canônicos · usar com peso</p>
+      <table class="cal" style="margin-top: 3mm;">
+        <tbody>
+          <tr><td class="day">🌅</td><td>amanhecer · pôr do sol · primeira frase de bio/post manifesto</td></tr>
+          <tr><td class="day">✦</td><td>fim de mensagem WhatsApp · não usar em post público</td></tr>
+          <tr><td class="day">🌊</td><td>mar · destination wedding · evento beira-mar</td></tr>
+          <tr><td class="day">🎸</td><td>banda · noite pública · evento ao vivo</td></tr>
+          <tr><td class="day">🥂</td><td>casamento · aniversário · raro</td></tr>
+        </tbody>
+      </table>
+      <p class="micro" style="margin-top: 3mm;"><b>Proibidos:</b> 🔥 (clichê), 💃 (clichê balada), 🍺 (sem necessidade), 😍 (não é a voz), 🚀 (corporativo). Máximo <b>1 emoji por post</b>.</p>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>11</span></div>
+</section>
+
+<!-- ===================== 10 CALENDÁRIO ===================== -->
+<section class="page sand">
+  <div class="runner-top"><span>10 · CALENDÁRIO SEMANAL</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">10 — semana tipo</p>
+  <h2 class="display h1" style="margin-top: 4mm;">O QUE POSTAR<br/>QUANDO.</h2>
+
+  <table class="cal" style="margin-top: 8mm;">
+    <thead>
+      <tr><th>dia</th><th>horário</th><th>formato</th><th>conteúdo · gancho</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day">SEG</td>
+        <td class="kind">19h</td>
+        <td class="kind">story · cena</td>
+        <td class="body">"a casa dorme até quinta." — recap rápido do fim de semana, foto leve do deck.</td>
+      </tr>
+      <tr>
+        <td class="day">TER</td>
+        <td class="kind">10h</td>
+        <td class="kind">feed · pacote</td>
+        <td class="body">post de eventos privados (template B feed). canal de DM aberto pro Beto.</td>
+      </tr>
+      <tr>
+        <td class="day">QUA</td>
+        <td class="kind">12h</td>
+        <td class="kind">carrossel · ranking</td>
+        <td class="body">3 drinks da casa · 3 pratos da semana · 3 noites do mês. (template C carrossel)</td>
+      </tr>
+      <tr>
+        <td class="day">QUI</td>
+        <td class="kind">11h<br/>17h<br/>21h</td>
+        <td class="kind">feed · evento<br/>story · ficha<br/>story · convite</td>
+        <td class="body">11h: capa do evento sex. 17h: ficha técnica (porta, banda, lote). 21h: lista free chama "manda nome até amanhã".</td>
+      </tr>
+      <tr>
+        <td class="day">SEX</td>
+        <td class="kind">14h<br/>19h<br/>21h45</td>
+        <td class="kind">story · countdown<br/>story · porta<br/>story · ao vivo</td>
+        <td class="body">14h: "hoje. 22h." 19h: portas em prep. 21h45: "abrindo já já". Não usar "corre", "vem"; deixar a casa esperar.</td>
+      </tr>
+      <tr>
+        <td class="day">SÁB</td>
+        <td class="kind">14h<br/>21h</td>
+        <td class="kind">feed · carrossel<br/>story · porta</td>
+        <td class="body">14h: carrossel da noite anterior (cena → cena → manifesto). 21h: portas abrindo.</td>
+      </tr>
+      <tr>
+        <td class="day">DOM</td>
+        <td class="kind">11h</td>
+        <td class="kind">feed · manifesto</td>
+        <td class="body">"a noite virou história" — foto do amanhecer + frase canônica + 3 linhas de legenda. dia de respiro.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="frame bg-ink" style="margin-top: 6mm;">
+    <p class="eyebrow" style="color: var(--ember);">cadência</p>
+    <p class="small" style="margin-top: 1mm;">≈ <b>3-4 feed/semana</b> + <b>10-15 story/semana</b>. Quinta + sexta concentram esforço (lead-in pro fim de semana). Domingo é manifesto/respiro. Segunda quase silêncio. <b>Não posta toda hora — a casa não grita.</b></p>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>12</span></div>
+</section>
+
+<!-- ===================== 11 CAPTIONS PRONTOS ===================== -->
+<section class="page">
+  <div class="runner-top"><span>11 · CAPTIONS PRONTOS</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">11 — copy pronto pra colar</p>
+  <h2 class="display h2" style="margin-top: 3mm;">8 LEGENDAS QUE<br/>JÁ SÃO DA CASA.</h2>
+
+  <div class="grid-2" style="margin-top: 6mm;">
+
+    <div class="caption-card">
+      <p class="head">01 · evento sexta · banda</p>
+      <p>O sol cai e o deck enche.</p>
+      <p>Sexta · 22h · banda Coyote sobe às 23h.</p>
+      <p class="ember">a noite te espera.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">02 · evento sábado · pista</p>
+      <p>A pista lembra de quem dançou ontem.</p>
+      <p>Sábado · 22h às 5h · som ao vivo + DJ.</p>
+      <p class="ember">venha inteiro.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">03 · pôr do sol · domingo</p>
+      <p>O porto vira ouro depois das 17h.</p>
+      <p>Domingo · sunset session · 18h às 22h.</p>
+      <p class="ember">o sol cai. a pista sobe.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">04 · eventos privados</p>
+      <p>A casa fica sua por uma noite — ou um dia inteiro.</p>
+      <p>Casamento · aniversário · corporativo · destination wedding.</p>
+      <p class="ember">um sim com vista pro mar.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">05 · aniversariante</p>
+      <p>Se a sexta cai no seu mês, a casa põe seu nome no painel.</p>
+      <p>Lista de convidados, mimo, drink Coyote.</p>
+      <p class="ember">manda DM pra Lia.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">06 · pós-noite (d+1)</p>
+      <p>Ontem foi noite.</p>
+      <p>Foto: deck cheio. Som: alto. Sol: nascendo.</p>
+      <p class="ember">a noite vira história.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">07 · cancelamento por chuva</p>
+      <p>A chuva venceu hoje.</p>
+      <p>O show fica pra próxima sexta — quem comprou ingresso está garantido.</p>
+      <p class="ember">a casa fica.</p>
+    </div>
+
+    <div class="caption-card">
+      <p class="head">08 · destination wedding RS</p>
+      <p>Vocês vêm de longe pra dizer sim com vista do mar.</p>
+      <p>Casa + cerimônia + festa até o sol nascer · pousada parceira na Barra da Ibiraquera.</p>
+      <p class="ember">a casa aberta.</p>
+    </div>
+
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>13</span></div>
+</section>
+
+<!-- ===================== 12 ✅ × ❌ ===================== -->
+<section class="page">
+  <div class="runner-top"><span>12 · ✅ × ❌</span><span>SOCIAL MEDIA KIT</span></div>
+  <p class="eyebrow" style="color: var(--ember); margin-top: 12mm;">12 — quando a frase trai a casa</p>
+  <h2 class="display h1" style="margin-top: 4mm;">SIM E NÃO,<br/>LADO A LADO.</h2>
+
+  <div style="margin-top: 8mm;">
+    <div class="pair">
+      <div class="item no"><p class="lbl">não</p><p>"Venha viver uma experiência inesquecível na nossa casa premium!"</p></div>
+      <div class="item yes"><p class="lbl">sim</p><p>"A casa abre sexta. Vem."</p></div>
+    </div>
+    <div class="pair">
+      <div class="item no"><p class="lbl">não</p><p>"Não perca essa oportunidade única! Garanta seu ingresso já!"</p></div>
+      <div class="item yes"><p class="lbl">sim</p><p>"1º lote vai até dia 15. depois sobe."</p></div>
+    </div>
+    <div class="pair">
+      <div class="item no"><p class="lbl">não</p><p>"Casamentos high-end com cenário paradisíaco e gastronomia internacional."</p></div>
+      <div class="item yes"><p class="lbl">sim</p><p>"Um sim com vista pro mar — e a festa que acaba quando o sol nasce."</p></div>
+    </div>
+    <div class="pair">
+      <div class="item no"><p class="lbl">não</p><p>"Galera, sexta tem rolê top na pista! Bora curtir!"</p></div>
+      <div class="item yes"><p class="lbl">sim</p><p>"Sexta. 22h. banda sobe às 23h."</p></div>
+    </div>
+    <div class="pair">
+      <div class="item no"><p class="lbl">não</p><p>"Aproveite nosso open bar premium com drinks especiais 🍹🔥💃"</p></div>
+      <div class="item yes"><p class="lbl">sim</p><p>"Open Casa: cerveja + drinks da casa por R$99/pessoa."</p></div>
+    </div>
+    <div class="pair">
+      <div class="item no"><p class="lbl">não</p><p>"Devido a condições climáticas adversas, o evento foi cancelado."</p></div>
+      <div class="item yes"><p class="lbl">sim</p><p>"A chuva venceu hoje. O show fica pra próxima sexta — ingresso vale."</p></div>
+    </div>
+  </div>
+
+  <div class="runner-bottom"><span>EL COYOTE · 2026</span><span>14</span></div>
+</section>
+
+<!-- ===================== BACKCOVER ===================== -->
+<section class="page dark">
+  <div style="margin-top: 80mm; text-align: center;">
+    <p class="hand" style="font-size: 28pt; color: var(--sun);">posta</p>
+    <p class="display" style="font-size: 92pt; line-height: 0.9; margin-top: 6mm;">SEM<br/>DESVIAR.</p>
+    <p class="hand" style="font-size: 22pt; color: var(--ember); margin-top: 8mm;">a casa agradece.</p>
+  </div>
+
+  <div style="position: absolute; bottom: 18mm; left: 18mm; right: 18mm;">
+    <div class="hairline" style="background: rgba(244,239,230,.3); margin-bottom: 4mm;"></div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <p class="eyebrow" style="opacity: .7;">EL COYOTE · @elcoyotepub</p>
+        <p class="small" style="opacity: .6; margin-top: 2mm;">imbituba · sc · desde 2017</p>
+        <p class="small" style="opacity: .6;">elcoyotepub.com</p>
+      </div>
+      <div style="text-align: right;">
+        <p class="mono" style="font-size: 8pt; opacity: .6;">social media kit · v1</p>
+        <p class="mono" style="font-size: 8pt; opacity: .6;">2026</p>
+        <p class="mono" style="font-size: 8pt; opacity: .6;">complementa brandbook v2</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</body>
+</html>

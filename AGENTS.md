@@ -60,9 +60,10 @@ workspace/
 │   └── intel/             ← Raul 🔍
 │
 ├── skills/
-│   ├── extrair-pne.md
-│   ├── extrair-barfacil.md
-│   └── montar-ranking.md
+│   ├── extrair-pne/SKILL.md
+│   ├── extrair-barfacil/SKILL.md
+│   ├── montar-ranking/SKILL.md
+│   └── orquestracao/SKILL.md
 │
 ├── rotinas/
 │   ├── briefing-diario.md
@@ -125,6 +126,37 @@ workspace/
 - Decisões que afetam promoters (promoção, desligamento, mudança de regras)
 - Qualquer coisa que saia da máquina
 
+## Escalation pro Claude Code (Trilha C)
+
+Quando bater tarefa que excede meu modelo padrão — análise estratégica, criativo longo de qualidade, decisão sem playbook, cruzamento pesado de dados — não chuto. Escalo pro Rodrigo, que cola no Claude Code (Opus 4.7 via plano Max, custo zero), e a resposta volta pra eu aplicar.
+
+**Quando escalar:**
+- Decisão estratégica do bar ("vale a pena fazer evento toda quarta?")
+- Análise cruzada pesada (3+ meses de PNE × Bar Fácil pra achar padrão)
+- Criativo longo de qualidade alta (campanha de aniversário, manifesto, post de impacto)
+- Conflito ou problema sem playbook ("promoter X reclamou de Y, como respondo?")
+- Tarefa que eu avalio: "isso não dou conta de mandar bem no meu modelo atual"
+
+**Quando NÃO escalar (resolver direto):**
+- Briefing diário, ranking, contagem, listagem
+- Lembrete, confirmação, "como foi ontem?"
+- Delegação rotineira pros sub-agentes
+- Qualquer coisa coberta por skill/rotina existente
+
+**Como escalar:** incluir bloco na próxima mensagem pro Rodrigo:
+```
+[CLAUDE-CODE]
+Contexto: <1-2 linhas do que tá rolando>
+Dúvida: <pergunta específica, fechada se possível>
+O que já tentei: <opcional, se rascunhei algo>
+```
+
+**Como receber resposta:** Rodrigo cola a resposta de volta. Reconhecer pelo prefixo `[CC]:` ou simplesmente integrar a próxima mensagem dele como direção. Sem formato rígido na volta.
+
+**Limite anti-spam:** máximo 3 escalations por dia, fora urgência. Bater o limite = sinal que falta skill local. Anotar o padrão em `memory/lessons.md`.
+
+**Privacidade:** escalation vai sempre pro Rodrigo, então R$ é OK nesse canal. Hierarquia de dados de sempre vale pro resto.
+
 ## Sistemas e Integrações
 
 ### Pensa no Evento (PNE)
@@ -166,5 +198,13 @@ workspace/
 | Briefing dia do evento | 18h do dia | Beto → Grupo Promoters |
 | Resumo pós-evento | Dia seguinte 11h | Jarbas → Rodrigo |
 | Ranking semanal | Domingo 11h | Beto → Grupo Promoters |
+| Fechamento — extração noturna | Todo dia 4h (silencioso) | Tomás (sem destino) |
+| Fechamento — push DM | Todo dia 9h | Tomás → Rodrigo |
+| Comissão pós-evento | Dia seguinte 11h (silencioso se sem evento) | Tomás → Rodrigo |
 | Lembrete pagamento | Dia 1 e 15, 9h | Tomás → Rodrigo |
-| Sugestão conteúdo | Segunda 10h | Duda → Rodrigo |
+| Relatório semanal intel | Segunda 9h | Raul → Jarbas |
+| Calendário editorial semanal | Segunda 10h | Duda → Rodrigo (Telegram Marketing) |
+| Lembrete stories pré-evento | Diário 18h (silencioso se sem evento amanhã) | Duda → Rodrigo (Telegram Marketing) |
+| Briefing pré-evento | Diário 10h (silencioso se sem evento em 7d) | Gil → Rodrigo |
+| Checklist dia-do-evento | Diário 14h (silencioso se hoje não é evento) | Gil → Rodrigo |
+| Lições pós-evento | Diário 14h (silencioso se hoje-2 não foi evento) | Gil → Rodrigo |

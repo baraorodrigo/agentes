@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>El Coyote — Marketing site UI kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- JSX inlined pra funcionar em file:// (Babel CORS bloqueia src externo). Edite os .jsx originais e cole de volta aqui. -->
+<script type="text/babel" data-presets="react">
+// === components.jsx ===
+const TopNav = ({ active = "home", onNav }) => (
+  <header className="topnav">
+    <div className="lockup">
+      <span className="live-dot"></span>
+      <img src="../../assets/logo-black.png" alt="ELCOYOTE" />
+    </div>
+    <nav className="nav">
+      <a className={active==="home"?"active":""} onClick={() => onNav("home")}>Início</a>
+      <a className={active==="agenda"?"active":""} onClick={() => onNav("agenda")}>Agenda</a>
+      <a className={active==="private"?"active":""} onClick={() => onNav("private")}>Eventos privados</a>
+      <a className={active==="contact"?"active":""} onClick={() => onNav("contact")}>Contato</a>
+    </nav>
+    <div className="right">
+      <span className="lang">PT · EN</span>
+      <button className="cta" onClick={() => onNav("event")}>Comprar</button>
+    </div>
+  </header>
+);
+
+const EventCard = ({ img, day, mo, when, title, price, status, onClick }) => (
+  <article className="event-card" onClick={onClick}>
+    <div className="img" style={{ backgroundImage: `url(${img})` }}>
+      <div className="stamp"><div className="day">{day}</div><div className="mo">{mo}</div></div>
+      {status && <span className="chip">{status}</span>}
+      <div className="cap">
+        <div className="when">{when}</div>
+        <div className="title" dangerouslySetInnerHTML={{ __html: title }} />
+      </div>
+    </div>
+    <div className="body">
+      <span className="meta">22h → 5h · Imbituba</span>
+      <span className="price">{price}</span>
+    </div>
+  </article>
+);
+
+const Footer = () => (
+  <footer className="footer">
+    <div className="col lockup">
+      <img src="../../assets/logo-white.png" alt="" />
+      <blockquote>onde a noite vira história.</blockquote>
+    </div>
+    <div className="col">
+      <h4>Onde</h4>
+      <p>Av. Beira-Mar, 1.420<br/>Imbituba · SC<br/>Brasil</p>
+    </div>
+    <div className="col">
+      <h4>Quando</h4>
+      <p>Sex & Sáb · 22h → 5h<br/>Eventos: sob agenda</p>
+    </div>
+    <div className="col">
+      <h4>Fala com a gente</h4>
+      <a>@elcoyote.pub</a>
+      <a>contato@elcoyote.com.br</a>
+      <a>+55 48 9 9100-0000</a>
+    </div>
+  </footer>
+);
+
+// === screens.jsx ===
+const HomeScreen = ({ onNav }) => (
+  <>
+    <TopNav active="home" onNav={onNav} />
+    <section className="hero">
+      <div className="left">
+        <div>
+          <div className="eyebrow">Imbituba · SC · Sex & Sáb · 22h → 5h</div>
+          <h1>El<br/>Coyote<em>onde a noite vira história.</em></h1>
+        </div>
+        <div className="meta-strip">
+          <div className="item"><div className="k">Próximo show</div>Sex 21 nov · Banda Coyote</div>
+          <div className="item"><div className="k">Capacidade</div>800 pessoas · 2 pisos</div>
+          <div className="item"><div className="k">Vista</div>Pôr do sol & nascer do sol</div>
+        </div>
+      </div>
+      <div className="right" style={{ backgroundImage: "url(../../assets/photo-crowd-twilight.jpg)" }}>
+        <aside className="floating-card">
+          <div className="top">
+            <div className="when"><span className="live-pill">AO VIVO</span> SEX · 21 NOV · 22h</div>
+            <div className="title">Banda Coyote</div>
+            <div className="price-blk"><strong>R$ 40</strong> antecipado · 1º lote até 20/11</div>
+          </div>
+          <div className="right-side">
+            <button onClick={() => onNav("event")}>Comprar →</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section className="agenda-strip">
+      <div className="head">
+        <h2>Agenda<em>quem vem aí.</em></h2>
+        <div className="filter">
+          <button className="chip active">Todos</button>
+          <button className="chip">Samba</button>
+          <button className="chip">Pagode</button>
+          <button className="chip">Sertanejo</button>
+          <button className="chip">DJ</button>
+        </div>
+      </div>
+      <div className="agenda-list">
+        <EventCard img="../../assets/photo-stage-band.jpg" day="21" mo="NOV" when="SEX · 22h" title="Banda<br/>Coyote" price="R$40" status="AO VIVO" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-deck-sunset.jpg" day="22" mo="NOV" when="SÁB · 18h" title="Sunset<br/>Deck" price="R$30" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-friends-cups.jpg" day="28" mo="NOV" when="SEX · 22h" title="Pagode<br/>na Vista" price="R$45" onClick={() => onNav("event")} />
+      </div>
+    </section>
+
+    <section className="editorial-block">
+      <blockquote>A vista, a banda, a galera. <em>Tudo em um lugar só</em>, do pôr ao nascer.</blockquote>
+      <div className="photos">
+        <img src="../../assets/photo-sunrise-deck.jpg" alt="" />
+        <img src="../../assets/photo-dancing.jpg" alt="" />
+      </div>
+    </section>
+
+    <section className="split">
+      <div className="pic" style={{ backgroundImage: "url(../../assets/photo-bar-warm.jpg)" }}></div>
+      <div className="copy">
+        <div className="eyebrow">Eventos privados</div>
+        <h2>Sua<br/>história,<br/>nosso<br/>espaço.</h2>
+        <p>Casamentos, formaturas, aniversários e eventos corporativos com vista pro mar, som ao vivo e aquele cuidado que faz a noite virar história.</p>
+        <button className="cta" onClick={() => onNav("private")}>Orçar evento →</button>
+      </div>
+    </section>
+    <Footer />
+  </>
+);
+
+const AgendaScreen = ({ onNav }) => (
+  <>
+    <TopNav active="agenda" onNav={onNav} />
+    <section className="agenda-strip" style={{ borderTop: "none", paddingTop: 64 }}>
+      <div className="head">
+        <h2>Agenda<br/>Nov · Dez</h2>
+        <div className="filter">
+          <button className="chip active">Todos</button>
+          <button className="chip">Samba</button>
+          <button className="chip">Pagode</button>
+          <button className="chip">Sertanejo</button>
+          <button className="chip">Rock</button>
+          <button className="chip">DJ</button>
+        </div>
+      </div>
+      <div className="agenda-list">
+        <EventCard img="../../assets/photo-stage-band.jpg" day="21" mo="NOV" when="SEX · 22h" title="Banda<br/>Coyote" price="R$40" status="AO VIVO" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-deck-sunset.jpg" day="22" mo="NOV" when="SÁB · 18h" title="Sunset<br/>Deck" price="R$30" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-friends-cups.jpg" day="28" mo="NOV" when="SEX · 22h" title="Pagode<br/>na Vista" price="R$45" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-dancing.jpg" day="29" mo="NOV" when="SÁB · 22h" title="Sertanejo<br/>de raiz" price="R$50" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-cup-motion.jpg" day="05" mo="DEZ" when="SEX · 23h" title="DJ<br/>Sunrise" price="R$35" onClick={() => onNav("event")} />
+        <EventCard img="../../assets/photo-portrait-lights.jpg" day="06" mo="DEZ" when="SÁB · 22h" title="Som<br/>de Casa" price="R$45" onClick={() => onNav("event")} />
+      </div>
+    </section>
+    <Footer />
+  </>
+);
+
+const EventScreen = ({ onNav }) => (
+  <>
+    <TopNav active="agenda" onNav={onNav} />
+    <section className="detail-hero" style={{ backgroundImage: "url(../../assets/photo-stage-band.jpg)" }}>
+      <div className="inner">
+        <div className="when">SEX · 21 NOV · 22h → 5h</div>
+        <h1>Banda<br/>Coyote</h1>
+      </div>
+    </section>
+    <section className="detail-body">
+      <div>
+        <p className="lead">Sete músicos, um deck com vista, e o som que define o som da casa. Pagode raiz que segue até o sol nascer no mar.</p>
+        <p>Banda Coyote é residente da casa há três anos. Mistura pagode raiz com clássicos do samba e abre espaço para convidados especiais — quase sempre artistas que estão de passagem por Imbituba.</p>
+        <p>O show começa às 23h, mas a casa abre às 22h. Quem chega cedo pega o último lampião do pôr do sol no deck — e isso, a gente recomenda.</p>
+        <ul className="lineup">
+          <li><span className="a">Abertura · DJ Lobo</span><span className="t">22h00</span></li>
+          <li><span className="a">Banda Coyote</span><span className="t">23h00</span></li>
+          <li><span className="a">Convidado surpresa</span><span className="t">01h30</span></li>
+          <li><span className="a">After · DJ Sunrise</span><span className="t">03h00</span></li>
+        </ul>
+      </div>
+      <aside className="ticket">
+        <div className="label">Ingresso · 1º lote</div>
+        <div className="price">R$40<small>antec. · até 20 nov</small></div>
+        <div className="row"><span>2º lote</span><strong>R$ 60</strong></div>
+        <div className="row"><span>Na porta</span><strong>R$ 80</strong></div>
+        <div className="row"><span>Mesa (4 lugares)</span><strong>R$ 180</strong></div>
+        <button className="buy">Comprar agora →</button>
+        <p style={{ fontSize: 12, color: "var(--fg-3)", marginTop: 14, textAlign: "center" }}>+18 anos · documento na entrada</p>
+      </aside>
+    </section>
+    <Footer />
+  </>
+);
+
+const PrivateScreen = ({ onNav }) => (
+  <>
+    <TopNav active="private" onNav={onNav} />
+    <section className="hero" style={{ height: 540, backgroundImage: "url(../../assets/photo-bar-warm.jpg)" }}>
+      <div className="inner">
+        <div className="eyebrow">Eventos privados</div>
+        <h1>Sua história,<em>nosso espaço.</em></h1>
+      </div>
+    </section>
+    <section className="editorial-block">
+      <blockquote>Casamento ao pôr do sol. Formatura à beira-mar. <em>Aniversário com a banda inteira.</em></blockquote>
+      <div className="photos">
+        <img src="../../assets/photo-deck-sunset.jpg" alt="" />
+        <img src="../../assets/photo-friends-cups.jpg" alt="" />
+      </div>
+    </section>
+    <section className="split">
+      <div className="copy">
+        <div className="eyebrow">O que oferecemos</div>
+        <h2>Tudo<br/>incluído.</h2>
+        <p>Espaço completo, equipe de bar, segurança, som e iluminação. Cardápio personalizado, banda ou DJ a sua escolha. A gente cuida — você só vive a noite.</p>
+        <button className="cta" onClick={() => onNav("contact")}>Pedir orçamento →</button>
+      </div>
+      <div className="pic" style={{ backgroundImage: "url(../../assets/photo-night-venue.jpg)" }}></div>
+    </section>
+    <Footer />
+  </>
+);
+
+const ContactScreen = ({ onNav }) => (
+  <>
+    <TopNav active="contact" onNav={onNav} />
+    <section className="contact-grid">
+      <div>
+        <h2>Pra<br/>chegar.</h2>
+        <div className="row"><div className="k">Onde</div><div className="v">Av. Beira-Mar, 1.420<br/>Praia da Vila · Imbituba · SC</div></div>
+        <div className="row"><div className="k">Quando</div><div className="v">Sexta & Sábado · 22h → 5h<br/>Eventos privados sob agenda</div></div>
+        <div className="row"><div className="k">Fone</div><div className="v">+55 48 9 9100-0000</div></div>
+        <div className="row"><div className="k">E-mail</div><div className="v">contato@elcoyote.com.br</div></div>
+        <div className="row"><div className="k">Insta</div><div className="v">@elcoyote.pub</div></div>
+      </div>
+      <div className="map">
+        <svg className="coast" viewBox="0 0 400 500" preserveAspectRatio="none">
+          <path d="M0,300 Q100,260 180,290 T400,310 L400,500 L0,500 Z" fill="#88a07d" opacity=".5"/>
+          <path d="M0,330 Q120,300 200,330 T400,340 L400,500 L0,500 Z" fill="#274156" opacity=".7"/>
+        </svg>
+        <div className="pin"><div className="dot"></div><div className="label">El Coyote · Pub</div></div>
+      </div>
+    </section>
+    <Footer />
+  </>
+);
+
+// === app root ===
+const { useState } = React;
+
+function App() {
+  const [screen, setScreen] = useState("home");
+  const screens = {
+    home: <HomeScreen onNav={setScreen} />,
+    agenda: <AgendaScreen onNav={setScreen} />,
+    event: <EventScreen onNav={setScreen} />,
+    private: <PrivateScreen onNav={setScreen} />,
+    contact: <ContactScreen onNav={setScreen} />,
+  };
+  const tabs = [
+    { id: "home", l: "Início" },
+    { id: "agenda", l: "Agenda" },
+    { id: "event", l: "Evento" },
+    { id: "private", l: "Privados" },
+    { id: "contact", l: "Contato" },
+  ];
+  return (
+    <div className="app">
+      <main className="viewport">{screens[screen]}</main>
+      <nav className="screen-switch" aria-label="Demo screens">
+        {tabs.map(t => (
+          <a key={t.id} className={screen===t.id?"active":""} onClick={() => setScreen(t.id)}>{t.l}</a>
+        ))}
+      </nav>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

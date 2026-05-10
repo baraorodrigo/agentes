@@ -4,7 +4,7 @@
 - **Agente:** Beto
 - **Destino:** WhatsApp privado de cada promoter zerado
 - **Condição:** Só executa se há evento na semana. Senão, completa silenciosamente.
-- **Skill usada:** `skills/extrair-pne.md`
+- **Skill usada:** `skills/extrair-pne/SKILL.md`
 
 ## Prompt
 

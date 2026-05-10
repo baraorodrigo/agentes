@@ -1,0 +1,779 @@
+<h2 class="sr-only">Visualização consolidada do El Coyote Corp com os 7 agentes corretos: Jarbas, Beto, Lia, Duda, Tomás, Gil, Raul.</h2>
+
+<style>
+.nav-btn { border:none; background:transparent; padding:7px 14px; border-radius:6px; cursor:pointer; font-size:13px; color:var(--color-text-secondary); }
+.nav-btn.active { background:var(--color-background-primary); font-weight:500; color:var(--color-text-primary); box-shadow: 0 0 0 0.5px var(--color-border-tertiary); }
+.screen { display:none; }
+.screen.active { display:flex; flex-direction:column; gap:12px; }
+.f-btn { display: flex; align-items: center; gap: 5px; font-size: 11px; padding: 4px 9px; border-radius: 999px; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); cursor: pointer; }
+.f-btn.off { opacity: 0.4; background: var(--color-background-secondary); }
+.org-btn { border:0.5px solid var(--color-border-tertiary); background:var(--color-background-primary); cursor:pointer; transition: all 0.15s; }
+.org-btn:hover { border-color: var(--color-border-secondary); }
+.org-btn.selected { background: var(--color-background-info); border-color: var(--color-border-info); outline: 2px solid var(--color-text-info); }
+.q-btn { text-align:left; padding: 9px 11px; border-radius: var(--border-radius-md); cursor:pointer; font-size:12px; line-height:1.4; }
+.q-btn.active { border:0.5px solid var(--color-border-info); background:var(--color-background-info); color:var(--color-text-info); }
+.q-btn.idle { border:0.5px solid var(--color-border-tertiary); background:var(--color-background-primary); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+</style>
+
+<div style="font-size: 13px;">
+
+<div style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); margin-bottom: 12px;">
+  <div style="display:flex; align-items:center; gap:14px;">
+    <div style="font-weight:500; font-size:14px;">El Coyote Corp</div>
+    <div style="display:flex; gap:2px; background:var(--color-background-secondary); padding:3px; border-radius:var(--border-radius-md);">
+      <button class="nav-btn active" onclick="show('hoje')" id="nav-hoje">Hoje</button>
+      <button class="nav-btn" onclick="show('semana')" id="nav-semana">Semana</button>
+      <button class="nav-btn" onclick="show('pipeline')" id="nav-pipeline">Pipeline</button>
+      <button class="nav-btn" onclick="show('estrutura')" id="nav-estrutura">Estrutura</button>
+      <button class="nav-btn" onclick="show('cabine')" id="nav-cabine">Cabine</button>
+      <button class="nav-btn" onclick="show('logs')" id="nav-logs">Logs</button>
+    </div>
+  </div>
+  <div style="font-size:11px; color:var(--color-text-tertiary);">sáb, 17 mai · noite de show</div>
+</div>
+
+
+<div id="screen-hoje" class="screen active">
+
+  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+    <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:11px 13px;">
+      <div style="font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;">Em execução</div>
+      <div style="font-size:22px; font-weight:500;">2</div>
+    </div>
+    <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:11px 13px;">
+      <div style="font-size:10px; color:var(--color-text-danger); text-transform:uppercase;">Travado em ti</div>
+      <div style="font-size:22px; font-weight:500; color:var(--color-text-danger);">3</div>
+    </div>
+    <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:11px 13px;">
+      <div style="font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;">Entregue hoje</div>
+      <div style="font-size:22px; font-weight:500;">8</div>
+    </div>
+    <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:11px 13px;">
+      <div style="font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;">Agendado hoje</div>
+      <div style="font-size:22px; font-weight:500;">5</div>
+    </div>
+  </div>
+
+  <section>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:0 4px;">
+      <span style="width:8px; height:8px; border-radius:50%; background:var(--color-text-success); animation:pulse 1.6s infinite;"></span>
+      <span style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-tertiary); font-weight:500;">Agora · em execução</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:5px;">
+      <div style="display:flex; align-items:center; gap:11px; padding:9px 13px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md);">
+        <div style="width:26px; height:26px; border-radius:50%; background:#FAEEDA; display:flex; align-items:center; justify-content:center; font-size:11px;">⚡</div>
+        <div style="flex:1;">
+          <div style="font-size:12px;">Beto disparando lembrete pré-show no grupo de promoters</div>
+          <div style="font-size:11px; color:var(--color-text-tertiary); margin-top:1px;">cron das 16:00 · "lista até 22h, top 3 ontem foi @rafa, @cami, @duda"</div>
+        </div>
+        <div style="font-size:11px; color:var(--color-text-secondary);">~30s</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:11px; padding:9px 13px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md);">
+        <div style="width:26px; height:26px; border-radius:50%; background:#E1F5EE; display:flex; align-items:center; justify-content:center; font-size:11px;">💬</div>
+        <div style="flex:1;">
+          <div style="font-size:12px;">Lia respondendo mensagens no WhatsApp público</div>
+          <div style="font-size:11px; color:var(--color-text-tertiary); margin-top:1px;">7 conversas ativas · 2 aguardando resposta</div>
+        </div>
+        <div style="font-size:11px; color:var(--color-text-secondary);">contínuo</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:0 4px;">
+      <span style="width:8px; height:8px; border-radius:50%; background:var(--color-text-danger);"></span>
+      <span style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-danger); font-weight:500;">Travado em ti</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:5px;">
+      <div style="display:flex; align-items:center; gap:11px; padding:11px 13px; background:var(--color-background-primary); border:0.5px solid var(--color-border-danger); border-left:2px solid var(--color-border-danger); border-radius:var(--border-radius-md);">
+        <div style="width:26px; height:26px; border-radius:50%; background:#FCEBEB; display:flex; align-items:center; justify-content:center; font-size:11px;">📊</div>
+        <div style="flex:1;">
+          <div style="font-size:12px;">Tomás detectou queda 23% no ticket médio · decidir ação</div>
+          <div style="font-size:11px; color:var(--color-text-tertiary); margin-top:1px;">parado há 4h · alerta de variação anormal</div>
+        </div>
+        <button onclick="show('cabine'); selectAgent('tomas')" style="font-size:11px; padding:4px 9px;">resolver</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:11px; padding:11px 13px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-border-warning); border-radius:var(--border-radius-md);">
+        <div style="width:26px; height:26px; border-radius:50%; background:#FAEEDA; display:flex; align-items:center; justify-content:center; font-size:11px;">🎸</div>
+        <div style="flex:1;">
+          <div style="font-size:12px;">Duda submeteu copy do post do show · aprovar?</div>
+          <div style="font-size:11px; color:var(--color-text-tertiary); margin-top:1px;">parado há 2h · post agendado pras 18h</div>
+        </div>
+        <button onclick="show('cabine'); selectAgent('duda')" style="font-size:11px; padding:4px 9px;">ver</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:11px; padding:11px 13px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-border-warning); border-radius:var(--border-radius-md);">
+        <div style="width:26px; height:26px; border-radius:50%; background:#E1F5EE; display:flex; align-items:center; justify-content:center; font-size:11px;">💬</div>
+        <div style="flex:1;">
+          <div style="font-size:12px;">Lia escalou pra Gil: aniversário 15 anos · 80 pax · 7 jun</div>
+          <div style="font-size:11px; color:var(--color-text-tertiary); margin-top:1px;">parado há 30min · cliente esperando proposta</div>
+        </div>
+        <button onclick="show('cabine'); selectAgent('gil')" style="font-size:11px; padding:4px 9px;">passar Gil</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:0 4px;">
+      <span style="width:8px; height:8px; border-radius:50%; background:var(--color-text-tertiary);"></span>
+      <span style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-tertiary); font-weight:500;">Agendado pra hoje</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:2px;">
+      <div style="display:flex; gap:12px; padding:6px 14px; font-size:12px; color:var(--color-text-secondary);"><span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:46px;">19:00</span><span>Gil — checklist final do show</span></div>
+      <div style="display:flex; gap:12px; padding:6px 14px; font-size:12px; color:var(--color-text-secondary);"><span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:46px;">22:30</span><span>Show MC Vine7 + MC Danado · El Coyote Pub</span></div>
+      <div style="display:flex; gap:12px; padding:6px 14px; font-size:12px; color:var(--color-text-secondary);"><span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:46px;">04:00</span><span>Tomás — fechamento financeiro do dia</span></div>
+      <div style="display:flex; gap:12px; padding:6px 14px; font-size:12px; color:var(--color-text-secondary);"><span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:46px;">D+1</span><span>Beto — follow-up do show no grupo</span></div>
+    </div>
+  </section>
+
+</div>
+
+
+<div id="screen-semana" class="screen">
+
+  <div style="display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; gap:4px; flex-wrap:wrap;">
+      <button id="f-eventos" onclick="toggleF('eventos')" class="f-btn"><span style="width:8px; height:8px; border-radius:2px; background:#7F77DD;"></span>Eventos</button>
+      <button id="f-vencimentos" onclick="toggleF('vencimentos')" class="f-btn"><span style="width:8px; height:8px; border-radius:2px; background:#E24B4A;"></span>Vencimentos</button>
+      <button id="f-posts" onclick="toggleF('posts')" class="f-btn"><span style="width:8px; height:8px; border-radius:2px; background:#EF9F27;"></span>Posts da Duda</button>
+      <button id="f-meus" onclick="toggleF('meus')" class="f-btn"><span style="width:8px; height:8px; border-radius:2px; background:#888780;"></span>Meus</button>
+      <button id="f-crons" onclick="toggleF('crons')" class="f-btn off"><span style="width:8px; height:8px; border-radius:2px; background:#5DCAA5;"></span>Crons</button>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="font-size:12px; font-weight:500;">12 — 18 mai</span>
+    </div>
+  </div>
+
+  <div style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); overflow:hidden;">
+    <div style="display:grid; grid-template-columns:34px repeat(7,1fr); border-bottom:0.5px solid var(--color-border-tertiary);">
+      <div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:10px; color:var(--color-text-tertiary);">SEG</div><div style="font-size:13px; font-weight:500;">12</div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:10px; color:var(--color-text-tertiary);">TER</div><div style="font-size:13px; font-weight:500;">13</div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:10px; color:var(--color-text-tertiary);">QUA</div><div style="font-size:13px; font-weight:500;">14</div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:10px; color:var(--color-text-tertiary);">QUI</div><div style="font-size:13px; font-weight:500;">15</div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:10px; color:var(--color-text-tertiary);">SEX</div><div style="font-size:13px; font-weight:500;">16</div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary); background:rgba(55,138,221,0.08);"><div style="font-size:10px; color:var(--color-text-info); font-weight:500;">SÁB</div><div style="font-size:13px; font-weight:500; color:var(--color-text-info);">17</div></div>
+      <div style="padding:6px 4px; text-align:center; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:10px; color:var(--color-text-tertiary);">DOM</div><div style="font-size:13px; font-weight:500;">18</div></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:34px repeat(7,1fr); border-bottom:0.5px solid var(--color-border-tertiary); min-height:26px; background:var(--color-background-secondary);">
+      <div style="font-size:9px; color:var(--color-text-tertiary); padding:3px 4px; text-align:right;">dia</div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"></div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:9px; padding:1px 4px; background:#FCEBEB; color:#791F1F; border-radius:3px;">Som&Luz parc.</div></div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"></div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:9px; padding:1px 4px; background:#FCEBEB; color:#791F1F; border-radius:3px;">Bebidas Trop.</div></div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"></div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"></div>
+      <div data-cat="vencimentos" style="padding:2px; border-left:0.5px solid var(--color-border-tertiary);"><div style="font-size:9px; padding:1px 4px; background:#FAEEDA; color:#633806; border-radius:3px;">Pousada 9d</div></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:34px repeat(7,1fr);">
+      <div style="display:flex; flex-direction:column;">
+        <div style="height:32px; padding:3px 4px; font-size:9px; color:var(--color-text-tertiary); text-align:right; border-bottom:0.5px dashed var(--color-border-tertiary);">09h</div>
+        <div style="height:32px; padding:3px 4px; font-size:9px; color:var(--color-text-tertiary); text-align:right; border-bottom:0.5px dashed var(--color-border-tertiary);">12h</div>
+        <div style="height:32px; padding:3px 4px; font-size:9px; color:var(--color-text-tertiary); text-align:right; border-bottom:0.5px dashed var(--color-border-tertiary);">15h</div>
+        <div style="height:32px; padding:3px 4px; font-size:9px; color:var(--color-text-tertiary); text-align:right; border-bottom:0.5px dashed var(--color-border-tertiary);">18h</div>
+        <div style="height:32px; padding:3px 4px; font-size:9px; color:var(--color-text-tertiary); text-align:right; border-bottom:0.5px dashed var(--color-border-tertiary);">21h</div>
+        <div style="height:32px; padding:3px 4px; font-size:9px; color:var(--color-text-tertiary); text-align:right;">00h</div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Beto rank.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="meus" style="position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#F1EFE8; border-left:2px solid #5F5E5A; font-size:9px; color:#2C2C2A;">Forn. som</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px;"></div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Duda cal.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px;"></div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Duda cal.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px;"></div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Duda cal.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="posts" style="position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#FAEEDA; border-left:2px solid #BA7517; font-size:9px; color:#412402;">Post Vista</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px;"></div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Beto lemb.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="posts" style="position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#FAEEDA; border-left:2px solid #BA7517; font-size:9px; color:#412402;">Story show</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="eventos" style="position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#EEEDFE; border-left:2px solid #534AB7; font-size:9px; color:#26215C;">Live music</div></div>
+        <div style="height:32px;"></div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary); background:rgba(55,138,221,0.04);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Beto rank.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Beto motiv</div></div>
+        <div style="height:32px; position:relative;"><div data-cat="eventos" style="position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#EEEDFE; border-left:2px solid #534AB7; font-size:9px; color:#26215C; font-weight:500;">MC Vine7</div></div>
+      </div>
+      <div style="position:relative; border-left:0.5px solid var(--color-border-tertiary);">
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Raul anál.</div></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary);"></div>
+        <div style="height:32px; border-bottom:0.5px dashed var(--color-border-tertiary); position:relative;"><div data-cat="crons" style="display:none; position:absolute; top:1px; left:1px; right:1px; padding:1px 3px; background:#E1F5EE; border-left:2px solid #1D9E75; font-size:9px; color:#04342C;">Beto top3</div></div>
+        <div style="height:32px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:11px; color:var(--color-text-tertiary); padding:0 4px;"><i class="ti ti-info-circle" aria-hidden="true" style="font-size:12px; vertical-align:-2px;"></i> Crons desligados por padrão · Tomás (04:00 diário) e Lia (pull, contínuo) fora da grade.</div>
+</div>
+
+
+<div id="screen-pipeline" class="screen">
+
+  <section>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:0 4px;">
+      <span style="font-size:11px;">🎪</span>
+      <span style="font-size:12px; font-weight:500;">Eventos em produção</span>
+      <span style="font-size:11px; color:var(--color-text-tertiary);">· Gil</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:120px;">
+        <div style="display:flex; justify-content:space-between; padding:1px 4px 6px; font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;"><span>Brief</span><span style="background:var(--color-background-primary); padding:0 5px; border-radius:999px;">2</span></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; margin-bottom:4px; font-size:11px;"><div style="font-weight:500;">Casamento Marina&Pedro</div><div style="color:var(--color-text-tertiary); font-size:10px; margin-top:2px;">14 jun · Vista</div></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px;"><div style="font-weight:500;">15 anos · 80 pax</div><div style="color:var(--color-text-tertiary); font-size:10px; margin-top:2px;">7 jun · escalada Lia</div></div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:120px;">
+        <div style="display:flex; justify-content:space-between; padding:1px 4px 6px; font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;"><span>Produção</span><span style="background:var(--color-background-primary); padding:0 5px; border-radius:999px;">2</span></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; margin-bottom:4px; font-size:11px;"><div style="font-weight:500;">MC Vine7 + Danado</div><div style="color:var(--color-text-tertiary); font-size:10px; margin-top:2px;">hoje · 22h30</div></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px; border-left:2px solid var(--color-border-danger);"><div style="font-weight:500;">Logus · jantar</div><div style="color:var(--color-text-danger); font-size:10px; margin-top:2px;">⚠ cardápio 4d</div></div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:120px;">
+        <div style="display:flex; justify-content:space-between; padding:1px 4px 6px; font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;"><span>Divulgação</span><span style="background:var(--color-background-primary); padding:0 5px; border-radius:999px;">1</span></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px;"><div style="font-weight:500;">A Terapia · maio</div><div style="color:var(--color-text-tertiary); font-size:10px; margin-top:2px;">18 mai</div></div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:120px;">
+        <div style="display:flex; justify-content:space-between; padding:1px 4px 6px; font-size:10px; color:var(--color-text-secondary); text-transform:uppercase;"><span>Realizado</span><span style="background:var(--color-background-primary); padding:0 5px; border-radius:999px;">1</span></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px; opacity:0.7;"><div style="font-weight:500;">Acústico DJ Barão</div><div style="color:var(--color-text-tertiary); font-size:10px; margin-top:2px;">3 mai</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:0 4px;">
+      <span style="font-size:11px;">💬</span>
+      <span style="font-size:12px; font-weight:500;">Propostas comerciais</span>
+      <span style="font-size:11px; color:var(--color-text-tertiary);">· Lia (lead) → Gil (proposta)</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:100px;">
+        <div style="font-size:10px; color:var(--color-text-secondary); padding:1px 4px 6px; text-transform:uppercase;">Lead · 2</div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; margin-bottom:4px; font-size:11px;">Construtora Litoral</div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px;">Marina Garcia</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:100px;">
+        <div style="font-size:10px; color:var(--color-text-secondary); padding:1px 4px 6px; text-transform:uppercase;">Enviada · 2</div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; margin-bottom:4px; font-size:11px;"><div style="font-weight:500;">Logus jantar</div><div style="color:var(--color-text-tertiary); font-size:10px;">R$ 12.4k</div></div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px; border-left:2px solid var(--color-border-warning);"><div style="font-weight:500;">Pousada Mar Aberto</div><div style="color:var(--color-text-warning); font-size:10px;">⚠ 9d sem resp.</div></div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:100px;">
+        <div style="font-size:10px; color:var(--color-text-secondary); padding:1px 4px 6px; text-transform:uppercase;">Negociação · 1</div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px;"><div style="font-weight:500;">Marina&Pedro</div><div style="color:var(--color-text-tertiary); font-size:10px;">R$ 28k</div></div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:7px; min-height:100px;">
+        <div style="font-size:10px; color:var(--color-text-secondary); padding:1px 4px 6px; text-transform:uppercase;">Fechado · 3</div>
+        <div style="background:var(--color-background-primary); border-radius:5px; padding:6px 8px; font-size:11px; opacity:0.7;"><div style="font-weight:500;">Carla 40 anos</div><div style="color:var(--color-text-tertiary); font-size:10px;">R$ 6.8k</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; padding:0 4px;">
+      <span style="font-size:11px;">📊</span>
+      <span style="font-size:12px; font-weight:500;">Saúde financeira</span>
+      <span style="font-size:11px; color:var(--color-text-tertiary);">· Tomás (push direto, blindado)</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:9px 11px;">
+        <div style="font-size:10px; color:var(--color-text-tertiary); text-transform:uppercase;">Faturam. semana</div>
+        <div style="font-size:18px; font-weight:500; margin-top:2px;">R$ 47.2k</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:9px 11px;">
+        <div style="font-size:10px; color:var(--color-text-tertiary); text-transform:uppercase;">Ticket médio</div>
+        <div style="font-size:18px; font-weight:500; margin-top:2px; color:var(--color-text-danger);">R$ 49 ↓23%</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:9px 11px;">
+        <div style="font-size:10px; color:var(--color-text-tertiary); text-transform:uppercase;">A pagar (10d)</div>
+        <div style="font-size:18px; font-weight:500; margin-top:2px;">R$ 14.0k</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:9px 11px;">
+        <div style="font-size:10px; color:var(--color-text-tertiary); text-transform:uppercase;">A receber (10d)</div>
+        <div style="font-size:18px; font-weight:500; margin-top:2px;">R$ 28.0k</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<div id="screen-estrutura" class="screen">
+
+  <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:12px;">
+
+    <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-lg); padding:14px;">
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-tertiary); margin-bottom:10px;">Organograma · clique pra ver ficha</div>
+
+      <div style="display:flex; justify-content:center; margin-bottom:12px;">
+        <button onclick="selectAgentInfo('rodrigo')" id="bi-rodrigo" class="org-btn" style="padding:7px 16px; border-radius:8px; font-size:13px; font-weight:500;">👤 Rodrigo</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:14px; margin-bottom:14px;">
+        <div style="flex:1;">
+          <button onclick="selectAgentInfo('jarbas')" id="bi-jarbas" class="org-btn" style="width:100%; padding:7px 10px; border-radius:8px; font-size:12px; font-weight:500;">🐺 Jarbas</button>
+          <div style="text-align:center; font-size:9px; color:var(--color-text-tertiary); margin-top:3px;">hub · WhatsApp privado</div>
+        </div>
+        <div style="flex:1;">
+          <button onclick="selectAgentInfo('tomas')" id="bi-tomas" class="org-btn" style="width:100%; padding:7px 10px; border-radius:8px; font-size:12px; font-weight:500; border-color:var(--color-border-secondary); border-width:1px;">📊 Tomás</button>
+          <div style="text-align:center; font-size:9px; color:var(--color-text-tertiary); margin-top:3px;">blindado · DM separada</div>
+        </div>
+      </div>
+
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--color-text-tertiary); margin-bottom:5px; padding:0 2px;">Operacionais</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-bottom:10px;">
+        <button onclick="selectAgentInfo('beto')" id="bi-beto" class="org-btn" style="padding:7px 9px; border-radius:6px; font-size:11px; text-align:left;">
+          <div style="display:flex; align-items:center; gap:6px;"><span style="width:5px; height:5px; border-radius:50%; background:var(--color-text-success);"></span><span style="flex:1; font-weight:500;">⚡ Beto</span><span style="font-size:9px; color:var(--color-text-tertiary);">push</span></div>
+          <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:2px;">grupo promoters</div>
+        </button>
+        <button onclick="selectAgentInfo('duda')" id="bi-duda" class="org-btn" style="padding:7px 9px; border-radius:6px; font-size:11px; text-align:left;">
+          <div style="display:flex; align-items:center; gap:6px;"><span style="width:5px; height:5px; border-radius:50%; background:var(--color-text-success);"></span><span style="flex:1; font-weight:500;">🎸 Duda</span><span style="font-size:9px; color:var(--color-text-tertiary);">push</span></div>
+          <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:2px;">Telegram · marketing</div>
+        </button>
+        <button onclick="selectAgentInfo('gil')" id="bi-gil" class="org-btn" style="padding:7px 9px; border-radius:6px; font-size:11px; text-align:left;">
+          <div style="display:flex; align-items:center; gap:6px;"><span style="width:5px; height:5px; border-radius:50%; background:var(--color-text-success);"></span><span style="flex:1; font-weight:500;">🎪 Gil</span><span style="font-size:9px; color:var(--color-text-tertiary);">pull</span></div>
+          <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:2px;">DM contigo · eventos</div>
+        </button>
+        <button onclick="selectAgentInfo('lia')" id="bi-lia" class="org-btn" style="padding:7px 9px; border-radius:6px; font-size:11px; text-align:left;">
+          <div style="display:flex; align-items:center; gap:6px;"><span style="width:5px; height:5px; border-radius:50%; background:var(--color-text-success);"></span><span style="flex:1; font-weight:500;">💬 Lia</span><span style="font-size:9px; color:var(--color-text-tertiary);">pull</span></div>
+          <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:2px;">WhatsApp público</div>
+        </button>
+      </div>
+
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--color-text-tertiary); margin-bottom:5px; padding:0 2px;">Sub-agente</div>
+      <button onclick="selectAgentInfo('raul')" id="bi-raul" class="org-btn" style="width:100%; padding:7px 9px; border-radius:6px; font-size:11px; text-align:left; border-style:dashed;">
+        <div style="display:flex; align-items:center; gap:6px;"><span style="width:5px; height:5px; border-radius:50%; background:var(--color-text-success);"></span><span style="flex:1; font-weight:500;">🔍 Raul</span><span style="font-size:9px; color:var(--color-text-tertiary);">via Jarbas · semanal</span></div>
+        <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:2px;">sem canal · análise</div>
+      </button>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-tertiary); padding:0 4px;">Acontecendo agora</div>
+      <div style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-border-info); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:10px; color:var(--color-text-info); font-weight:500;">⚡ Beto · 16:00</div>
+        <div style="font-size:11px; line-height:1.4; margin-top:2px;">Disparou ranking + lista de hoje no grupo</div>
+      </div>
+      <div style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-border-warning); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:10px; color:var(--color-text-warning); font-weight:500;">💬 Lia → 🎪 Gil · 12:14</div>
+        <div style="font-size:11px; line-height:1.4; margin-top:2px;">15 anos / 80 pax / 7 jun · Gil precisa puxar a proposta</div>
+      </div>
+      <div style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-border-warning); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:10px; color:var(--color-text-warning); font-weight:500;">🎪 Gil · 19:42</div>
+        <div style="font-size:11px; line-height:1.4; margin-top:2px;">Som não confirmou teste de mic · autoriza cobrar?</div>
+      </div>
+      <div style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-border-info); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:10px; color:var(--color-text-info); font-weight:500;">🎸 Duda · 14:30</div>
+        <div style="font-size:11px; line-height:1.4; margin-top:2px;">Submeteu copy do Story · aguarda aprovação</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="agent-info-panel" style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-lg); padding:13px 15px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div id="ai-emoji" style="font-size:22px;">🐺</div>
+        <div>
+          <div id="ai-name" style="font-weight:500; font-size:14px;">Jarbas</div>
+          <div id="ai-meta" style="font-size:11px; color:var(--color-text-secondary);">hub · WhatsApp privado · pull · IDENTITY pronta, falta canal</div>
+        </div>
+      </div>
+      <button onclick="show('cabine'); selectAgent(currentAgent)" style="font-size:11px;">abrir cabine ↗</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:9px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:3px;">Pra quê serve</div>
+        <div id="ai-f1" style="font-size:11px; line-height:1.45;">Recebe tudo que tu manda no privado, roteia pro agente certo, devolve resposta consolidada. Não executa sozinho.</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:9px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:3px;">Quando age</div>
+        <div id="ai-f2" style="font-size:11px; line-height:1.45;">Quando tu manda mensagem no WhatsApp privado. Sem cron próprio.</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:9px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:3px;">O que produz</div>
+        <div id="ai-f3" style="font-size:11px; line-height:1.45;">Resposta consolidada com origem clara ("Gil disse que..."). Encaminha pro Tomás se for $$.</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:9px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:3px;">Quem consome</div>
+        <div id="ai-f4" style="font-size:11px; line-height:1.45;">Só Rodrigo. Nunca cliente público nem promoter.</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:9px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:3px;">Sinal de saúde</div>
+        <div id="ai-f5" style="font-size:11px; line-height:1.45;">Responde em até 30s. Silêncio &gt; 2min após pergunta = quebrado.</div>
+      </div>
+      <div style="background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:8px 11px;">
+        <div style="font-size:9px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:3px;">Quando NÃO age</div>
+        <div id="ai-f6" style="font-size:11px; line-height:1.45;">Não toca dado financeiro · não puxa do Tomás · não responde sem rotear.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="screen-cabine" class="screen">
+
+  <div style="display:flex; align-items:center; gap:8px; padding:0 4px; flex-wrap:wrap;">
+    <span style="font-size:11px; text-transform:uppercase; color:var(--color-text-tertiary); margin-right:4px;">Agente:</span>
+    <button onclick="selectAgent('jarbas')" id="ca-jarbas" class="agent-pill"><span>🐺</span>Jarbas</button>
+    <button onclick="selectAgent('beto')" id="ca-beto" class="agent-pill"><span>⚡</span>Beto</button>
+    <button onclick="selectAgent('lia')" id="ca-lia" class="agent-pill"><span>💬</span>Lia</button>
+    <button onclick="selectAgent('duda')" id="ca-duda" class="agent-pill"><span>🎸</span>Duda</button>
+    <button onclick="selectAgent('tomas')" id="ca-tomas" class="agent-pill"><span>📊</span>Tomás</button>
+    <button onclick="selectAgent('gil')" id="ca-gil" class="agent-pill"><span>🎪</span>Gil</button>
+    <button onclick="selectAgent('raul')" id="ca-raul" class="agent-pill"><span>🔍</span>Raul</button>
+  </div>
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:9px 13px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md);">
+    <div style="display:flex; align-items:center; gap:11px;">
+      <div id="cb-emoji" style="font-size:22px;">⚡</div>
+      <div>
+        <div id="cb-name" style="font-weight:500; font-size:13px;">Beto</div>
+        <div id="cb-meta" style="font-size:11px; color:var(--color-text-secondary);">Promoters · grupo WhatsApp · push (5 crons)</div>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:9px;">
+      <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:var(--color-text-success);">
+        <span style="width:6px; height:6px; border-radius:50%; background:var(--color-text-success);"></span>
+        ativo
+      </span>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1.7fr 1fr; gap:11px;">
+
+    <div style="display:flex; flex-direction:column; gap:11px;">
+
+      <div id="cb-exec" style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-left:2px solid var(--color-text-success); border-radius:var(--border-radius-md); padding:12px 14px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:7px;">
+          <div style="display:flex; align-items:center; gap:7px;">
+            <span style="width:7px; height:7px; border-radius:50%; background:var(--color-text-success); animation:pulse 1.6s infinite;"></span>
+            <span style="font-size:10px; text-transform:uppercase; color:var(--color-text-success); font-weight:500;">Em execução</span>
+          </div>
+          <span id="cb-exec-time" style="font-size:10px; color:var(--color-text-tertiary);">iniciado 16:00 · ~30s</span>
+        </div>
+        <div id="cb-exec-title" style="font-size:13px; margin-bottom:3px;">Disparando lembrete pré-show no grupo de promoters</div>
+        <div id="cb-exec-sub" style="font-size:11px; color:var(--color-text-secondary); margin-bottom:10px;">cron das 16:00 · ranking + lembrete da lista de hoje</div>
+        <div style="display:flex; gap:5px;">
+          <button style="font-size:11px; padding:5px 10px;">⏸ pausar</button>
+          <button style="font-size:11px; padding:5px 10px; color:var(--color-text-danger); border-color:var(--color-border-danger);">✕ cancelar</button>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:10px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:6px; padding:0 4px;">Disparar manualmente</div>
+        <div id="cb-actions" style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px;">
+          <button style="display:flex; align-items:center; gap:8px; padding:9px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); cursor:pointer; text-align:left; font-size:11px;">
+            <i class="ti ti-trophy" aria-hidden="true" style="font-size:15px; color:var(--color-text-secondary);"></i>
+            <div style="flex:1;"><div style="font-weight:500;">Forçar ranking</div><div style="font-size:10px; color:var(--color-text-tertiary);">disparo fora de cron</div></div>
+          </button>
+          <button style="display:flex; align-items:center; gap:8px; padding:9px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); cursor:pointer; text-align:left; font-size:11px;">
+            <i class="ti ti-megaphone" aria-hidden="true" style="font-size:15px; color:var(--color-text-secondary);"></i>
+            <div style="flex:1;"><div style="font-weight:500;">Lembrete de lista</div><div style="font-size:10px; color:var(--color-text-tertiary);">avisar próximo evento</div></div>
+          </button>
+          <button style="display:flex; align-items:center; gap:8px; padding:9px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); cursor:pointer; text-align:left; font-size:11px;">
+            <i class="ti ti-confetti" aria-hidden="true" style="font-size:15px; color:var(--color-text-secondary);"></i>
+            <div style="flex:1;"><div style="font-weight:500;">Parabéns top 3</div><div style="font-size:10px; color:var(--color-text-tertiary);">manda agora</div></div>
+          </button>
+          <button style="display:flex; align-items:center; gap:8px; padding:9px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); cursor:pointer; text-align:left; font-size:11px;">
+            <i class="ti ti-bolt" aria-hidden="true" style="font-size:15px; color:var(--color-text-secondary);"></i>
+            <div style="flex:1;"><div style="font-weight:500;">Motivação pré-evento</div><div style="font-size:10px; color:var(--color-text-tertiary);">disparo customizado</div></div>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; padding:0 4px;">
+          <div style="font-size:10px; text-transform:uppercase; color:var(--color-text-tertiary);">Próximos crons</div>
+          <span style="font-size:10px; color:var(--color-text-tertiary);">5 ativos</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <div style="display:flex; align-items:center; gap:9px; padding:6px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); font-size:11px;">
+            <span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:60px; font-size:10px;">D+1 21h</span>
+            <span style="flex:1;">Follow-up pós-show</span>
+            <i class="ti ti-pencil" aria-hidden="true" style="font-size:13px; color:var(--color-text-tertiary); cursor:pointer;"></i>
+          </div>
+          <div style="display:flex; align-items:center; gap:9px; padding:6px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); font-size:11px;">
+            <span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:60px; font-size:10px;">dom 21h</span>
+            <span style="flex:1;">Parabéns top 3 da semana</span>
+            <i class="ti ti-pencil" aria-hidden="true" style="font-size:13px; color:var(--color-text-tertiary); cursor:pointer;"></i>
+          </div>
+          <div style="display:flex; align-items:center; gap:9px; padding:6px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); font-size:11px;">
+            <span style="font-variant-numeric:tabular-nums; color:var(--color-text-tertiary); width:60px; font-size:10px;">seg 10h</span>
+            <span style="flex:1;">Ranking semanal</span>
+            <i class="ti ti-pencil" aria-hidden="true" style="font-size:13px; color:var(--color-text-tertiary); cursor:pointer;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; padding:0 4px;">
+          <div style="font-size:10px; text-transform:uppercase; color:var(--color-text-tertiary);">Entregas recentes</div>
+          <button style="font-size:10px; padding:2px 7px; border:none; background:transparent; color:var(--color-text-secondary); cursor:pointer;">ver tudo ↗</button>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <div style="display:grid; grid-template-columns:54px 1fr auto; gap:11px; align-items:center; padding:8px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md);">
+            <span style="font-size:10px; color:var(--color-text-tertiary); font-variant-numeric:tabular-nums;">16:00</span>
+            <div>
+              <div style="font-size:11px;">Lembrete pré-show + ranking ontem</div>
+              <div style="font-size:10px; color:var(--color-text-tertiary); margin-top:1px;">grupo WhatsApp · 23 leituras</div>
+            </div>
+            <button style="font-size:10px; padding:2px 7px;">ver ↗</button>
+          </div>
+          <div style="display:grid; grid-template-columns:54px 1fr auto; gap:11px; align-items:center; padding:8px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); opacity:0.85;">
+            <span style="font-size:10px; color:var(--color-text-tertiary); font-variant-numeric:tabular-nums;">qui 18h</span>
+            <div>
+              <div style="font-size:11px;">Lembrete lista · D-1 do show</div>
+              <div style="font-size:10px; color:var(--color-text-tertiary); margin-top:1px;">grupo · 18 leituras</div>
+            </div>
+            <button style="font-size:10px; padding:2px 7px;">ver ↗</button>
+          </div>
+          <div style="display:grid; grid-template-columns:54px 1fr auto; gap:11px; align-items:center; padding:8px 11px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); opacity:0.7;">
+            <span style="font-size:10px; color:var(--color-text-tertiary); font-variant-numeric:tabular-nums;">seg 10h</span>
+            <div>
+              <div style="font-size:11px;">Ranking semanal</div>
+              <div style="font-size:10px; color:var(--color-text-tertiary); margin-top:1px;">grupo · top 3: @rafa, @cami, @duda</div>
+            </div>
+            <button style="font-size:10px; padding:2px 7px;">ver ↗</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); display:flex; flex-direction:column; min-height:520px;">
+      <div style="padding:11px 13px; border-bottom:0.5px solid var(--color-border-tertiary);">
+        <div style="font-size:11px; font-weight:500;">Conversar com Beto</div>
+        <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:1px;">canal interno · IDENTITY+SOUL carregados</div>
+      </div>
+      <div style="flex:1; padding:13px; display:flex; flex-direction:column; gap:9px;">
+        <div style="align-self:flex-start; max-width:90%; padding:7px 11px; background:var(--color-background-secondary); border-radius:11px; border-top-left-radius:4px; font-size:11px; line-height:1.45;">
+          Oi Rodrigo. Disparei o lembrete da lista do show de hoje no grupo. Quer que eu envie um reforço mais perto do horário?
+          <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:3px;">16:01</div>
+        </div>
+        <div style="align-self:flex-end; max-width:90%; padding:7px 11px; background:var(--color-background-info); color:var(--color-text-info); border-radius:11px; border-top-right-radius:4px; font-size:11px; line-height:1.45;">
+          manda às 21h um aviso curto. sem ranking dessa vez
+          <div style="font-size:9px; opacity:0.7; margin-top:3px;">16:03</div>
+        </div>
+        <div style="align-self:flex-start; max-width:90%; padding:7px 11px; background:var(--color-background-secondary); border-radius:11px; border-top-left-radius:4px; font-size:11px; line-height:1.45;">
+          Anotado. Vou agendar pras 21h: "última hora pra entrar na lista de hoje, valeu galera". Confirmo?
+          <div style="font-size:9px; color:var(--color-text-tertiary); margin-top:3px;">16:04</div>
+        </div>
+      </div>
+      <div style="padding:9px 11px; border-top:0.5px solid var(--color-border-tertiary);">
+        <div style="display:flex; gap:5px; margin-bottom:6px; flex-wrap:wrap;">
+          <button style="font-size:9px; padding:2px 7px; border-radius:999px; background:var(--color-background-secondary); border:none; cursor:pointer; color:var(--color-text-secondary);">"confirma"</button>
+          <button style="font-size:9px; padding:2px 7px; border-radius:999px; background:var(--color-background-secondary); border:none; cursor:pointer; color:var(--color-text-secondary);">"refaz"</button>
+          <button style="font-size:9px; padding:2px 7px; border-radius:999px; background:var(--color-background-secondary); border:none; cursor:pointer; color:var(--color-text-secondary);">"+ opções"</button>
+        </div>
+        <div style="display:flex; gap:5px; align-items:center;">
+          <input type="text" placeholder="responde ao Beto..." style="flex:1; padding:6px 9px; font-size:11px;" />
+          <button style="font-size:10px; padding:5px 10px; background:var(--color-background-info); color:var(--color-text-info); border-color:var(--color-border-info);">enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="screen-logs" class="screen">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:0 4px;">
+    <div style="font-size:11px; text-transform:uppercase; color:var(--color-text-tertiary);">O que tu quer saber?</div>
+    <div style="display:flex; gap:4px;">
+      <button class="f-btn"><span>30 dias</span></button>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+    <button onclick="askLog('escalacoes')" id="ql-escalacoes" class="q-btn active">Quantas vezes a Lia escalou pro Gil?</button>
+    <button onclick="askLog('crons')" id="ql-crons" class="q-btn idle">O Beto perdeu algum cron?</button>
+    <button onclick="askLog('alertas')" id="ql-alertas" class="q-btn idle">Quantos alertas o Tomás disparou? Quais foram úteis?</button>
+    <button onclick="askLog('rotear')" id="ql-rotear" class="q-btn idle">Em quais dias o Jarbas não soube rotear?</button>
+    <button onclick="askLog('handoffs')" id="ql-handoffs" class="q-btn idle">Mapa completo de handoffs entre os agentes</button>
+    <button onclick="askLog('insights')" id="ql-insights" class="q-btn idle">Insights do Raul que viraram ação</button>
+  </div>
+
+  <div id="log-answer" style="padding:14px 16px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-lg); min-height:240px;">
+
+    <div id="la-escalacoes">
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center; margin-bottom:14px;">
+        <div>
+          <div style="font-size:32px; font-weight:500; line-height:1;">14</div>
+          <div style="font-size:11px; color:var(--color-text-secondary); margin-top:3px;">escalações em 30d</div>
+        </div>
+        <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.5;">
+          Lia escalou 14 vezes pra Gil. <span style="color:var(--color-text-primary);">11 viraram proposta comercial</span>, 3 não foram pra frente. Média de 1 a cada 2 dias.
+        </div>
+      </div>
+
+      <div style="font-size:10px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:6px;">Tipo de evento escalado</div>
+      <div style="display:flex; flex-direction:column; gap:5px;">
+        <div style="display:grid; grid-template-columns:120px 1fr 30px; align-items:center; gap:8px; font-size:11px;">
+          <span>Aniversário</span>
+          <div style="background:var(--color-background-secondary); border-radius:3px; height:14px;"><div style="background:var(--color-text-info); height:100%; width:50%; border-radius:3px;"></div></div>
+          <span style="color:var(--color-text-secondary); text-align:right; font-variant-numeric:tabular-nums;">7</span>
+        </div>
+        <div style="display:grid; grid-template-columns:120px 1fr 30px; align-items:center; gap:8px; font-size:11px;">
+          <span>Casamento</span>
+          <div style="background:var(--color-background-secondary); border-radius:3px; height:14px;"><div style="background:var(--color-text-info); height:100%; width:21%; border-radius:3px;"></div></div>
+          <span style="color:var(--color-text-secondary); text-align:right; font-variant-numeric:tabular-nums;">3</span>
+        </div>
+        <div style="display:grid; grid-template-columns:120px 1fr 30px; align-items:center; gap:8px; font-size:11px;">
+          <span>Confraternização</span>
+          <div style="background:var(--color-background-secondary); border-radius:3px; height:14px;"><div style="background:var(--color-text-info); height:100%; width:21%; border-radius:3px;"></div></div>
+          <span style="color:var(--color-text-secondary); text-align:right; font-variant-numeric:tabular-nums;">3</span>
+        </div>
+        <div style="display:grid; grid-template-columns:120px 1fr 30px; align-items:center; gap:8px; font-size:11px;">
+          <span>Outros</span>
+          <div style="background:var(--color-background-secondary); border-radius:3px; height:14px;"><div style="background:var(--color-text-info); height:100%; width:7%; border-radius:3px;"></div></div>
+          <span style="color:var(--color-text-secondary); text-align:right; font-variant-numeric:tabular-nums;">1</span>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; padding:9px 12px; background:var(--color-background-secondary); border-radius:var(--border-radius-md); font-size:11px; line-height:1.5;">
+        <div style="font-weight:500; margin-bottom:3px;">💡 Sugestão de calibração</div>
+        <div style="color:var(--color-text-secondary);">3 escalações não viraram proposta — todas eram aniversário com menos de 30 pessoas. Considera ajustar a regra: aniversário só escala pro Gil se ≥ 40 pax. Abaixo disso, Lia resolve direto.</div>
+      </div>
+    </div>
+
+    <div id="la-crons" style="display:none;">
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center;">
+        <div>
+          <div style="font-size:32px; font-weight:500; line-height:1; color:var(--color-text-success);">148/150</div>
+          <div style="font-size:11px; color:var(--color-text-secondary); margin-top:3px;">crons em 30d</div>
+        </div>
+        <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.5;">
+          Beto perdeu 2 disparos no mês — domingo 5/mai (parabéns top 3) e quarta 8/mai (lembrete lista). Causa: instabilidade da Evolution API.
+        </div>
+      </div>
+    </div>
+
+    <div id="la-alertas" style="display:none; padding:30px 0; text-align:center; color:var(--color-text-secondary); font-size:12px;">
+      Tomás disparou 4 alertas em 30d. 3 confirmados úteis (queda ticket, pico de devolução, vendas zero por 2h). 1 falso positivo.
+    </div>
+    <div id="la-rotear" style="display:none; padding:30px 0; text-align:center; color:var(--color-text-secondary); font-size:12px;">
+      Jarbas pediu esclarecimento 7 vezes em 30d. Padrão: termos genéricos sem contexto temporal ("e aí?", "como tá?").
+    </div>
+    <div id="la-handoffs" style="display:none;">
+      <div style="font-size:10px; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:10px;">Quem passou pra quem · 30d</div>
+      <div style="display:flex; flex-direction:column; gap:5px; font-size:11px;">
+        <div style="display:grid; grid-template-columns:80px 1fr 80px 40px; align-items:center; gap:9px; padding:7px 9px; background:var(--color-background-secondary); border-radius:5px;"><span style="font-weight:500;">💬 Lia</span><div style="background:var(--color-background-primary); height:12px; border-radius:3px;"><div style="background:var(--color-text-info); height:100%; width:100%; border-radius:3px;"></div></div><span style="text-align:right;">🎪 Gil</span><span style="text-align:right; font-variant-numeric:tabular-nums; color:var(--color-text-secondary);">14</span></div>
+        <div style="display:grid; grid-template-columns:80px 1fr 80px 40px; align-items:center; gap:9px; padding:7px 9px; background:var(--color-background-secondary); border-radius:5px;"><span style="font-weight:500;">🔍 Raul</span><div style="background:var(--color-background-primary); height:12px; border-radius:3px;"><div style="background:var(--color-text-info); height:100%; width:57%; border-radius:3px;"></div></div><span style="text-align:right;">🐺 Jarbas</span><span style="text-align:right; font-variant-numeric:tabular-nums; color:var(--color-text-secondary);">8</span></div>
+        <div style="display:grid; grid-template-columns:80px 1fr 80px 40px; align-items:center; gap:9px; padding:7px 9px; background:var(--color-background-secondary); border-radius:5px;"><span style="font-weight:500;">🎪 Gil</span><div style="background:var(--color-background-primary); height:12px; border-radius:3px;"><div style="background:var(--color-text-info); height:100%; width:43%; border-radius:3px;"></div></div><span style="text-align:right;">🐺 Jarbas</span><span style="text-align:right; font-variant-numeric:tabular-nums; color:var(--color-text-secondary);">6</span></div>
+        <div style="display:grid; grid-template-columns:80px 1fr 80px 40px; align-items:center; gap:9px; padding:7px 9px; background:var(--color-background-secondary); border-radius:5px;"><span style="font-weight:500;">💬 Lia</span><div style="background:var(--color-background-primary); height:12px; border-radius:3px;"><div style="background:var(--color-text-info); height:100%; width:14%; border-radius:3px;"></div></div><span style="text-align:right;">👤 Rodrigo</span><span style="text-align:right; font-variant-numeric:tabular-nums; color:var(--color-text-secondary);">2</span></div>
+      </div>
+    </div>
+    <div id="la-insights" style="display:none; padding:30px 0; text-align:center; color:var(--color-text-secondary); font-size:12px;">
+      Raul gerou 8 insights em 30d. 5 viraram ação (reforço de estoque MC, troca de DJ, ajuste de horário). 3 só ficaram registrados.
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<script>
+const AGENTS = {
+  rodrigo: {emoji:'👤', name:'Rodrigo', meta:'tu · centro de tudo', f1:'Decide. Aprova. Veta. Único humano no sistema.', f2:'Sempre.', f3:'Decisões.', f4:'Os 7 agentes.', f5:'-', f6:'Não executar tarefa operacional — delegar.'},
+  jarbas: {emoji:'🐺', name:'Jarbas', meta:'hub · WhatsApp privado · pull · IDENTITY pronta, falta canal', f1:'Recebe tudo que tu manda no privado, roteia pro agente certo, devolve resposta consolidada. Não executa sozinho.', f2:'Quando tu manda mensagem no WhatsApp privado. Sem cron próprio.', f3:'Resposta consolidada com origem clara ("Gil disse que..."). Encaminha pro Tomás se for $$.', f4:'Só Rodrigo. Nunca cliente público nem promoter.', f5:'Responde em até 30s. Silêncio > 2min após pergunta = quebrado.', f6:'Não toca dado financeiro · não puxa do Tomás · não responde sem rotear.'},
+  beto: {emoji:'⚡', name:'Beto', meta:'Promoters · grupo WhatsApp · push (5 crons) · ✅ em prod', f1:'Mantém o jogo aceso no grupo dos promoters: ranking, parabéns top 3, lembrete lista, motivação pré-evento.', f2:'5 crons: ranking seg 10h · lembrete D-1 · motivação D 16h · parabéns dom 21h · follow-up D+1.', f3:'Mensagens no grupo. Mostra POSIÇÃO no ranking, NUNCA R$. Nunca dado individual de outro promoter.', f4:'Promoters (público restrito). Material vem da Duda.', f5:'Cada cron disparou na hora certa. Cron silenciado = alerta.', f6:'Não cria material (recebe da Duda). Não revela R$. Promoter nunca vê dado individual de outro.'},
+  lia: {emoji:'💬', name:'Lia', meta:'Atendimento público · WhatsApp do bar · pull · stub', f1:'Cliente pergunta endereço, horário, line-up, reserva — Lia responde com tom acolhedor. Não vê dado interno.', f2:'Pull puro: só age quando cliente escreve. Sem cron.', f3:'Respostas factuais (horário, line-up, reserva). Escalações pra Gil (eventos privados) ou Rodrigo (caso sério).', f4:'Cliente público. Em escalação: Gil ou Rodrigo.', f5:'Tempo de resposta < 5min em horário comercial. Cliente esperando > 30min = crítico.', f6:'Não vê faturamento. Não passa dado interno. Não confirma evento privado — escala pro Gil.'},
+  duda: {emoji:'🎸', name:'Duda', meta:'Marketing · Telegram topic Marketing · push · stub', f1:'Calendário editorial, gabarito de flyer/post, copy curta, lembrete de divulgar evento. Não posta sozinha.', f2:'Cron diário pra checar calendário. Cron D-3 pré-evento sugere material. Cron D dispara último gás.', f3:'Material aprovado por ti que vai pro feed/stories OU pro Beto disparar no grupo de promoters.', f4:'Rodrigo (aprovação). Beto (handoff de material pro grupo).', f5:'Submete material a tempo. Atraso > 24h do prazo = alerta.', f6:'Não posta sem aprovação. Não invade canal de promoter.'},
+  tomas: {emoji:'📊', name:'Tomás', meta:'Financeiro · DM separada (não passa pelo Jarbas) · push · stub', f1:'Fechamento diário, comissões pós-evento, alerta de variação anormal antes de tu perguntar. ÚNICO que reporta direto.', f2:'Cron diário 04:00. Cron pós-evento. Trigger por variação anormal (>20%).', f3:'Resumo financeiro do dia. Cálculo de comissão. Alertas com número + comparação.', f4:'Só Rodrigo. NUNCA Jarbas. NUNCA outro agente.', f5:'Push até 09:00 todo dia. Sem push em dia comum = quebrado. Sem push em dia de evento = crítico.', f6:'Não interpreta padrão (isso é Raul). Não conversa via Jarbas. Não revela dado individual de promoter.'},
+  gil: {emoji:'🎪', name:'Gil', meta:'Eventos/Operações · DM contigo · pull (com checklist 48h) · stub', f1:'Pré: checklist 48h, rider, equipe. Dia: timeline. Pós: resumo PNE+Bar Fácil (público + venda, não R$).', f2:'Pull: só age se há evento ou tu pergunta. Push automático: checklist D-2, alerta D-1.', f3:'Cronograma operacional, alertas de pendência, resumo pós-evento (público, atraso, equipe, sobra).', f4:'Rodrigo (DM). Em pós-evento: alimenta Jarbas pro consolidado.', f5:'Em dia de evento: silêncio > 2h = alerta. Em dia comum: pull (silêncio é normal).', f6:'Não confirma atração sem tu autorizar. Não muda data sem ti. Não toca R$ (isso é Tomás).'},
+  raul: {emoji:'🔍', name:'Raul', meta:'Inteligência · sub-agente do Jarbas, sem canal · push semanal · stub', f1:'Cruza PNE × Bar Fácil × histórico e entrega insight (padrão + hipótese + ação sugerida). Nunca número pelado.', f2:'Cron semanal seg 09:00. Trigger sob demanda quando Jarbas pede análise.', f3:'Insight estruturado: padrão observado + hipótese + ação sugerida.', f4:'Jarbas (que repassa pra ti). Nunca direto pra ti.', f5:'Relatório semanal seg 09:00. Atraso > 12h = alerta.', f6:'Sem canal próprio. Não fala número sem hipótese. Não substitui Tomás (Tomás = $$, Raul = comportamento).'}
+};
+
+let currentAgent = 'beto';
+
+function show(screen) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('screen-' + screen).classList.add('active');
+  document.getElementById('nav-' + screen).classList.add('active');
+}
+
+function selectAgentInfo(id) {
+  document.querySelectorAll('[id^="bi-"]').forEach(b => b.classList.remove('selected'));
+  const btn = document.getElementById('bi-' + id);
+  if (btn) btn.classList.add('selected');
+  const a = AGENTS[id];
+  if (!a) return;
+  currentAgent = id;
+  document.getElementById('ai-emoji').textContent = a.emoji;
+  document.getElementById('ai-name').textContent = a.name;
+  document.getElementById('ai-meta').textContent = a.meta;
+  document.getElementById('ai-f1').textContent = a.f1;
+  document.getElementById('ai-f2').textContent = a.f2;
+  document.getElementById('ai-f3').textContent = a.f3;
+  document.getElementById('ai-f4').textContent = a.f4;
+  document.getElementById('ai-f5').textContent = a.f5;
+  document.getElementById('ai-f6').textContent = a.f6;
+}
+
+function selectAgent(id) {
+  document.querySelectorAll('[id^="ca-"]').forEach(b => b.classList.remove('selected'));
+  const btn = document.getElementById('ca-' + id);
+  if (btn) btn.classList.add('selected');
+  const a = AGENTS[id];
+  if (!a) return;
+  currentAgent = id;
+  document.getElementById('cb-emoji').textContent = a.emoji;
+  document.getElementById('cb-name').textContent = a.name;
+  document.getElementById('cb-meta').textContent = a.meta;
+}
+
+const filterState = {crons: false, eventos: true, vencimentos: true, posts: true, meus: true};
+function toggleF(cat) {
+  filterState[cat] = !filterState[cat];
+  const btn = document.getElementById('f-' + cat);
+  if (filterState[cat]) {
+    btn.classList.remove('off');
+  } else {
+    btn.classList.add('off');
+  }
+  document.querySelectorAll('[data-cat="' + cat + '"]').forEach(el => {
+    Array.from(el.children).forEach(c => c.style.display = filterState[cat] ? '' : 'none');
+  });
+}
+
+function askLog(q) {
+  ['escalacoes','crons','alertas','rotear','handoffs','insights'].forEach(k => {
+    document.getElementById('ql-' + k).classList.remove('active');
+    document.getElementById('ql-' + k).classList.add('idle');
+    document.getElementById('la-' + k).style.display = 'none';
+  });
+  document.getElementById('ql-' + q).classList.remove('idle');
+  document.getElementById('ql-' + q).classList.add('active');
+  document.getElementById('la-' + q).style.display = '';
+}
+
+selectAgentInfo('jarbas');
+selectAgent('beto');
+</script>

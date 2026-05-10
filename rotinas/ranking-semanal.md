@@ -3,7 +3,7 @@
 - **Cron:** `0 11 * * 0` (domingo, 11h Brasília)
 - **Agente:** Beto (promoters)
 - **Destino:** WhatsApp Grupo Promoters
-- **Skill usada:** `skills/montar-ranking.md`
+- **Skill usada:** `skills/montar-ranking/SKILL.md`
 
 ## Prompt
 

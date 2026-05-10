@@ -1,0 +1,72 @@
+/* ============================================================
+   EL COYOTE — colors & type tokens
+   Fonte de verdade pra todos os ui_kits.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;700&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
+
+:root {
+  /* ---------- INK / PAPER (neutros base) ---------- */
+  --ink:           #0E1418;        /* preto profundo, quase azul */
+  --paper:         #F4EFE6;        /* creme — papel encerado */
+  --bone:          #E6DCCB;        /* areia clara, fundos secundários */
+  --sand:          #E6DCCB;        /* alias */
+  --cream:         #F4EFE6;        /* alias */
+  --rule:          rgba(14,20,24,.10);   /* linha divisória sobre paper */
+  --rule-strong:   rgba(14,20,24,.22);
+
+  /* ---------- COYOTE — paleta da casa ---------- */
+  --coyote-sun:     #F2C14E;       /* sol — sun yellow */
+  --coyote-sunset:  #F58549;       /* ember/sunset — laranja */
+  --coyote-clay:    #9E5641;       /* terra — terracota */
+  --coyote-night:   #274156;       /* deep — noite-mar */
+  --coyote-sage:    #88A07D;       /* sage — verde mata */
+  --coyote-mist:    #A9B0B3;       /* mist — bruma */
+
+  /* aliases curtos pro brandbook */
+  --sun:    #F2C14E;
+  --ember:  #F58549;
+  --terra:  #9E5641;
+  --deep:   #274156;
+  --sage:   #88A07D;
+  --mist:   #A9B0B3;
+
+  /* ---------- foreground tones (sobre paper/ink) ---------- */
+  --fg-1: var(--ink);                       /* texto principal */
+  --fg-2: rgba(14,20,24,.72);               /* texto secundário */
+  --fg-3: rgba(14,20,24,.52);               /* texto terciário/legenda */
+  --fg-4: rgba(14,20,24,.34);               /* hint */
+
+  /* sobre fundo escuro */
+  --on-dark-1: var(--paper);
+  --on-dark-2: rgba(244,239,230,.72);
+  --on-dark-3: rgba(244,239,230,.52);
+
+  /* ---------- semantic ---------- */
+  --good:   #5E8A5A;
+  --bad:    #B5483A;
+  --warn:   #D69E2E;
+
+  /* ---------- type stack ---------- */
+  --font-display:   "Anton", "Impact", "Helvetica Inserat", sans-serif;
+  --font-body:      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-editorial: "Caveat", "Playfair Display", Georgia, serif;
+  --font-mono:      "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---------- shadows / radii ---------- */
+  --shadow-1: 0 2px 6px rgba(14,20,24,.06), 0 8px 24px rgba(14,20,24,.06);
+  --shadow-2: 0 6px 16px rgba(14,20,24,.10), 0 18px 48px rgba(14,20,24,.10);
+  --r-2: 2px;
+  --r-4: 4px;
+  --r-6: 6px;
+  --r-12: 12px;
+  --r-pill: 999px;
+}
+
+/* dark surfaces helper */
+.on-dark { background: var(--ink); color: var(--paper); }
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: var(--font-body); color: var(--ink); background: var(--paper); }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }

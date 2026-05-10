@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EL COYOTE — UI Kit v2 · alinhado ao design-system-v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:'#0E0E0E',deep:'#274156',sage:'#88a07d',sun:'#f2c14e',
+        ember:'#f58549',terra:'#9e5641',mist:'#a9b0b3',cream:'#F4EFE6',sand:'#E6DCCB',
+      },
+      fontFamily: {
+        display:['Anton','Impact','sans-serif'],
+        sans:['Inter','system-ui','sans-serif'],
+        hand:['Caveat','cursive'],
+        mono:['JetBrains Mono','ui-monospace','monospace'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#F4EFE6;color:#0E0E0E;font-weight:300}
+  .display{font-family:'Anton',Impact,sans-serif;text-transform:uppercase;line-height:.92;letter-spacing:.005em}
+  .eyebrow{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.32em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:currentColor;opacity:.7}
+  .eyebrow.no-rule::before{display:none}
+  .hairline{border:0;border-top:1px solid rgba(14,14,14,.12)}
+  .hairline-strong{border:0;border-top:1px solid rgba(14,14,14,.32)}
+  .grain{position:relative}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  .photo-grade{position:relative}
+  .photo-grade::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,133,73,.06) 0%,transparent 30%,transparent 65%,rgba(14,14,14,.55) 100%);pointer-events:none;z-index:1}
+  .photo-grade>img{position:relative;z-index:0}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:all 240ms cubic-bezier(.22,1,.36,1);cursor:pointer;border:0;font-family:inherit}
+  .btn-primary{background:#f58549;color:#0E0E0E}
+  .btn-primary:hover{background:#f2c14e;transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,133,73,.32)}
+  .btn-secondary{background:transparent;color:#0E0E0E;border:1px solid rgba(14,14,14,.32)}
+  .btn-secondary:hover{background:#0E0E0E;color:#F4EFE6}
+  .btn-ghost{background:transparent;color:#0E0E0E;padding:14px 4px;border-radius:0;border-bottom:1px solid rgba(14,14,14,.32)}
+  .btn-ghost:hover{color:#f58549;border-color:#f58549}
+  .btn-disabled{background:#a9b0b3;color:rgba(14,14,14,.4);cursor:not-allowed}
+  .field{background:transparent;border:0;border-bottom:1px solid rgba(14,14,14,.32);padding:12px 0;font-size:16px;outline:none;width:100%;font-family:inherit;color:inherit;transition:border-color 220ms}
+  .field:focus{border-color:#f58549}
+  .field-label{font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(14,14,14,.5);margin-bottom:8px;display:block}
+  .field-error{border-color:#f58549}
+  .field-error-msg{font-size:11px;color:#f58549;margin-top:6px;display:block}
+  .scratch{background:linear-gradient(110deg,transparent 30%,rgba(245,133,73,.18) 50%,transparent 70%)}
+  .tilt-l{transform:rotate(-2.5deg)}.tilt-r{transform:rotate(2deg)}
+  /* kit nav */
+  .kit-nav{position:fixed;top:24px;left:24px;z-index:50;background:rgba(14,14,14,.92);backdrop-filter:blur(14px);border-radius:999px;padding:6px;display:flex;gap:2px;flex-wrap:wrap;max-width:calc(100vw - 48px)}
+  .kit-nav a{padding:8px 14px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,239,230,.6);border-radius:999px;cursor:pointer;transition:all 180ms;text-decoration:none}
+  .kit-nav a:hover{color:#F4EFE6}
+  .swatch{aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;font-size:11px;font-weight:600;line-height:1.3}
+  .swatch .name{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.02em}
+  .swatch .hex{font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.8;margin-top:2px}
+  section{scroll-margin-top:96px}
+  ::selection{background:#f58549;color:#0E0E0E}
+</style>
+</head>
+<body>
+
+<nav class="kit-nav">
+  <a href="#tokens">tokens</a>
+  <a href="#color">cor</a>
+  <a href="#type">tipografia</a>
+  <a href="#components">componentes</a>
+  <a href="#patterns">padrões</a>
+  <a href="#voice">voz</a>
+</nav>
+
+<!-- HEADER -->
+<header class="px-6 lg:px-12 pt-32 pb-16 max-w-[1280px] mx-auto">
+  <div class="eyebrow text-ember mb-6"><span>UI KIT · v2</span></div>
+  <h1 class="display text-[56px] sm:text-[88px] lg:text-[128px] leading-[.86]">elcoyote<br><span class="text-ember">ui kit.</span></h1>
+  <p class="text-lg text-ink/65 mt-6 max-w-2xl leading-relaxed">peças canônicas alinhadas ao <code class="font-mono text-ember text-base">design-system-v2.html</code>. tudo aqui pode ser copiado e colado pro <code class="font-mono text-ember text-base">index.html</code> sem perder consistência.</p>
+  <div class="mt-8 flex flex-wrap gap-4">
+    <span class="font-hand text-ember text-3xl tilt-l">a noite vira história.</span>
+  </div>
+</header>
+
+<hr class="hairline mx-6 lg:mx-12">
+
+<!-- TOKENS -->
+<section id="tokens" class="px-6 lg:px-12 py-16 max-w-[1280px] mx-auto">
+  <div class="eyebrow text-ember mb-6"><span>01 · TOKENS</span></div>
+  <h2 class="display text-[40px] sm:text-[60px] mb-8">paleta · 8 cores</h2>
+  <p class="text-ink/65 mb-10 max-w-2xl">regra 60·30·10. combinação A: ink+ember+cream (noite combustível). B: deep+sun+cream (entardecer no porto). C: cream+terra+ink (domingo de ressaca).</p>
+
+  <div id="color" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+    <div class="swatch" style="background:#0E0E0E;color:#F4EFE6"><span class="name">ink</span><span class="hex">#0E0E0E</span></div>
+    <div class="swatch" style="background:#274156;color:#F4EFE6"><span class="name">deep</span><span class="hex">#274156</span></div>
+    <div class="swatch" style="background:#f58549;color:#0E0E0E"><span class="name">ember</span><span class="hex">#f58549</span></div>
+    <div class="swatch" style="background:#f2c14e;color:#0E0E0E"><span class="name">sun</span><span class="hex">#f2c14e</span></div>
+    <div class="swatch" style="background:#9e5641;color:#F4EFE6"><span class="name">terra</span><span class="hex">#9e5641</span></div>
+    <div class="swatch" style="background:#88a07d;color:#0E0E0E"><span class="name">sage</span><span class="hex">#88a07d</span></div>
+    <div class="swatch" style="background:#a9b0b3;color:#0E0E0E"><span class="name">mist</span><span class="hex">#a9b0b3</span></div>
+    <div class="swatch" style="background:#F4EFE6;color:#0E0E0E;border:1px solid rgba(14,14,14,.08)"><span class="name">cream</span><span class="hex">#F4EFE6</span></div>
+    <div class="swatch" style="background:#E6DCCB;color:#0E0E0E"><span class="name">sand</span><span class="hex">#E6DCCB</span></div>
+  </div>
+
+  <div class="grid sm:grid-cols-3 gap-6 mt-12">
+    <div class="rounded-md overflow-hidden">
+      <div class="h-32 grid grid-cols-3" style="grid-template-columns:60% 30% 10%">
+        <div style="background:#0E0E0E"></div>
+        <div style="background:#f58549"></div>
+        <div style="background:#F4EFE6"></div>
+      </div>
+      <div class="bg-cream p-4">
+        <div class="eyebrow text-ember no-rule mb-1"><span>combinação A</span></div>
+        <p class="text-sm">noite combustível</p>
+      </div>
+    </div>
+    <div class="rounded-md overflow-hidden">
+      <div class="h-32 grid" style="grid-template-columns:60% 30% 10%">
+        <div style="background:#274156"></div>
+        <div style="background:#f2c14e"></div>
+        <div style="background:#F4EFE6"></div>
+      </div>
+      <div class="bg-cream p-4">
+        <div class="eyebrow text-ember no-rule mb-1"><span>combinação B</span></div>
+        <p class="text-sm">entardecer no porto</p>
+      </div>
+    </div>
+    <div class="rounded-md overflow-hidden">
+      <div class="h-32 grid" style="grid-template-columns:60% 30% 10%">
+        <div style="background:#F4EFE6"></div>
+        <div style="background:#9e5641"></div>
+        <div style="background:#0E0E0E"></div>
+      </div>
+      <div class="bg-cream p-4">
+        <div class="eyebrow text-ember no-rule mb-1"><span>combinação C</span></div>
+        <p class="text-sm">domingo de ressaca</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline mx-6 lg:mx-12">
+
+<!-- TYPE -->
+<section id="type" class="px-6 lg:px-12 py-16 max-w-[1280px] mx-auto">
+  <div class="eyebrow text-ember mb-6"><span>02 · TIPOGRAFIA</span></div>
+  <h2 class="display text-[40px] sm:text-[60px] mb-12">quatro famílias.<br>quatro funções.</h2>
+
+  <div class="space-y-12">
+    <div>
+      <div class="grid lg:grid-cols-[180px_1fr] gap-6 items-start">
+        <div>
+          <div class="eyebrow text-ember mb-2 no-rule"><span>display · anton</span></div>
+          <p class="font-mono text-xs text-ink/55">Regular · CAIXA ALTA · ≥28px · tracking .005em · line-height .92</p>
+        </div>
+        <div>
+          <div class="display text-[120px] sm:text-[180px] leading-[.86]">a noite</div>
+          <div class="font-mono text-xs text-ink/55 mt-2">equity do logo. NUNCA em corpo de texto, NUNCA minúsculo.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hairline">
+
+    <div>
+      <div class="grid lg:grid-cols-[180px_1fr] gap-6 items-start">
+        <div>
+          <div class="eyebrow text-ember mb-2 no-rule"><span>sans · inter</span></div>
+          <p class="font-mono text-xs text-ink/55">300 / 400 / 500 / 600 / 700</p>
+        </div>
+        <div class="space-y-2">
+          <p class="font-light text-2xl">Inter Light · parágrafos longos respiram.</p>
+          <p class="font-normal text-2xl">Inter Regular · UI padrão.</p>
+          <p class="font-medium text-2xl">Inter Medium · ênfase.</p>
+          <p class="font-semibold text-2xl">Inter Semibold · botões / links.</p>
+          <p class="font-bold text-2xl">Inter Bold · eyebrows / labels.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hairline">
+
+    <div>
+      <div class="grid lg:grid-cols-[180px_1fr] gap-6 items-start">
+        <div>
+          <div class="eyebrow text-ember mb-2 no-rule"><span>hand · caveat</span></div>
+          <p class="font-mono text-xs text-ink/55">400 / 700 · UMA frase por seção · ornamento</p>
+        </div>
+        <div>
+          <span class="font-hand text-[64px] text-ember tilt-l block leading-none">venha inteiro.</span>
+          <div class="font-mono text-xs text-ink/55 mt-3">tilt -2.5° ou +2°. NUNCA em CTA, NUNCA em parágrafo.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hairline">
+
+    <div>
+      <div class="grid lg:grid-cols-[180px_1fr] gap-6 items-start">
+        <div>
+          <div class="eyebrow text-ember mb-2 no-rule"><span>mono · jetbrains</span></div>
+          <p class="font-mono text-xs text-ink/55">400 / 600 · metadados · datas · especs</p>
+        </div>
+        <div class="space-y-1 font-mono text-base">
+          <p>SEX · SÁB · 22h → 5h</p>
+          <p>R$ 2026 · #f58549 · IMBITUBA/SC</p>
+          <p>01 · 02 · 03 · 04 · 05</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16 grid sm:grid-cols-3 gap-6">
+    <div class="bg-sand rounded-md p-6">
+      <div class="font-mono text-xs text-ink/55 mb-2">HERO</div>
+      <div class="display text-[64px] leading-[.85]">96px</div>
+    </div>
+    <div class="bg-sand rounded-md p-6">
+      <div class="font-mono text-xs text-ink/55 mb-2">H1</div>
+      <div class="display text-[56px] leading-[.85]">56px</div>
+    </div>
+    <div class="bg-sand rounded-md p-6">
+      <div class="font-mono text-xs text-ink/55 mb-2">H2</div>
+      <div class="display text-[36px] leading-[.85]">36px</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline mx-6 lg:mx-12">
+
+<!-- COMPONENTS -->
+<section id="components" class="px-6 lg:px-12 py-16 max-w-[1280px] mx-auto">
+  <div class="eyebrow text-ember mb-6"><span>03 · COMPONENTES</span></div>
+  <h2 class="display text-[40px] sm:text-[60px] mb-12">peças.</h2>
+
+  <!-- buttons -->
+  <h3 class="display text-2xl mb-6">buttons</h3>
+  <div class="flex flex-wrap gap-4 mb-4">
+    <button class="btn btn-primary">primary <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i></button>
+    <button class="btn btn-secondary">secondary</button>
+    <button class="btn btn-ghost">ghost link</button>
+    <button class="btn btn-disabled" disabled>disabled</button>
+  </div>
+  <p class="font-mono text-xs text-ink/55 mb-12">11px · letter-spacing .18em · padding 16px 26px · border-radius 999px · UPPERCASE</p>
+
+  <!-- eyebrows -->
+  <h3 class="display text-2xl mb-6">eyebrows</h3>
+  <div class="flex flex-wrap gap-x-10 gap-y-4 mb-12">
+    <div class="eyebrow text-ember"><span>com hairline</span></div>
+    <div class="eyebrow text-ember no-rule"><span>sem hairline</span></div>
+    <div class="eyebrow text-sun"><span>sun (em fundo escuro)</span></div>
+    <div class="eyebrow text-mist"><span>mist (label de form)</span></div>
+  </div>
+
+  <!-- form -->
+  <h3 class="display text-2xl mb-6">form fields</h3>
+  <div class="bg-cream rounded-md p-8 max-w-xl mb-4">
+    <div class="space-y-6">
+      <div>
+        <label class="field-label">nome</label>
+        <input type="text" class="field" placeholder="o teu nome">
+      </div>
+      <div>
+        <label class="field-label">whatsapp</label>
+        <input type="tel" class="field" placeholder="+55 48 9 8765-4321" value="+55 48 99174-4141">
+      </div>
+      <div>
+        <label class="field-label">data do evento</label>
+        <input type="text" class="field field-error" value="33 de fevereiro">
+        <span class="field-error-msg">essa data não cabe no calendário.</span>
+      </div>
+    </div>
+  </div>
+  <p class="font-mono text-xs text-ink/55 mb-12">hairline embaixo · sem caixa · foco vira ember · errors em ember (não vermelho)</p>
+
+  <!-- event card -->
+  <h3 class="display text-2xl mb-6">event card</h3>
+  <div class="grid sm:grid-cols-3 gap-5 mb-4">
+    <article class="group cursor-pointer">
+      <div class="relative overflow-hidden rounded-md aspect-[4/5] photo-grade">
+        <img src="../../%40SimplePixOficial-138.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute top-4 left-4 z-10 bg-cream/95 rounded-md px-3 py-2">
+          <div class="display text-[28px] leading-none">SEX</div>
+          <div class="font-mono text-[10px] text-ember tracking-widest mt-1">22h → 5h</div>
+        </div>
+        <div class="absolute top-4 right-4 z-10 bg-ember text-ink eyebrow no-rule px-3 py-1.5 rounded-full"><span style="font-size:9px">ao vivo</span></div>
+        <div class="absolute left-5 right-5 bottom-5 z-10 text-cream">
+          <div class="font-mono text-[10px] tracking-widest opacity-80">LIVE MUSIC</div>
+          <h4 class="display text-3xl mt-1">banda da casa</h4>
+        </div>
+      </div>
+    </article>
+    <article class="group cursor-pointer">
+      <div class="relative overflow-hidden rounded-md aspect-[4/5] photo-grade">
+        <img src="../../%40SimplePixOficial-219.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute top-4 left-4 z-10 bg-cream/95 rounded-md px-3 py-2">
+          <div class="display text-[28px] leading-none">SÁB</div>
+          <div class="font-mono text-[10px] text-ember tracking-widest mt-1">22h → 5h</div>
+        </div>
+        <div class="absolute top-4 right-4 z-10 border border-cream/50 text-cream eyebrow no-rule px-3 py-1.5 rounded-full"><span style="font-size:9px">esgotado</span></div>
+        <div class="absolute left-5 right-5 bottom-5 z-10 text-cream">
+          <div class="font-mono text-[10px] tracking-widest opacity-80">CONVIDADOS</div>
+          <h4 class="display text-3xl mt-1">noite quente</h4>
+        </div>
+      </div>
+    </article>
+    <article class="group cursor-pointer">
+      <div class="relative overflow-hidden rounded-md aspect-[4/5] photo-grade">
+        <img src="../../%40SimplePixOficial-339.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute top-4 left-4 z-10 bg-cream/95 rounded-md px-3 py-2">
+          <div class="display text-[18px] leading-none">EVENTOS</div>
+          <div class="font-mono text-[10px] text-ember tracking-widest mt-1">especiais</div>
+        </div>
+        <div class="absolute left-5 right-5 bottom-5 z-10 text-cream">
+          <div class="font-mono text-[10px] tracking-widest opacity-80">NOITES TEMÁTICAS</div>
+          <h4 class="display text-3xl mt-1">veja tudo</h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <p class="font-mono text-xs text-ink/55 mb-12">aspect 4/5 · day-stamp top-left · status badge top-right (ember pra "ao vivo", border pra "esgotado")</p>
+
+  <!-- pillar -->
+  <h3 class="display text-2xl mb-6">pillar card</h3>
+  <div class="grid grid-cols-2 lg:grid-cols-5 gap-px bg-ink/12 rounded-md overflow-hidden mb-4">
+    <div class="bg-cream p-8 hover:bg-sand transition-colors duration-500">
+      <div class="font-mono text-ink/40 text-xs tracking-widest">01</div>
+      <h4 class="display text-3xl mt-4 mb-3">livre</h4>
+      <p class="text-sm text-ink/65 leading-relaxed">se é seu, é da casa. ninguém julga, ninguém mede.</p>
+    </div>
+    <div class="bg-cream p-8 hover:bg-sand transition-colors duration-500">
+      <div class="font-mono text-ink/40 text-xs tracking-widest">02</div>
+      <h4 class="display text-3xl mt-4 mb-3">quente</h4>
+      <p class="text-sm text-ink/65 leading-relaxed">brasa que não apaga. abraço que não dura.</p>
+    </div>
+    <div class="bg-cream p-8 hover:bg-sand transition-colors duration-500">
+      <div class="font-mono text-ink/40 text-xs tracking-widest">03</div>
+      <h4 class="display text-3xl mt-4 mb-3">intenso</h4>
+      <p class="text-sm text-ink/65 leading-relaxed">o som sobe. a pista responde.</p>
+    </div>
+    <div class="bg-cream p-8 hover:bg-sand transition-colors duration-500">
+      <div class="font-mono text-ink/40 text-xs tracking-widest">04</div>
+      <h4 class="display text-3xl mt-4 mb-3">poético</h4>
+      <p class="text-sm text-ink/65 leading-relaxed">a luz vira âmbar. o lugar conta sozinho.</p>
+    </div>
+    <div class="bg-cream p-8 hover:bg-sand transition-colors duration-500">
+      <div class="font-mono text-ink/40 text-xs tracking-widest">05</div>
+      <h4 class="display text-3xl mt-4 mb-3">litorâneo</h4>
+      <p class="text-sm text-ink/65 leading-relaxed">o vento entra na casa e leva tudo embora.</p>
+    </div>
+  </div>
+  <p class="font-mono text-xs text-ink/55 mb-12">grid 5 colunas · número mono em cinza · hover muda fundo pra sand</p>
+</section>
+
+<hr class="hairline mx-6 lg:mx-12">
+
+<!-- PATTERNS -->
+<section id="patterns" class="px-6 lg:px-12 py-16 max-w-[1280px] mx-auto">
+  <div class="eyebrow text-ember mb-6"><span>04 · PADRÕES</span></div>
+  <h2 class="display text-[40px] sm:text-[60px] mb-12">composições.</h2>
+
+  <!-- hero pattern -->
+  <h3 class="display text-2xl mb-6">hero · fullbleed</h3>
+  <div class="relative h-[480px] rounded-md overflow-hidden mb-4 bg-ink">
+    <img src="../../%40SimplePixOficial-281.jpg" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/20 to-ink/85"></div>
+    <div class="absolute inset-0 grain"></div>
+    <div class="relative h-full flex flex-col justify-end p-10">
+      <div class="eyebrow text-sun mb-4"><span>PUB · LIVE MUSIC · DECK</span></div>
+      <div class="display text-[88px] text-cream leading-[.86]">a noite<br>te&nbsp;espera.</div>
+      <div class="mt-6 flex flex-wrap gap-3 items-center">
+        <button class="btn btn-primary">reservar mesa <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i></button>
+        <span class="font-hand text-sun text-3xl tilt-l">venha inteiro.</span>
+      </div>
+    </div>
+  </div>
+  <p class="font-mono text-xs text-ink/55 mb-12">photo-grade overlay · grain · gradient bottom · eyebrow + display + CTA + Caveat</p>
+
+  <!-- manifesto pattern -->
+  <h3 class="display text-2xl mb-6">manifesto · deep + 222</h3>
+  <div class="relative rounded-md overflow-hidden bg-ink text-cream p-12 mb-4">
+    <div class="absolute inset-0 opacity-30"><img src="../../222.png" class="w-full h-full object-cover"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/30"></div>
+    <div class="relative">
+      <div class="eyebrow text-sun mb-6"><span>MANIFESTO</span></div>
+      <div class="display text-[64px] leading-[.86]">litoral<br>brasileiro<br><span class="text-ember">com alma</span><br>de pub.</div>
+      <span class="font-hand text-sun text-4xl block mt-8 tilt-r">se é pra viver, que seja inteiro.</span>
+    </div>
+  </div>
+
+  <!-- split pattern -->
+  <h3 class="display text-2xl mb-6">split · privados</h3>
+  <div class="grid lg:grid-cols-2 rounded-md overflow-hidden mb-4 bg-deep text-cream">
+    <div class="aspect-[4/3] lg:aspect-auto"><img src="../../IMG_0311-telao.jpg" class="w-full h-full object-cover"></div>
+    <div class="p-10 lg:p-14 flex flex-col justify-center grain relative">
+      <div class="eyebrow text-sun mb-6"><span>EVENTOS PRIVADOS</span></div>
+      <div class="display text-[64px] leading-[.86]">a casa<br><span class="text-sun">fica sua.</span></div>
+      <p class="text-cream/75 mt-6 max-w-md">casamento, formatura, aniversário da firma. o EL COYOTE inteiro pra quem você ama.</p>
+      <div class="mt-8 flex flex-wrap gap-4 items-center">
+        <button class="btn btn-primary">conversar com a casa <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i></button>
+        <span class="font-hand text-sun text-3xl tilt-r">um sim com vista pro mar.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- masonry -->
+  <h3 class="display text-2xl mb-6 mt-12">masonry photo</h3>
+  <div class="columns-2 sm:columns-3 lg:columns-4 gap-3 mb-4">
+    <img src="../../%40SimplePixOficial-138.jpg" class="w-full mb-3 rounded-md break-inside-avoid">
+    <img src="../../%40SimplePixOficial-219.jpg" class="w-full mb-3 rounded-md break-inside-avoid">
+    <img src="../../%40SimplePixOficial-281.jpg" class="w-full mb-3 rounded-md break-inside-avoid">
+    <img src="../../%40SimplePixOficial-339.jpg" class="w-full mb-3 rounded-md break-inside-avoid">
+    <img src="../../%40SimplePixOficial-245.jpg" class="w-full mb-3 rounded-md break-inside-avoid">
+    <img src="../../%40SimplePixOficial-172.jpg" class="w-full mb-3 rounded-md break-inside-avoid">
+  </div>
+  <p class="font-mono text-xs text-ink/55">columns CSS · gap-3 · break-inside-avoid · lazy-load nas reais</p>
+</section>
+
+<hr class="hairline mx-6 lg:mx-12">
+
+<!-- VOICE -->
+<section id="voice" class="px-6 lg:px-12 py-16 max-w-[1280px] mx-auto">
+  <div class="eyebrow text-ember mb-6"><span>05 · VOZ</span></div>
+  <h2 class="display text-[40px] sm:text-[60px] mb-12">como a casa fala.</h2>
+
+  <div class="grid lg:grid-cols-3 gap-8 mb-16">
+    <div class="bg-cream rounded-md p-6">
+      <div class="flex items-baseline gap-3 mb-2">
+        <div class="display text-5xl text-ember">78%</div>
+        <div class="text-sm text-ink/55">informal</div>
+      </div>
+      <div class="h-1.5 bg-ink/8 rounded-full overflow-hidden">
+        <div class="h-full bg-ember" style="width:78%"></div>
+      </div>
+      <p class="text-xs text-ink/55 mt-3">informal · vs formal</p>
+    </div>
+    <div class="bg-cream rounded-md p-6">
+      <div class="flex items-baseline gap-3 mb-2">
+        <div class="display text-5xl text-ember">72%</div>
+        <div class="text-sm text-ink/55">coração</div>
+      </div>
+      <div class="h-1.5 bg-ink/8 rounded-full overflow-hidden">
+        <div class="h-full bg-ember" style="width:72%"></div>
+      </div>
+      <p class="text-xs text-ink/55 mt-3">coração · vs cabeça</p>
+    </div>
+    <div class="bg-cream rounded-md p-6">
+      <div class="flex items-baseline gap-3 mb-2">
+        <div class="display text-5xl text-ember">65%</div>
+        <div class="text-sm text-ink/55">sugere</div>
+      </div>
+      <div class="h-1.5 bg-ink/8 rounded-full overflow-hidden">
+        <div class="h-full bg-ember" style="width:65%"></div>
+      </div>
+      <p class="text-xs text-ink/55 mt-3">sugere · vs explica</p>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-12">
+    <div>
+      <div class="eyebrow text-ember mb-4"><span>vocabulário · use</span></div>
+      <p class="text-base leading-loose">deck · noite · brasa · vista · história · a casa · amanhecer · a pista · o porto · imbituba · hora dourada · âmbar · uivo · litoral</p>
+    </div>
+    <div>
+      <div class="eyebrow text-ember mb-4"><span>proibido</span></div>
+      <p class="text-base leading-loose line-through decoration-ember/60 text-ink/40">balada · vip · premium · experiência · inesquecível · exclusivo · high-end · incrível · imperdível · top · rolê · brother · promoção · baladinha · bomba · mega · 🔥</p>
+    </div>
+  </div>
+
+  <hr class="hairline my-12">
+
+  <div class="eyebrow text-ember mb-4"><span>frases canônicas</span></div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
+    <div>
+      <p class="display text-2xl">a noite vira história.</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">tagline · hero · footer</p>
+    </div>
+    <div>
+      <p class="display text-2xl">a noite te espera.</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">CTA hero alt</p>
+    </div>
+    <div>
+      <p class="font-hand text-3xl text-ember tilt-l leading-none">venha inteiro.</p>
+      <p class="font-mono text-xs text-ink/55 mt-3">hand · ornamento</p>
+    </div>
+    <div>
+      <p class="text-lg italic">"sexta começa às 22h. seu domingo a gente devolve."</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">agenda</p>
+    </div>
+    <div>
+      <p class="display text-2xl">a casa fica sua.</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">eventos · hero do bloco</p>
+    </div>
+    <div>
+      <p class="text-lg italic">"o sol cai. a pista sobe."</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">subtítulo</p>
+    </div>
+    <div>
+      <p class="text-lg italic">"se é pra viver, que seja inteiro."</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">manifesto · assinatura</p>
+    </div>
+    <div>
+      <p class="display text-2xl">a casa aberta.</p>
+      <p class="font-mono text-xs text-ink/55 mt-1">contato</p>
+    </div>
+    <div>
+      <p class="font-hand text-3xl text-ember tilt-r leading-none">um sim com vista pro mar.</p>
+      <p class="font-mono text-xs text-ink/55 mt-3">casamento · ornamento</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-cream px-6 lg:px-12 py-16 mt-16">
+  <div class="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 lg:items-end justify-between">
+    <div>
+      <div class="display text-[40px] lg:text-[64px] leading-[.86]">a noite vira<br><span class="text-ember">história.</span></div>
+      <p class="font-mono text-xs text-cream/55 mt-4">UI Kit v2 · alinhado a design-system-v2.html</p>
+    </div>
+    <a href="../../index.html" class="btn btn-primary self-start lg:self-end">ver site v1 <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i></a>
+  </div>
+</footer>
+
+<script>
+  if (window.lucide) lucide.createIcons();
+</script>
+</body>
+</html>

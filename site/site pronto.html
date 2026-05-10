@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EL COYOTE — a noite vira história · Imbituba/SC</title>
+<meta name="description" content="Pub e eventos privados à beira-mar em Imbituba/SC. Sex e sáb 22h às 5h. Casamento, formatura, aniversário da firma — a casa fica sua. Desde 2017.">
+<meta property="og:title" content="EL COYOTE — a noite vira história">
+<meta property="og:description" content="Pub & eventos à beira-mar em Imbituba/SC. PUB · LIVE MUSIC · DECK.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0E0E0E', deep: '#274156', sage: '#88a07d',
+        sun: '#f2c14e', ember: '#f58549', terra: '#9e5641',
+        mist: '#a9b0b3', cream: '#F4EFE6', sand: '#E6DCCB',
+      },
+      fontFamily: {
+        display: ['Anton', 'Impact', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        hand: ['Caveat', 'cursive'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:#F4EFE6;color:#0E0E0E;font-weight:300;-webkit-font-smoothing:antialiased}
+  .display{font-family:'Anton',Impact,sans-serif;text-transform:uppercase;line-height:.92;letter-spacing:.005em}
+  .eyebrow{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.32em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:currentColor;opacity:.7}
+  .eyebrow.no-rule::before{display:none}
+  .smallcaps{font-variant-caps:all-small-caps;letter-spacing:.12em}
+  .hairline{border:0;border-top:1px solid rgba(14,14,14,.12)}
+  .hairline-strong{border:0;border-top:1px solid rgba(14,14,14,.32)}
+  .grain{position:relative}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  .photo-grade{position:relative}
+  .photo-grade::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,133,73,.06) 0%,transparent 30%,transparent 65%,rgba(14,14,14,.55) 100%);pointer-events:none;z-index:1}
+  .photo-grade>*{position:relative;z-index:2}
+  .scratch{background:linear-gradient(110deg,transparent 30%,rgba(245,133,73,.18) 50%,transparent 70%)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:all 240ms cubic-bezier(.22,1,.36,1);cursor:pointer;border:0;font-family:inherit}
+  .btn-primary{background:#f58549;color:#0E0E0E}
+  .btn-primary:hover{background:#f2c14e;transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,133,73,.32)}
+  .btn-secondary{background:transparent;color:#0E0E0E;border:1px solid rgba(14,14,14,.32)}
+  .btn-secondary:hover{background:#0E0E0E;color:#F4EFE6;border-color:#0E0E0E}
+  .btn-secondary.on-dark{color:#F4EFE6;border-color:rgba(244,239,230,.32)}
+  .btn-secondary.on-dark:hover{background:#F4EFE6;color:#0E0E0E}
+  .btn-ghost{background:transparent;color:#0E0E0E;padding:14px 4px;border-radius:0;border-bottom:1px solid rgba(14,14,14,.32)}
+  .btn-ghost:hover{color:#f58549;border-color:#f58549}
+  .btn-ghost.on-dark{color:#F4EFE6;border-color:rgba(244,239,230,.32)}
+  .btn-ghost.on-dark:hover{color:#f2c14e;border-color:#f2c14e}
+  .field{background:transparent;border:0;border-bottom:1px solid rgba(14,14,14,.32);padding:12px 0;font-size:16px;outline:none;width:100%;font-family:inherit;color:inherit;transition:border-color 220ms}
+  .field:focus{border-color:#f58549}
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity 1000ms cubic-bezier(.22,1,.36,1),transform 1000ms cubic-bezier(.22,1,.36,1)}
+  .fade-up.in{opacity:1;transform:translateY(0)}
+  .fade-up.d2{transition-delay:120ms}.fade-up.d3{transition-delay:240ms}.fade-up.d4{transition-delay:360ms}.fade-up.d5{transition-delay:480ms}
+  .marquee{display:flex;overflow:hidden;gap:0;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .marquee-track{display:flex;gap:48px;padding-right:48px;animation:marquee 60s linear infinite;flex-shrink:0}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+  .nav-blur{backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%)}
+  .hero-zoom{animation:zoomout 14s cubic-bezier(.22,1,.36,1) forwards}
+  @keyframes zoomout{from{transform:scale(1.08)}to{transform:scale(1)}}
+  .tilt-l{transform:rotate(-2.5deg)}
+  .tilt-r{transform:rotate(2deg)}
+  .pulse-dot{animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(245,133,73,.5)}50%{opacity:.7;box-shadow:0 0 0 10px rgba(245,133,73,0)}}
+  .nav-link{position:relative;padding:6px 0}
+  .nav-link::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 320ms cubic-bezier(.22,1,.36,1)}
+  .nav-link:hover::after{transform:scaleX(1);transform-origin:left}
+  .nav-link.active::after{transform:scaleX(1)}
+  .pillar:hover .pillar-num{color:#f58549}
+  .pillar:hover{background:#E6DCCB}
+  .gallery img{transition:transform 800ms cubic-bezier(.22,1,.36,1),filter 600ms}
+  .gallery img:hover{transform:scale(1.02);filter:saturate(1.1)}
+  .stamp{font-family:'Anton',sans-serif;line-height:.85;text-transform:uppercase}
+  .ember-line{height:1px;background:linear-gradient(90deg,transparent,#f58549,transparent)}
+  ::selection{background:#f58549;color:#0E0E0E}
+  /* responsive helpers */
+  @media (max-width:640px){
+    .display.hero-h1{font-size:64px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== STICKY NAV ============== -->
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="nav">
+  <div class="transition-all duration-500" id="nav-bg">
+    <div class="max-w-[1440px] mx-auto px-5 lg:px-12 py-5 flex items-center justify-between gap-4">
+      <a href="#top" class="flex items-center gap-3" aria-label="ELCOYOTE">
+        <span class="w-1.5 h-1.5 rounded-full bg-ember pulse-dot inline-block"></span>
+        <img src="logo%20branco.png" alt="ELCOYOTE" class="h-5 w-auto" id="logo-w">
+        <img src="logo%20preto.png" alt="ELCOYOTE" class="h-5 w-auto hidden" id="logo-b">
+      </a>
+      <nav class="hidden lg:flex items-center gap-8 text-[12px] font-semibold tracking-[.18em] uppercase text-cream" id="nav-links">
+        <a class="nav-link" href="#agenda">agenda</a>
+        <a class="nav-link" href="#eventos">eventos privados</a>
+        <a class="nav-link" href="#fotografia">fotografia</a>
+        <a class="nav-link" href="#contato">contato</a>
+      </nav>
+      <a href="https://wa.me/5548996663645" class="btn btn-primary text-[10px] py-3 px-5">
+        reservar mesa
+        <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section id="top" class="relative min-h-screen overflow-hidden bg-ink">
+  <div class="absolute inset-0 hero-zoom">
+    <img src="%40SimplePixOficial-281.jpg" alt="" class="w-full h-full object-cover">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/20 to-ink/85"></div>
+  <div class="absolute inset-0 grain"></div>
+
+  <div class="relative min-h-screen flex flex-col justify-end pb-16 lg:pb-20 pt-32 px-5 lg:px-12">
+    <div class="max-w-[1440px] mx-auto w-full grid lg:grid-cols-12 gap-10 items-end">
+
+      <div class="lg:col-span-8 text-cream fade-up in">
+        <div class="eyebrow text-sun mb-6">
+          <span>PUB · LIVE MUSIC · DECK</span>
+        </div>
+        <h1 class="display hero-h1 text-cream text-[64px] sm:text-[96px] lg:text-[140px] xl:text-[168px]">
+          a noite<br>te&nbsp;espera.
+        </h1>
+        <div class="mt-10 flex flex-wrap gap-3 items-center">
+          <a href="https://wa.me/5548996663645" class="btn btn-primary">
+            reservar mesa
+            <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+          </a>
+          <a href="#agenda" class="btn btn-secondary on-dark">
+            ver agenda
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-4 text-cream fade-up d2">
+        <span class="font-hand text-sun text-[44px] lg:text-[58px] block leading-[.9] tilt-l mb-8">venha inteiro.</span>
+        <div class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-[12px] font-mono">
+          <div class="text-cream/50">SEX · SÁB</div><div>22h → 5h</div>
+          <div class="text-cream/50">DESDE</div><div>2017</div>
+          <div class="text-cream/50">ONDE</div><div>Imbituba · SC</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-cream/60 flex flex-col items-center gap-2">
+    <span class="text-[9px] tracking-[.4em] uppercase">desce</span>
+    <span class="w-px h-10 bg-cream/40"></span>
+  </div>
+</section>
+
+<!-- ============== MARQUEE ============== -->
+<section class="bg-ink py-5 border-y border-cream/10 overflow-hidden">
+  <div class="marquee">
+    <div class="marquee-track display text-cream/85 text-[28px] tracking-[.05em] items-center">
+      <span>DECK</span><span class="text-ember">·</span>
+      <span>NOITE</span><span class="text-ember">·</span>
+      <span>BRASA</span><span class="text-ember">·</span>
+      <span>VISTA</span><span class="text-ember">·</span>
+      <span>HISTÓRIA</span><span class="text-ember">·</span>
+      <span>A&nbsp;CASA</span><span class="text-ember">·</span>
+      <span>AMANHECER</span><span class="text-ember">·</span>
+      <span>A&nbsp;PISTA</span><span class="text-ember">·</span>
+      <span>O&nbsp;PORTO</span><span class="text-ember">·</span>
+      <span>IMBITUBA</span><span class="text-ember">·</span>
+      <span>HORA&nbsp;DOURADA</span><span class="text-ember">·</span>
+      <span>ÂMBAR</span><span class="text-ember">·</span>
+      <span>UIVO</span><span class="text-ember">·</span>
+      <span>LITORAL</span><span class="text-ember">·</span>
+    </div>
+    <div class="marquee-track display text-cream/85 text-[28px] tracking-[.05em] items-center" aria-hidden="true">
+      <span>DECK</span><span class="text-ember">·</span>
+      <span>NOITE</span><span class="text-ember">·</span>
+      <span>BRASA</span><span class="text-ember">·</span>
+      <span>VISTA</span><span class="text-ember">·</span>
+      <span>HISTÓRIA</span><span class="text-ember">·</span>
+      <span>A&nbsp;CASA</span><span class="text-ember">·</span>
+      <span>AMANHECER</span><span class="text-ember">·</span>
+      <span>A&nbsp;PISTA</span><span class="text-ember">·</span>
+      <span>O&nbsp;PORTO</span><span class="text-ember">·</span>
+      <span>IMBITUBA</span><span class="text-ember">·</span>
+      <span>HORA&nbsp;DOURADA</span><span class="text-ember">·</span>
+      <span>ÂMBAR</span><span class="text-ember">·</span>
+      <span>UIVO</span><span class="text-ember">·</span>
+      <span>LITORAL</span><span class="text-ember">·</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONCEITO — 5 PILARES ============== -->
+<section id="conceito" class="py-24 lg:py-36 px-5 lg:px-12 bg-cream">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 mb-16 lg:mb-24 items-end">
+      <div class="lg:col-span-7 fade-up">
+        <div class="eyebrow text-ember mb-6"><span>CONCEITO</span></div>
+        <h2 class="display text-[44px] sm:text-[60px] lg:text-[88px]">cinco pilares.<br><span class="text-ember">cinco verbos.</span></h2>
+      </div>
+      <div class="lg:col-span-5 fade-up d2">
+        <p class="text-lg text-ink/70 leading-relaxed max-w-md">a casa não é só lugar. é jeito. é o que segura a noite até o sol pintar o porto e devolver todo mundo inteiro.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-px bg-ink/12">
+      <div class="pillar bg-cream p-8 lg:p-10 transition-colors duration-500 fade-up">
+        <div class="pillar-num font-mono text-ink/40 text-xs tracking-widest transition-colors">01</div>
+        <h3 class="display text-3xl lg:text-4xl mt-4 mb-3">livre</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">se é seu, é da casa. ninguém julga, ninguém mede. é território aberto.</p>
+      </div>
+      <div class="pillar bg-cream p-8 lg:p-10 transition-colors duration-500 fade-up d2">
+        <div class="pillar-num font-mono text-ink/40 text-xs tracking-widest transition-colors">02</div>
+        <h3 class="display text-3xl lg:text-4xl mt-4 mb-3">quente</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">brasa que não apaga. abraço que não dura. clima que ferve devagar.</p>
+      </div>
+      <div class="pillar bg-cream p-8 lg:p-10 transition-colors duration-500 fade-up d3">
+        <div class="pillar-num font-mono text-ink/40 text-xs tracking-widest transition-colors">03</div>
+        <h3 class="display text-3xl lg:text-4xl mt-4 mb-3">intenso</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">o som sobe. a pista responde. quem chegou pra ficar atravessa a noite.</p>
+      </div>
+      <div class="pillar bg-cream p-8 lg:p-10 transition-colors duration-500 fade-up d4">
+        <div class="pillar-num font-mono text-ink/40 text-xs tracking-widest transition-colors">04</div>
+        <h3 class="display text-3xl lg:text-4xl mt-4 mb-3">poético</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">o sol cai. a luz vira âmbar. o lugar passa a contar a história sozinho.</p>
+      </div>
+      <div class="pillar bg-cream p-8 lg:p-10 transition-colors duration-500 fade-up d5">
+        <div class="pillar-num font-mono text-ink/40 text-xs tracking-widest transition-colors">05</div>
+        <h3 class="display text-3xl lg:text-4xl mt-4 mb-3">litorâneo</h3>
+        <p class="text-sm text-ink/65 leading-relaxed">o mar tá ali. o porto tá ali. o vento entra na casa e leva tudo embora.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MANIFESTO EDITORIAL ============== -->
+<section class="relative bg-ink text-cream py-32 lg:py-44 px-5 lg:px-12 overflow-hidden grain">
+  <div class="absolute inset-0 opacity-30">
+    <img src="222.png" alt="" class="w-full h-full object-cover">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/30"></div>
+
+  <div class="relative max-w-[1440px] mx-auto">
+    <div class="eyebrow text-sun mb-10 fade-up"><span>MANIFESTO</span></div>
+    <h2 class="display fade-up d2 text-[56px] sm:text-[88px] lg:text-[148px] xl:text-[176px] leading-[.86]">
+      litoral<br>brasileiro<br><span class="text-ember">com&nbsp;alma</span><br>de&nbsp;pub.
+    </h2>
+
+    <div class="grid lg:grid-cols-3 gap-10 mt-20 max-w-5xl">
+      <div class="fade-up">
+        <div class="eyebrow text-sun mb-3 no-rule"><span>tensão criativa</span></div>
+        <p class="text-cream/75 text-[15px] leading-relaxed">a casa abre os 360 sem pedir desculpa. mas escolhe quando ser quente. quando ser solto. quando recolher.</p>
+      </div>
+      <div class="fade-up d2">
+        <div class="eyebrow text-sun mb-3 no-rule"><span>caráter</span></div>
+        <p class="text-cream/75 text-[15px] leading-relaxed">é poesia que cabe num pub. é refinado que não tem pose. é noite que vai até o sol pintar o porto.</p>
+      </div>
+      <div class="fade-up d3">
+        <div class="eyebrow text-mist mb-3 no-rule"><span>o que não somos</span></div>
+        <p class="text-cream/35 text-[15px] leading-relaxed line-through decoration-ember/60">balada · vip · premium · experiência inesquecível · exclusivo · high-end.</p>
+      </div>
+    </div>
+
+    <div class="mt-20 fade-up d4">
+      <span class="font-hand text-sun text-[48px] lg:text-[68px] block tilt-r leading-[.9]">se é pra viver, que seja inteiro.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AGENDA ============== -->
+<section id="agenda" class="py-24 lg:py-36 px-5 lg:px-12 bg-cream">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+      <div class="lg:col-span-7 fade-up">
+        <div class="eyebrow text-ember mb-6"><span>AGENDA</span></div>
+        <h2 class="display text-[44px] sm:text-[60px] lg:text-[88px]">o que vem aí<br>na casa.</h2>
+        <p class="font-hand text-ember text-[32px] mt-4 tilt-l leading-none">sexta começa às 22h.</p>
+      </div>
+      <div class="lg:col-span-5 fade-up d2">
+        <p class="text-ink/70 max-w-md leading-relaxed lg:ml-auto">programação atualizada toda semana. seu domingo a gente devolve.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <article class="group cursor-pointer fade-up">
+        <div class="relative overflow-hidden rounded-md aspect-[4/5] photo-grade">
+          <img src="%40SimplePixOficial-138.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+          <div class="absolute top-4 left-4 z-10 bg-cream/95 backdrop-blur-sm rounded-md px-3 py-2">
+            <div class="stamp text-[28px] text-ink leading-none">SEX</div>
+            <div class="font-mono text-[10px] text-ember tracking-widest mt-1">22h → 5h</div>
+          </div>
+          <div class="absolute top-4 right-4 z-10 bg-ember text-ink eyebrow no-rule px-3 py-1.5 rounded-full">
+            <span style="font-size:9px">ao vivo</span>
+          </div>
+          <div class="absolute left-5 right-5 bottom-5 z-10 text-cream">
+            <div class="font-mono text-[10px] tracking-widest opacity-80">LIVE MUSIC</div>
+            <h3 class="display text-3xl mt-1.5">banda da casa</h3>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between text-[13px]">
+          <span class="text-ink/55 font-mono">deck aberto · pista cheia</span>
+          <span class="text-ember font-semibold tracking-wider uppercase text-[11px]">→ ver no insta</span>
+        </div>
+      </article>
+
+      <article class="group cursor-pointer fade-up d2">
+        <div class="relative overflow-hidden rounded-md aspect-[4/5] photo-grade">
+          <img src="%40SimplePixOficial-219.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+          <div class="absolute top-4 left-4 z-10 bg-cream/95 backdrop-blur-sm rounded-md px-3 py-2">
+            <div class="stamp text-[28px] text-ink leading-none">SÁB</div>
+            <div class="font-mono text-[10px] text-ember tracking-widest mt-1">22h → 5h</div>
+          </div>
+          <div class="absolute left-5 right-5 bottom-5 z-10 text-cream">
+            <div class="font-mono text-[10px] tracking-widest opacity-80">CONVIDADOS</div>
+            <h3 class="display text-3xl mt-1.5">noite quente</h3>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between text-[13px]">
+          <span class="text-ink/55 font-mono">som da casa · pista até 5h</span>
+          <span class="text-ember font-semibold tracking-wider uppercase text-[11px]">→ ver no insta</span>
+        </div>
+      </article>
+
+      <article class="group cursor-pointer fade-up d3">
+        <div class="relative overflow-hidden rounded-md aspect-[4/5] photo-grade">
+          <img src="%40SimplePixOficial-339.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+          <div class="absolute top-4 left-4 z-10 bg-cream/95 backdrop-blur-sm rounded-md px-3 py-2">
+            <div class="stamp text-[20px] text-ink leading-none">EVENTOS</div>
+            <div class="font-mono text-[10px] text-ember tracking-widest mt-1">especiais</div>
+          </div>
+          <div class="absolute top-4 right-4 z-10 border border-cream/40 text-cream eyebrow no-rule px-3 py-1.5 rounded-full">
+            <span style="font-size:9px">agenda viva</span>
+          </div>
+          <div class="absolute left-5 right-5 bottom-5 z-10 text-cream">
+            <div class="font-mono text-[10px] tracking-widest opacity-80">NOITES TEMÁTICAS</div>
+            <h3 class="display text-3xl mt-1.5">veja tudo</h3>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-between text-[13px]">
+          <span class="text-ink/55 font-mono">grade completa · ingressos</span>
+          <span class="text-ember font-semibold tracking-wider uppercase text-[11px]">→ pne</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-14 flex flex-wrap gap-4 items-center justify-between">
+      <a href="https://pensanoevento.com.br/casas/1117/el-coyote-pub" target="_blank" rel="noopener" class="btn btn-secondary">
+        agenda completa
+        <i data-lucide="external-link" class="w-3 h-3" stroke-width="2.5"></i>
+      </a>
+      <a href="https://instagram.com/elcoyotepub" target="_blank" rel="noopener" class="btn btn-ghost">
+        @elcoyotepub
+        <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EVENTOS PRIVADOS — A ============== -->
+<section id="eventos" class="bg-deep text-cream relative overflow-hidden">
+  <div class="grid lg:grid-cols-2 min-h-[88vh]">
+    <div class="relative min-h-[60vh] lg:min-h-full">
+      <img src="IMG_0311-telao.jpg" alt="casamento ao pôr do sol com vista do porto de Imbituba" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-deep/0 via-deep/0 to-deep lg:from-deep/0 lg:via-deep/0 lg:to-deep"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-deep/0 via-deep/0 to-deep/40"></div>
+    </div>
+
+    <div class="relative px-6 lg:px-16 py-20 lg:py-32 flex flex-col justify-center grain">
+      <div class="eyebrow text-sun mb-8 fade-up"><span>EVENTOS PRIVADOS</span></div>
+      <h2 class="display text-[60px] sm:text-[88px] lg:text-[112px] xl:text-[128px] fade-up d2">
+        a casa<br><span class="text-sun">fica sua.</span>
+      </h2>
+      <p class="text-cream/75 text-lg leading-relaxed max-w-md mt-8 fade-up d3">
+        casamento. formatura. aniversário da firma.<br>
+        o EL COYOTE inteiro pra quem você ama. vista do porto, deck preparado, equipe da casa cuidando do resto.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4 items-center fade-up d4">
+        <a href="https://wa.me/5548991744141" class="btn btn-primary">
+          conversar com a casa
+          <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+        </a>
+      </div>
+      <div class="mt-12 fade-up d5">
+        <span class="font-hand text-sun text-[44px] lg:text-[56px] block tilt-r leading-none">um sim com vista pro mar.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10 px-6 lg:px-16 py-16 lg:py-20 grid sm:grid-cols-3 gap-10">
+    <div class="fade-up">
+      <div class="aspect-[4/5] overflow-hidden rounded-md mb-5">
+        <img src="IMG_0134.jpg" alt="deck preparado para casamento" class="w-full h-full object-cover">
+      </div>
+      <div class="eyebrow text-sun mb-3 no-rule"><span>deck preparado</span></div>
+      <p class="text-cream/65 text-sm leading-relaxed">decoração, mobiliário, iluminação. a casa monta. você vive.</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="aspect-[4/5] overflow-hidden rounded-md mb-5">
+        <img src="222.png" alt="vista do porto de Imbituba" class="w-full h-full object-cover">
+      </div>
+      <div class="eyebrow text-sun mb-3 no-rule"><span>vista do porto</span></div>
+      <p class="text-cream/65 text-sm leading-relaxed">o entardecer pinta a baía de âmbar. é o cenário que ninguém compra — ele acontece.</p>
+    </div>
+    <div class="fade-up d3">
+      <div class="aspect-[4/5] overflow-hidden rounded-md mb-5">
+        <img src="%40SimplePixOficial-219.jpg" alt="festa noturna no El Coyote" class="w-full h-full object-cover">
+      </div>
+      <div class="eyebrow text-sun mb-3 no-rule"><span>até o sol nascer</span></div>
+      <p class="text-cream/65 text-sm leading-relaxed">a festa não acaba na meia-noite. acaba quando o sol pinta o deck.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EVENTOS PRIVADOS — B (DESTINATION) ============== -->
+<section class="bg-cream py-24 lg:py-32 px-5 lg:px-12">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <div class="lg:col-span-5 fade-up">
+        <div class="eyebrow text-ember mb-6"><span>VEM DE LONGE PRA CASAR PERTO</span></div>
+        <h2 class="display text-[40px] sm:text-[56px] lg:text-[80px]">
+          porto alegre,<br>serra,<br>beira-mar.
+        </h2>
+        <p class="text-ink/70 text-lg leading-relaxed mt-8 max-w-md">
+          imbituba pega quem desce do rio grande do sul atrás de praia do rosa, mar limpo e morro verde. a casa fica a três horas. a pousada parceira recebe os convidados. a festa acaba quando o sol nascer.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="https://wa.me/5548991744141" class="btn btn-primary">
+            pacote completo
+            <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+          </a>
+          <a href="#contato" class="btn btn-ghost">
+            falar com a casa
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 fade-up d2">
+        <div class="grid grid-cols-12 gap-3 lg:gap-4">
+          <div class="col-span-7 row-span-2">
+            <div class="aspect-[3/4] overflow-hidden rounded-md photo-grade">
+              <img src="Barra-de-Ibiraquera---SC-o-paraiso-te-chama-Na-pousadabarramaroficial-Ultimas-reservas-disponiveis---Feriado-de-15-de-novembro---RESERVAS-ESGOTADAS--Natal-Reveillon-e-janeiro-de-2025---ultimas-reservas-disponive.jpg" alt="praia da Barra da Ibiraquera" class="w-full h-full object-cover">
+            </div>
+          </div>
+          <div class="col-span-5">
+            <div class="aspect-[4/3] overflow-hidden rounded-md">
+              <img src="IMG_0134.jpg" alt="deck preparado" class="w-full h-full object-cover">
+            </div>
+          </div>
+          <div class="col-span-5 self-end">
+            <div class="aspect-square overflow-hidden rounded-md">
+              <img src="IMG_0311-telao.jpg" alt="casamento pôr do sol" class="w-full h-full object-cover object-center">
+            </div>
+            <span class="font-hand text-ember text-2xl lg:text-3xl block mt-3 tilt-l leading-none">a noite acaba só com o sol.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hairline my-16">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div class="fade-up">
+        <div class="font-mono text-[10px] tracking-[.32em] text-ember uppercase mb-2">01</div>
+        <h4 class="display text-2xl mb-2">cerimônia</h4>
+        <p class="text-sm text-ink/65 leading-relaxed">no deck, com vista pro porto. hora dourada combinada com o pôr do sol.</p>
+      </div>
+      <div class="fade-up d2">
+        <div class="font-mono text-[10px] tracking-[.32em] text-ember uppercase mb-2">02</div>
+        <h4 class="display text-2xl mb-2">festa</h4>
+        <p class="text-sm text-ink/65 leading-relaxed">bar, cozinha, som, iluminação. a casa monta — você só chega.</p>
+      </div>
+      <div class="fade-up d3">
+        <div class="font-mono text-[10px] tracking-[.32em] text-ember uppercase mb-2">03</div>
+        <h4 class="display text-2xl mb-2">hospedagem</h4>
+        <p class="text-sm text-ink/65 leading-relaxed">pousada parceira em barra da ibiraquera pra acomodar quem vem de fora.</p>
+      </div>
+      <div class="fade-up d4">
+        <div class="font-mono text-[10px] tracking-[.32em] text-ember uppercase mb-2">04</div>
+        <h4 class="display text-2xl mb-2">amanhecer</h4>
+        <p class="text-sm text-ink/65 leading-relaxed">a festa não tem hora. acaba quando o sol pintar o deck — e a gente tem foto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOTOGRAFIA ============== -->
+<section id="fotografia" class="py-24 lg:py-32 px-5 lg:px-12 bg-sand">
+  <div class="max-w-[1440px] mx-auto">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
+      <div class="fade-up">
+        <div class="eyebrow text-ember mb-6"><span>FOTOGRAFIA</span></div>
+        <h2 class="display text-[44px] sm:text-[60px] lg:text-[88px]">o que ficou<br>da&nbsp;noite.</h2>
+      </div>
+      <a href="https://instagram.com/elcoyotepub" target="_blank" rel="noopener" class="btn btn-ghost fade-up d2 self-start lg:self-end">
+        ver tudo no instagram
+        <i data-lucide="arrow-up-right" class="w-3 h-3" stroke-width="2.5"></i>
+      </a>
+    </div>
+
+    <div class="gallery columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3">
+      <img src="%40SimplePixOficial-138.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-219.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-281.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-245.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-339.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-172.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-218.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-246.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-317.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-324.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-327.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+      <img src="%40SimplePixOficial-397.jpg" alt="" class="w-full mb-3 rounded-md break-inside-avoid object-cover" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTATO ============== -->
+<section id="contato" class="bg-ink text-cream py-24 lg:py-36 px-5 lg:px-12 grain">
+  <div class="max-w-[1440px] mx-auto relative">
+    <div class="grid lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-6 fade-up">
+        <div class="eyebrow text-sun mb-6"><span>CONTATO</span></div>
+        <h2 class="display text-[60px] sm:text-[88px] lg:text-[140px] xl:text-[160px] leading-[.86]">
+          a casa<br>aberta.
+        </h2>
+        <span class="font-hand text-ember text-[40px] lg:text-[52px] block mt-8 tilt-l leading-none">a noite te espera.</span>
+      </div>
+
+      <div class="lg:col-span-6 grid sm:grid-cols-2 gap-x-8 gap-y-8 lg:mt-12 fade-up d2">
+        <div>
+          <div class="eyebrow text-mist mb-3 no-rule"><span>WHATSAPP RESERVAS</span></div>
+          <a href="https://wa.me/5548996663645" class="text-cream text-lg hover:text-ember transition-colors flex items-center gap-2">+55 48 99666-3645 <i data-lucide="arrow-up-right" class="w-4 h-4" stroke-width="2"></i></a>
+        </div>
+        <div>
+          <div class="eyebrow text-mist mb-3 no-rule"><span>WHATSAPP EVENTOS</span></div>
+          <a href="https://wa.me/5548991744141" class="text-cream text-lg hover:text-ember transition-colors flex items-center gap-2">+55 48 99174-4141 <i data-lucide="arrow-up-right" class="w-4 h-4" stroke-width="2"></i></a>
+        </div>
+        <div>
+          <div class="eyebrow text-mist mb-3 no-rule"><span>INSTAGRAM</span></div>
+          <a href="https://instagram.com/elcoyotepub" target="_blank" rel="noopener" class="text-cream text-lg hover:text-ember transition-colors flex items-center gap-2">@elcoyotepub <i data-lucide="arrow-up-right" class="w-4 h-4" stroke-width="2"></i></a>
+          <a href="https://instagram.com/elcoyote_eventos" target="_blank" rel="noopener" class="text-cream/70 text-base hover:text-ember transition-colors block mt-1">@elcoyote_eventos</a>
+        </div>
+        <div>
+          <div class="eyebrow text-mist mb-3 no-rule"><span>EMAIL</span></div>
+          <a href="mailto:elcoyoteimbituba@gmail.com" class="text-cream text-base hover:text-ember transition-colors break-all">elcoyoteimbituba@gmail.com</a>
+        </div>
+        <div>
+          <div class="eyebrow text-mist mb-3 no-rule"><span>FUNCIONAMENTO</span></div>
+          <p class="text-cream text-lg">SEX · SÁB · 22h → 5h</p>
+          <p class="text-cream/60 text-sm mt-1 font-mono">eventos privados · sob agenda</p>
+        </div>
+        <div>
+          <div class="eyebrow text-mist mb-3 no-rule"><span>ENDEREÇO</span></div>
+          <p class="text-cream text-base leading-relaxed">R. João Martins esq.<br>Av. 13 de Setembro<br><span class="text-cream/60 font-mono text-sm">Imbituba — SC · 88780-000</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="aspect-[16/6] sm:aspect-[16/5] rounded-md relative overflow-hidden bg-deep mt-8">
+      <svg viewBox="0 0 1600 500" preserveAspectRatio="none" class="absolute inset-0 w-full h-full">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#274156"/>
+            <stop offset="55%" stop-color="#1a3147"/>
+            <stop offset="100%" stop-color="#0E0E0E"/>
+          </linearGradient>
+          <radialGradient id="glow" cx="50%" cy="55%" r="40%">
+            <stop offset="0%" stop-color="#f58549" stop-opacity=".35"/>
+            <stop offset="60%" stop-color="#f58549" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="1600" height="500" fill="url(#sky)"/>
+        <rect width="1600" height="500" fill="url(#glow)"/>
+        <path d="M0,310 Q200,260 420,295 T820,310 T1200,300 T1600,315 L1600,500 L0,500 Z" fill="#88a07d" opacity=".22"/>
+        <path d="M0,340 Q220,310 460,335 T880,348 T1240,335 T1600,348 L1600,500 L0,500 Z" fill="#0E0E0E" opacity=".55"/>
+        <g transform="translate(800 270)">
+          <circle r="14" fill="#f58549"/>
+          <circle r="14" fill="#f58549" opacity=".28">
+            <animate attributeName="r" from="14" to="42" dur="2.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from=".28" to="0" dur="2.6s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <g transform="translate(800 310)">
+          <rect x="-110" y="0" width="220" height="32" rx="3" fill="#F4EFE6"/>
+          <text x="0" y="21" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="11" letter-spacing="2.6" fill="#0E0E0E">EL COYOTE · IMBITUBA</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-4">
+      <p class="font-mono text-cream/55 text-xs tracking-wider">site v1 · 2026 · single page · sem cookies · sem popups</p>
+      <a href="https://maps.app.goo.gl/AuhL5iskPZBR1NXR6" target="_blank" rel="noopener" class="btn btn-ghost on-dark">
+        traçar rota
+        <i data-lucide="map-pin" class="w-3 h-3" stroke-width="2.5"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="bg-cream text-ink pt-20 lg:pt-28 pb-10 px-5 lg:px-12 relative overflow-hidden">
+  <div class="ember-line absolute top-0 left-0 right-0"></div>
+  <div class="max-w-[1440px] mx-auto">
+    <h3 class="display text-[64px] sm:text-[120px] lg:text-[200px] xl:text-[260px] leading-[.85]">
+      a noite vira<br><span class="text-ember">história.</span>
+    </h3>
+    <hr class="hairline mt-12 mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <img src="logo%20preto.png" alt="ELCOYOTE" class="h-7 w-auto">
+        <span class="font-mono text-[10px] tracking-[.32em] text-ink/55 uppercase">desde 2017</span>
+      </div>
+      <div class="font-mono text-[10px] text-ink/55 uppercase tracking-[.32em]">
+        © ELCOYOTE 2026 · A NOITE VIRA HISTÓRIA
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============== SCHEMA.ORG ============== -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BarOrPub",
+  "name":"El Coyote",
+  "alternateName":"ELCOYOTE",
+  "url":"https://elcoyotepub.com",
+  "description":"Pub e eventos privados à beira-mar em Imbituba/SC. Sex e sáb 22h às 5h. Casamento, formatura, aniversário da firma — a casa fica sua.",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"R. João Martins esq. Av. 13 de Setembro",
+    "addressLocality":"Imbituba",
+    "addressRegion":"SC",
+    "postalCode":"88780-000",
+    "addressCountry":"BR"
+  },
+  "telephone":"+5548996663645",
+  "hasMap":"https://maps.app.goo.gl/AuhL5iskPZBR1NXR6",
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"22:00","closes":"05:00"}
+  ],
+  "priceRange":"$$",
+  "foundingDate":"2017",
+  "sameAs":[
+    "https://instagram.com/elcoyotepub",
+    "https://instagram.com/elcoyote_eventos",
+    "https://pensanoevento.com.br/casas/1117/el-coyote-pub"
+  ]
+}
+</script>
+
+<!-- ============== JS ============== -->
+<script>
+  // Lucide icons
+  if (window.lucide) lucide.createIcons();
+
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  const navBg = document.getElementById('nav-bg');
+  const navLinks = document.getElementById('nav-links');
+  const logoW = document.getElementById('logo-w');
+  const logoB = document.getElementById('logo-b');
+
+  function applyNav() {
+    const scrolled = window.scrollY > 64;
+    if (scrolled) {
+      navBg.style.background = 'rgba(244,239,230,.92)';
+      navBg.style.borderBottom = '1px solid rgba(14,14,14,.08)';
+      navBg.classList.add('nav-blur');
+      if (navLinks) {
+        navLinks.classList.remove('text-cream');
+        navLinks.classList.add('text-ink');
+      }
+      if (logoW) logoW.classList.add('hidden');
+      if (logoB) logoB.classList.remove('hidden');
+    } else {
+      navBg.style.background = 'transparent';
+      navBg.style.borderBottom = '0';
+      navBg.classList.remove('nav-blur');
+      if (navLinks) {
+        navLinks.classList.add('text-cream');
+        navLinks.classList.remove('text-ink');
+      }
+      if (logoW) logoW.classList.remove('hidden');
+      if (logoB) logoB.classList.add('hidden');
+    }
+  }
+  window.addEventListener('scroll', applyNav, { passive: true });
+  applyNav();
+
+  // Fade-up reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.fade-up:not(.in)').forEach(el => io.observe(el));
+
+  // Active nav link
+  const sections = ['agenda','eventos','fotografia','contato'].map(id => document.getElementById(id)).filter(Boolean);
+  const linkMap = {};
+  document.querySelectorAll('#nav-links a').forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    linkMap[id] = a;
+  });
+  function highlight() {
+    const y = window.scrollY + 120;
+    let active = null;
+    sections.forEach(s => { if (s.offsetTop <= y) active = s.id; });
+    Object.keys(linkMap).forEach(id => linkMap[id].classList.toggle('active', id === active));
+  }
+  window.addEventListener('scroll', highlight, { passive: true });
+</script>
+
+</body>
+</html>

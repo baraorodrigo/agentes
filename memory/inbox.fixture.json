@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fix-001",
+    "agent": "tomas",
+    "priority": "crítica",
+    "description": "Tomás detectou queda 23% no ticket médio — decidir ação",
+    "context": "Variação >20% vs média 4 semanas. Possível causa: combo promocional sexta.",
+    "deeplink": "cockpit://cabine/tomas?item=fix-001",
+    "created_at": "2026-05-08T09:18:00-03:00"
+  },
+  {
+    "id": "fix-002",
+    "agent": "duda",
+    "priority": "alta",
+    "description": "Duda submeteu copy do post do show de sábado — aprovar?",
+    "context": "Post agendado pra 18h hoje. Copy curta + call pra lista.",
+    "deeplink": "cockpit://cabine/duda?item=fix-002",
+    "created_at": "2026-05-08T10:30:00-03:00"
+  },
+  {
+    "id": "fix-003",
+    "agent": "gil",
+    "priority": "média",
+    "description": "Gil pediu autorização pra trocar fornecedor de som",
+    "context": "Fornecedor atual subiu 15%. Alternativa cota 8% a menos.",
+    "deeplink": "cockpit://cabine/gil?item=fix-003",
+    "created_at": "2026-05-08T08:42:00-03:00"
+  }
+]

@@ -4,7 +4,7 @@
 - **Agente:** Beto
 - **Destino:** WhatsApp privado Rodrigo
 - **Referência:** `agentes/promoters/PLAYBOOK.md` § Rotina diária / 09h
-- **Skill usada:** `skills/extrair-pne.md`
+- **Skill usada:** `skills/extrair-pne/SKILL.md`
 
 ## Prompt
 
